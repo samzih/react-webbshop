@@ -1,0 +1,50 @@
+//Skapa en admin användare här
+POST http://localhost:3000/api/users/register
+Content-Type: application/json
+
+{
+  "firstName": "Admin",
+  "lastName": "Adminsson",
+  "email": "admin@admin.se",
+  "password": "admin",
+  "isAdmin": true
+}
+
+###
+
+//Logga in här
+POST http://localhost:3000/api/users/login
+Content-Type: application/json
+
+{
+  "email": "admin@admin.se",
+  "password": "admin"
+}
+
+###
+
+//Skapa produkter här
+POST http://localhost:3000/api/products
+Content-Type: application/json
+
+{
+  "title": "",
+  "price": 0,
+  "description": "",
+  "image": "",
+  "inStock": 0
+}
+
+###
+
+//Skapa fraktsätt här
+POST http://localhost:3000/api/shippingMethod
+Content-Type: application/json
+
+{
+  "company": "PostNord",
+  "price": 20,
+ "deliveryTimeInHours": 72
+}
+
+##
