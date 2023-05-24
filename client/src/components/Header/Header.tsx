@@ -1,5 +1,20 @@
+import Nav from "../Nav/Nav";
+import CartHeader from "../CartHeader/CartHeader";
+import Login from "../Login/Login";
+import { Button, Space } from "antd";
+
 function Header() {
-  return <div>Header</div>;
+  return (
+    <header>
+      <h1>Logo</h1>
+      <Button type="primary">Knapp</Button>
+      <div>
+        <Login />
+        <CartHeader />
+      </div>
+      <Nav />
+    </header>
+  );
 }
 
 export default Header;
