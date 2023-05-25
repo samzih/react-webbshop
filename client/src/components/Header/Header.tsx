@@ -3,14 +3,18 @@ import CartHeader from "../CartHeader/CartHeader";
 import Login from "../Login/Login";
 import { Button, Space } from "antd";
 
+import "./Header.css";
+
 function Header() {
   return (
     <header>
-      <h1>Logo</h1>
+      <div id="header">
+        <h1>KJOSK</h1>
 
-      <div>
-        <Login />
-        <CartHeader />
+        <div id="right-content">
+          <Login />
+          <CartHeader />
+        </div>
       </div>
       <Nav />
     </header>
