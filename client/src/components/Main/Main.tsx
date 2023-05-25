@@ -3,6 +3,8 @@ import Cart from "../Cart/Cart";
 import HomePage from "../HomePage/HomePage";
 import ProductDetail from "../ProductDetail/ProductDetail";
 import Checkout from "../Checkout/Checkout";
+// import CartItem from "../../App";
+
 function Main() {
   return (
     <main>
