@@ -7,7 +7,7 @@ function Header() {
   return (
     <header>
       <h1>Logo</h1>
-      <Button type="primary">Knapp</Button>
+
       <div>
         <Login />
         <CartHeader />
