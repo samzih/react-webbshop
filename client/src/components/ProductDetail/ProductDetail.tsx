@@ -17,6 +17,21 @@ interface Product {
 function ProductDetail() {
   //Kolla upp vad som ska vara i parantesen
   const [product, setProduct] = useState<Product>("");
+  const [inStock, setInStock] = useState("");
+
+  function inStockChecker(product: Product) {
+    if (product.inStock === 0) {
+      setInStock("Ej i lager");
+    } else if (product.inStock < 3) {
+      setInStock("Fåtal i lager");
+    } else {
+      setInStock("I lager");
+    }
+  }
+
+  useEffect(() => {
+    inStockChecker(product);
+  }, [product]);
 
   const { id } = useParams();
 
@@ -45,7 +60,7 @@ function ProductDetail() {
         <h2>{product.title}</h2>
         <img alt="example" src={product.image} width={300} />
         <h3>{product.price + " kr"}</h3>
-        <p>{"I lager: " + product.inStock}</p>
+        <p>{inStock}</p>
         <p>{product.description}</p>
         <PurchaseButton product={product} />
       </Card>
