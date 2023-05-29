@@ -14,20 +14,37 @@ export interface User {
   password: string;
 }
 interface UserContext {
-  user: User;
-  loginUser: (user: User) => void;
+  loginUser: User;
+  fetchLoginUser: (user: User) => void;
+  handleEmail: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  handlePassword: (event: React.ChangeEvent<HTMLInputElement>) => void;
 }
 // Eventuellt lägga till Cart till userInterface
 
 const UserContext = createContext<UserContext>({
-  user: { email: "", password: "" },
-  loginUser: () => {},
+  loginUser: { email: "", password: "" },
+  fetchLoginUser: () => {},
+  handleEmail: () => {},
+  handlePassword: () => {},
 });
 
 export const useUserContext = () => useContext(UserContext);
 
 const UserProvider = ({ children }: PropsWithChildren<object>) => {
   const [loginUser, setLoginUser] = useState<User>({ email: "", password: "" });
+
+  function handleEmail(event: React.ChangeEvent<HTMLInputElement>) {
+    setLoginUser((prevUser) => ({
+      ...prevUser,
+      email: event.target.value,
+    }));
+  }
+  function handlePassword(event: React.ChangeEvent<HTMLInputElement>) {
+    setLoginUser((prevUser) => ({
+      ...prevUser,
+      password: event.target.value,
+    }));
+  }
 
   async function fetchLoginUser() {
     try {
@@ -37,8 +54,8 @@ const UserProvider = ({ children }: PropsWithChildren<object>) => {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          email: "lundell.linus@gmail.com",
-          password: "12345",
+          email: loginUser.email, //"lundell.linus@gmail.com",
+          password: loginUser.password, //"12345",
         }),
       });
       const data = await response.json();
@@ -55,7 +72,12 @@ const UserProvider = ({ children }: PropsWithChildren<object>) => {
   return (
     <div>
       <UserContext.Provider
-        value={{ user: loginUser, loginUser: fetchLoginUser }}
+        value={{
+          loginUser,
+          fetchLoginUser,
+          handleEmail,
+          handlePassword,
+        }}
       >
         {children}
       </UserContext.Provider>

@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { UserOutlined } from "@ant-design/icons";
 import LoginButton from "../LoginButton/LoginButton";
+import { useUserContext } from "../../context/UserContext";
 function Login() {
   const [expandLogin, setExpandLogin] = useState(false);
   const [expandRegister, setExpandRegister] = useState(false);
+  const { handleEmail, handlePassword, fetchLoginUser } = useUserContext();
   // MÅSTE TYPA UPP DET
   async function registerForm(e: any) {
     e.preventDefault();
@@ -49,8 +51,8 @@ function Login() {
       {expandLogin && (
         <form>
           Logga in
-          <input type="text" />
-          <input type="text" />
+          <input type="text" onChange={handleEmail} />
+          <input type="text" onChange={handlePassword} />
           <LoginButton />
         </form>
       )}

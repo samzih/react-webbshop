@@ -7,10 +7,10 @@ type Props = {
 };
 
 function LoginButton() {
-  const { user, loginUser } = useUserContext();
+  const { loginUser, fetchLoginUser } = useUserContext();
   return (
     <div>
-      <Button onClick={() => loginUser(user)} type="primary">
+      <Button onClick={() => fetchLoginUser(loginUser)} type="primary">
         Login
       </Button>
     </div>
