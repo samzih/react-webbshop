@@ -2,8 +2,9 @@ import React, { useState, useEffect } from "react";
 import { Card } from "antd";
 import { Carousel } from "antd";
 import { Link } from "react-router-dom";
+import PurchaseButton from "../PurchaseButton/PurchaseButton";
 
-interface Products {
+export interface Product {
   _id: number;
   title: string;
   image: string;
@@ -12,7 +13,7 @@ interface Products {
 }
 
 function HomePage() {
-  const [products, setProducts] = useState<Products[]>([]);
+  const [products, setProducts] = useState<Product[]>([]);
   const { Meta } = Card;
 
   useEffect(() => {
@@ -66,6 +67,7 @@ function HomePage() {
               cover={<img alt="example" src={product.image} />}
             >
               <Meta title={product.title} description={product.price + " kr"} />
+              <PurchaseButton product={product} />
             </Card>
           </Link>
         </div>
