@@ -1,12 +1,16 @@
 import Footer from "./components/Footer/Footer";
 import Header from "./components/Header/Header";
 import Main from "./components/Main/Main";
+import CartProvider from "./context/CartContext";
+
 function App() {
   return (
     <div>
-      <Header />
-      <Main />
-      <Footer />
+      <CartProvider>
+        <Header />
+        <Main />
+        <Footer />
+      </CartProvider>
     </div>
   );
 }

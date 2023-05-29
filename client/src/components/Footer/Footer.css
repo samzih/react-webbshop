@@ -1,0 +1,6 @@
+footer {
+  background-color: rgb(227, 224, 223);
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
