@@ -1,8 +1,15 @@
-import { PropsWithChildren, createContext, useContext, useState } from "react";
+import {
+  PropsWithChildren,
+  createContext,
+  useContext,
+  useEffect,
+  useState,
+} from "react";
+import { Product } from "../components/HomePage/HomePage";
 
 interface CartContext {
-  products: string[];
-  addProduct: (product: object) => void;
+  products: Product[];
+  addProduct: (product: Product) => void;
 }
 
 const CartContext = createContext<CartContext>({
@@ -13,10 +20,14 @@ const CartContext = createContext<CartContext>({
 export const useCartContext = () => useContext(CartContext);
 
 const CartProvider = ({ children }: PropsWithChildren<{}>) => {
-  const [products, setProducts] = useState<string[]>([]);
-  const addProduct = (product: string) => {
+  const [products, setProducts] = useState<Product[]>([]);
+  const addProduct = (product: Product) => {
     setProducts([...products, product]);
   };
+
+  useEffect(() => {
+    console.log(products);
+  }, [products]);
 
   return (
     <div>

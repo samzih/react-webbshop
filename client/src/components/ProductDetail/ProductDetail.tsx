@@ -47,7 +47,7 @@ function ProductDetail() {
         <h3>{product.price + " kr"}</h3>
         <p>{"I lager: " + product.inStock}</p>
         <p>{product.description}</p>
-        <PurchaseButton />
+        <PurchaseButton product={product} />
       </Card>
     </div>
   );

@@ -1,13 +1,18 @@
 import { Button } from "antd";
 import { useCartContext } from "../../context/CartContext";
 import { Product } from "../HomePage/HomePage";
+type Props = {
+  product: Product;
+};
 
-function PurchaseButton({ product }: { product: Product }) {
-  const { addProduct } = useCartContext();
+function PurchaseButton({ product }: Props) {
+  const { products, addProduct } = useCartContext();
   return (
-    <Button onClick={() => addProduct(product)} type="primary">
-      Köp
-    </Button>
+    <div>
+      <Button onClick={() => addProduct(product)} type="primary">
+        Köp
+      </Button>
+    </div>
   );
 }
 
