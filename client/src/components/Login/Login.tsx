@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { UserOutlined } from "@ant-design/icons";
+import LoginButton from "../LoginButton/LoginButton";
 function Login() {
   const [expandLogin, setExpandLogin] = useState(false);
   const [expandRegister, setExpandRegister] = useState(false);
-  const [login, setLogin] = useState(false);
-
   // MÅSTE TYPA UPP DET
   async function registerForm(e: any) {
     e.preventDefault();
@@ -52,6 +51,7 @@ function Login() {
           Logga in
           <input type="text" />
           <input type="text" />
+          <LoginButton />
         </form>
       )}
       {expandRegister && (

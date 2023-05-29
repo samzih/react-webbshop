@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { Button } from "antd";
 import { useCartContext } from "../../context/CartContext";
 import { Product } from "../HomePage/HomePage";

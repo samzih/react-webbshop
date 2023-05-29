@@ -1,10 +1,5 @@
-import {
-  PropsWithChildren,
-  createContext,
-  useContext,
-  useEffect,
-  useState,
-} from "react";
+/* eslint-disable @typescript-eslint/no-empty-function */
+import { PropsWithChildren, createContext, useContext, useEffect } from "react";
 import { Product } from "../components/HomePage/HomePage";
 import { useLocalStorage } from "../utils/useLocalStorage";
 
@@ -25,16 +20,16 @@ export const useCartContext = () => useContext(CartContext);
 
 //
 
-const CartProvider = ({ children }: PropsWithChildren<{}>) => {
+const CartProvider = ({ children }: PropsWithChildren<object>) => {
   // här sätter vi value och setValue v från den useLocalStorage funktionen
   const [products, setProducts] = useLocalStorage("cartProducts", []);
   const addProduct = (product: Product) => {
     setProducts([...products, product]);
   };
 
-  useEffect(() => {
-    console.log(products);
-  }, [products]);
+  // useEffect(() => {
+  //   console.log(products);
+  // }, [products]);
 
   return (
     <div>
