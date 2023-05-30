@@ -9,6 +9,7 @@ interface CartContext {
   removeItem: (productId: number) => void;
   increaseCartQuantity: (product: IProduct) => void;
   decreaseCartQuantity: (product: IProduct) => void;
+  totalSum: number;
 }
 
 export interface CartItem {
@@ -22,6 +23,7 @@ const CartContext = createContext<CartContext>({
   removeItem: () => {},
   increaseCartQuantity: () => {},
   decreaseCartQuantity: () => {},
+  totalSum: 0,
 });
 
 export const useCartContext = () => useContext(CartContext);
@@ -76,6 +78,12 @@ const CartProvider = ({ children }: PropsWithChildren<object>) => {
     }
   };
 
+  const totalSum = cart.reduce(
+    (accumulator: number, item: CartItem) =>
+      accumulator + item.product.price * item.quantity,
+    0
+  );
+
   return (
     <div>
       <CartContext.Provider
@@ -85,6 +93,7 @@ const CartProvider = ({ children }: PropsWithChildren<object>) => {
           removeItem,
           increaseCartQuantity,
           decreaseCartQuantity,
+          totalSum,
         }}
       >
         {children}
