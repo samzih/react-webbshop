@@ -1,11 +1,17 @@
 /* eslint-disable @typescript-eslint/no-empty-function */
-import { PropsWithChildren, createContext, useContext, useEffect } from "react";
-import { Product } from "../components/HomePage/HomePage";
+import {
+  PropsWithChildren,
+  createContext,
+  useContext,
+  useEffect,
+  useState,
+} from "react";
+import { IProduct } from "../context/ProductContext";
 import { useLocalStorage } from "../utils/useLocalStorage";
 
 interface CartContext {
-  products: Product[];
-  addProduct: (product: Product) => void;
+  products: IProduct[];
+  addProduct: (product: IProduct) => void;
 }
 
 const CartContext = createContext<CartContext>({
@@ -23,7 +29,7 @@ export const useCartContext = () => useContext(CartContext);
 const CartProvider = ({ children }: PropsWithChildren<object>) => {
   // här sätter vi value och setValue v från den useLocalStorage funktionen
   const [products, setProducts] = useLocalStorage("cartProducts", []);
-  const addProduct = (product: Product) => {
+  const addProduct = (product: IProduct) => {
     setProducts([...products, product]);
   };
 
