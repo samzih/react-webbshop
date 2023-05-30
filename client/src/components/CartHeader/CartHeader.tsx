@@ -1,7 +1,7 @@
 import { ShoppingCartOutlined, DeleteOutlined } from "@ant-design/icons";
 import { NavLink, Link } from "react-router-dom";
 import { useState } from "react";
-import { Button, Drawer, Space } from "antd";
+import { Badge, Button, Drawer, Space } from "antd";
 import type { DrawerProps } from "antd/es/drawer";
 import { Card } from "antd";
 import { useCartContext } from "../../context/CartContext";
@@ -36,7 +36,12 @@ function CartHeader() {
     <div>
       <>
         <Space>
-          <ShoppingCartOutlined onClick={showDrawer} />
+          <div>
+            <ShoppingCartOutlined style={{ fontSize: 50 }} onClick={showDrawer} />
+            <Badge count={1}>
+              <span />
+            </Badge>
+          </div>
         </Space>
         <Drawer
           title="KUNDVAGN"
