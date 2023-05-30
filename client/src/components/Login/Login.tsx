@@ -4,14 +4,21 @@ import { Button } from "antd";
 import { useUserContext } from "../../context/UserContext";
 import RegisterForm from "../RegisterForm/RegisterForm";
 function Login() {
-  const { fetchLoginUser } = useUserContext();
+  const { fetchLoginUser, logoutUser, loginUser } = useUserContext();
   const [expandLogin, setExpandLogin] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
   const handleClick = () => {
     const user = { email, password };
+
     fetchLoginUser(user);
+  };
+
+  const handleLogout = () => {
+    if (loginUser) {
+      logoutUser(loginUser);
+    }
   };
 
   return (
@@ -36,6 +43,9 @@ function Login() {
           />
           <Button onClick={handleClick} type="primary">
             Login
+          </Button>
+          <Button onClick={handleLogout} type="primary">
+            Logga ut
           </Button>
         </form>
       )}

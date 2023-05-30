@@ -25,18 +25,22 @@ interface User {
 interface UserContext {
   loginUser: User | null;
   fetchLoginUser: (user: Credentials) => void;
+  logoutUser: (user: User) => void;
 }
 // Eventuellt lägga till Cart till userInterface
 
 const UserContext = createContext<UserContext>({
   loginUser: null,
   fetchLoginUser: () => {},
+  logoutUser: () => {},
 });
 
 export const useUserContext = () => useContext(UserContext);
 
 const UserProvider = ({ children }: PropsWithChildren<object>) => {
   const [loginUser, setLoginUser] = useState<User | null>(null);
+
+  //reminder: useEffect for auth
 
   async function fetchLoginUser(user: Credentials) {
     try {
@@ -54,6 +58,21 @@ const UserProvider = ({ children }: PropsWithChildren<object>) => {
     }
   }
 
+  async function logoutUser(user: User) {
+    try {
+      const response = await fetch("/api/users/logout", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(user),
+      });
+      const data = await response.json();
+      setLoginUser(data);
+    } catch (error) {
+      console.log(error);
+    }
+  }
   useEffect(() => {
     console.log(loginUser);
   }, [loginUser]);
@@ -62,6 +81,7 @@ const UserProvider = ({ children }: PropsWithChildren<object>) => {
     <div>
       <UserContext.Provider
         value={{
+          logoutUser,
           loginUser,
           fetchLoginUser,
         }}
