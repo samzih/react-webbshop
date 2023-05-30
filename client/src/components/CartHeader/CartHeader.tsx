@@ -32,13 +32,20 @@ function CartHeader() {
 
   const ButtonGroup = Button.Group;
 
+  // calculates total quantity of items in the cart
+  let cartItemCount = 0;
+
+  cart.forEach((item) => {
+    cartItemCount += item.quantity;
+  });
+  
   return (
     <div>
       <>
         <Space>
           <div>
             <ShoppingCartOutlined style={{ fontSize: 50 }} onClick={showDrawer} />
-            <Badge count={1}>
+            <Badge count={cartItemCount}>
               <span />
             </Badge>
           </div>
