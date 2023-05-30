@@ -10,8 +10,13 @@ function CartHeader() {
   const [open, setOpen] = useState(false);
   const [placement] = useState<DrawerProps["placement"]>("right");
   const { Meta } = Card;
-  const { cart, removeItem, increaseCartQuantity, decreaseCartQuantity } =
-    useCartContext();
+  const {
+    cart,
+    removeItem,
+    increaseCartQuantity,
+    decreaseCartQuantity,
+    totalSum,
+  } = useCartContext();
 
   const showDrawer = () => {
     setOpen(true);
@@ -61,7 +66,9 @@ function CartHeader() {
                 >
                   <Meta
                     title={cartItem.product.title}
-                    description={cartItem.product.price + " kr"}
+                    description={
+                      cartItem.product.price * cartItem.quantity + " kr"
+                    }
                   />
                   <DeleteOutlined
                     onClick={() => handleClick(cartItem.product._id)}
@@ -89,12 +96,14 @@ function CartHeader() {
                         e.preventDefault();
                         increaseCartQuantity(cartItem.product);
                       }}
+                      disabled={cartItem.quantity >= cartItem.product.inStock}
                     >
                       +
                     </Button>
                   </ButtonGroup>
                 </Card>
               </Link>
+              <p>{"Totalsumma: " + totalSum}</p>
             </div>
           ))}
         </Drawer>
