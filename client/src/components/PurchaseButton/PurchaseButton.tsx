@@ -6,10 +6,16 @@ type Props = {
 };
 
 function PurchaseButton({ product }: Props) {
-  const { addProduct } = useCartContext();
+  const { addToCart } = useCartContext();
   return (
     <div>
-      <Button onClick={() => addProduct(product)} type="primary">
+      <Button
+        onClick={(e) => {
+          e.preventDefault();
+          addToCart(product);
+        }}
+        type="primary"
+      >
         Köp
       </Button>
     </div>

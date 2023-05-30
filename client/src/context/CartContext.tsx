@@ -1,45 +1,54 @@
 /* eslint-disable @typescript-eslint/no-empty-function */
-import {
-  PropsWithChildren,
-  createContext,
-  useContext,
-  useEffect,
-  useState,
-} from "react";
+import { PropsWithChildren, createContext, useContext, useEffect } from "react";
 import { IProduct } from "../context/ProductContext";
 import { useLocalStorage } from "../utils/useLocalStorage";
 
 interface CartContext {
-  products: IProduct[];
-  addProduct: (product: IProduct) => void;
+  cart: CartItem[];
+  addToCart: (product: IProduct) => void;
+  removeItem: (productId: number) => void;
+}
+
+export interface CartItem {
+  product: IProduct;
+  quantity: number;
 }
 
 const CartContext = createContext<CartContext>({
-  products: [],
-  addProduct: () => {},
+  cart: [],
+  addToCart: () => {},
+  removeItem: () => {},
 });
 
 export const useCartContext = () => useContext(CartContext);
 
-//kanske kan använda denna på flera ställen då det
-// sätter en initialValue, där vi själva får bestämma om det är en string/array/lr dylikt
-
-//
-
 const CartProvider = ({ children }: PropsWithChildren<object>) => {
-  // här sätter vi value och setValue v från den useLocalStorage funktionen
-  const [products, setProducts] = useLocalStorage("cartProducts", []);
-  const addProduct = (product: IProduct) => {
-    setProducts([...products, product]);
+  const [cart, setCart] = useLocalStorage("cart", []);
+  const addToCart = (product: IProduct) => {
+    const existingItem = cart.find(
+      (item: CartItem) => item.product._id === product._id
+    );
+    if (existingItem) {
+      existingItem.quantity++;
+      setCart([...cart]);
+    }
+    setCart([...cart, { product, quantity: 1 }]);
   };
 
   useEffect(() => {
-    console.log(products);
-  }, [products]);
+    console.log(cart);
+  }, [cart]);
+
+  const removeItem = (productId: number) => {
+    const newItemList = cart.filter(
+      (item: CartItem) => item.product._id !== productId
+    );
+    setCart(newItemList);
+  };
 
   return (
     <div>
-      <CartContext.Provider value={{ products, addProduct }}>
+      <CartContext.Provider value={{ cart, addToCart, removeItem }}>
         {children}
       </CartContext.Provider>
     </div>
