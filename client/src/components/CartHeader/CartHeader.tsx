@@ -10,7 +10,8 @@ function CartHeader() {
   const [open, setOpen] = useState(false);
   const [placement] = useState<DrawerProps["placement"]>("right");
   const { Meta } = Card;
-  const { cart, removeItem } = useCartContext();
+  const { cart, removeItem, increaseCartQuantity, decreaseCartQuantity } =
+    useCartContext();
 
   const showDrawer = () => {
     setOpen(true);
@@ -23,6 +24,8 @@ function CartHeader() {
   const handleClick = (id: number) => {
     removeItem(id);
   };
+
+  const ButtonGroup = Button.Group;
 
   return (
     <div>
@@ -63,6 +66,33 @@ function CartHeader() {
                   <DeleteOutlined
                     onClick={() => handleClick(cartItem.product._id)}
                   />
+
+                  <ButtonGroup>
+                    <Button
+                      type="primary"
+                      size="small"
+                      shape="circle"
+                      onClick={(e) => {
+                        e.preventDefault();
+                        decreaseCartQuantity(cartItem.product);
+                      }}
+                      disabled={cartItem.quantity <= 1}
+                    >
+                      -
+                    </Button>
+                    <p>{cartItem.quantity}</p>
+                    <Button
+                      type="primary"
+                      size="small"
+                      shape="circle"
+                      onClick={(e) => {
+                        e.preventDefault();
+                        increaseCartQuantity(cartItem.product);
+                      }}
+                    >
+                      +
+                    </Button>
+                  </ButtonGroup>
                 </Card>
               </Link>
             </div>
