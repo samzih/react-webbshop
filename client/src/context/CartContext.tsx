@@ -33,9 +33,9 @@ const CartProvider = ({ children }: PropsWithChildren<object>) => {
     setProducts([...products, product]);
   };
 
-  useEffect(() => {
-    console.log(products);
-  }, [products]);
+  // useEffect(() => {
+  //   console.log(products);
+  // }, [products]);
 
   return (
     <div>
