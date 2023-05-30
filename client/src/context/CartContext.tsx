@@ -35,6 +35,7 @@ const CartProvider = ({ children }: PropsWithChildren<object>) => {
     setCart([...cart, { product, quantity: 1 }]);
   };
 
+
   useEffect(() => {
     console.log(cart);
   }, [cart]);
@@ -45,6 +46,11 @@ const CartProvider = ({ children }: PropsWithChildren<object>) => {
     );
     setCart(newItemList);
   };
+
+  // useEffect(() => {
+  //   console.log(products);
+  // }, [products]);
+
 
   return (
     <div>
