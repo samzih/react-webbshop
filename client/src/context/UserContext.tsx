@@ -9,54 +9,43 @@ import {
   useContext,
 } from "react";
 
-export interface User {
+export interface Credentials {
   email: string;
   password: string;
 }
+
+interface User {
+  firstName: string;
+  lastName: string;
+  email: string;
+  password: string;
+  isAdmin: boolean;
+}
+
 interface UserContext {
-  loginUser: User;
-  fetchLoginUser: (user: User) => void;
-  handleEmail: (event: React.ChangeEvent<HTMLInputElement>) => void;
-  handlePassword: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  loginUser: User | null;
+  fetchLoginUser: (user: Credentials) => void;
 }
 // Eventuellt lägga till Cart till userInterface
 
 const UserContext = createContext<UserContext>({
-  loginUser: { email: "", password: "" },
+  loginUser: null,
   fetchLoginUser: () => {},
-  handleEmail: () => {},
-  handlePassword: () => {},
 });
 
 export const useUserContext = () => useContext(UserContext);
 
 const UserProvider = ({ children }: PropsWithChildren<object>) => {
-  const [loginUser, setLoginUser] = useState<User>({ email: "", password: "" });
+  const [loginUser, setLoginUser] = useState<User | null>(null);
 
-  function handleEmail(event: React.ChangeEvent<HTMLInputElement>) {
-    setLoginUser((prevUser) => ({
-      ...prevUser,
-      email: event.target.value,
-    }));
-  }
-  function handlePassword(event: React.ChangeEvent<HTMLInputElement>) {
-    setLoginUser((prevUser) => ({
-      ...prevUser,
-      password: event.target.value,
-    }));
-  }
-
-  async function fetchLoginUser() {
+  async function fetchLoginUser(user: Credentials) {
     try {
-      const response = await fetch("http://localhost:3000/api/users/login", {
+      const response = await fetch("/api/users/login", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({
-          email: loginUser.email, //"lundell.linus@gmail.com",
-          password: loginUser.password, //"12345",
-        }),
+        body: JSON.stringify(user),
       });
       const data = await response.json();
       setLoginUser(data);
@@ -75,8 +64,6 @@ const UserProvider = ({ children }: PropsWithChildren<object>) => {
         value={{
           loginUser,
           fetchLoginUser,
-          handleEmail,
-          handlePassword,
         }}
       >
         {children}
