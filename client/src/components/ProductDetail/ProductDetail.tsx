@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Card, Button } from "antd";
+import { Card } from "antd";
 import { useParams } from "react-router-dom";
 
 import "./ProductDetail.css";
