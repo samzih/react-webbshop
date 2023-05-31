@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
-import PurchaseButton from "../PurchaseButton/PurchaseButton";
-import { useProductContext } from "../../context/ProductContext";
+import PurchaseButton from "./PurchaseButton";
+import { useProductContext } from "../context/ProductContext";
 import { Card } from "antd";
 
 function ProductList() {
