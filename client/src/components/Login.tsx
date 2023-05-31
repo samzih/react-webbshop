@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { UserOutlined } from "@ant-design/icons";
 import { Button } from "antd";
-import { useUserContext } from "../../context/UserContext";
-import RegisterForm from "../RegisterForm/RegisterForm";
+import { useUserContext } from "../context/UserContext";
+import RegisterForm from "./RegisterForm";
 function Login() {
   const { fetchLoginUser } = useUserContext();
   const [expandLogin, setExpandLogin] = useState(false);

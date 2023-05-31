@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { Button } from "antd";
-import { useCartContext } from "../../context/CartContext";
-import { IProduct } from "../../context/ProductContext";
+import { useCartContext } from "../context/CartContext";
+import { IProduct } from "../context/ProductContext";
 type Props = {
   product: IProduct;
 };

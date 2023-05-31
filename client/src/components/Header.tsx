@@ -1,9 +1,9 @@
-import Nav from "../Nav/Nav";
-import CartHeader from "../CartHeader/CartHeader";
-import Login from "../Login/Login";
+import Nav from "./Nav";
+import Cart from "./Cart";
+import Login from "./Login";
 import { Button, Space } from "antd";
 
-import "./Header.css";
+import "../component-styling/Header.css";
 
 function Header() {
   return (
@@ -13,7 +13,7 @@ function Header() {
 
         <div id="right-content">
           <Login />
-          <CartHeader />
+          <Cart />
         </div>
       </div>
       <Nav />

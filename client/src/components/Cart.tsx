@@ -4,9 +4,9 @@ import { useState } from "react";
 import { Badge, Button, Drawer, Space } from "antd";
 import type { DrawerProps } from "antd/es/drawer";
 import { Card } from "antd";
-import { useCartContext } from "../../context/CartContext";
+import { useCartContext } from "../context/CartContext";
 
-function CartHeader() {
+function Cart() {
   const [open, setOpen] = useState(false);
   const [placement] = useState<DrawerProps["placement"]>("right");
   const { Meta } = Card;
@@ -55,7 +55,7 @@ function CartHeader() {
           open={open}
           extra={
             <Space>
-              <NavLink to="./cart">
+              <NavLink to="./checkout">
                 <Button type="primary" disabled={cartItemCount <= 0} onClick={onClose}>
                   Gå till kassan
                 </Button>
@@ -121,4 +121,4 @@ function CartHeader() {
   );
 }
 
-export default CartHeader;
+export default Cart;

@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-empty-function */
 import { PropsWithChildren, createContext, useContext, useEffect } from "react";
 import { IProduct } from "../context/ProductContext";
-import { useLocalStorage } from "../utils/useLocalStorage";
+import { useLocalStorage } from "../hooks/useLocalStorage";
 
 interface CartContext {
   cart: CartItem[];

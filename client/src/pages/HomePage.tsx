@@ -1,5 +1,5 @@
-import ImgCarousel from "../ImgCarousel/ImgCarousel";
-import ProductList from "../ProductList/ProductList";
+import ImgCarousel from "../components/ImgCarousel";
+import ProductList from "../components/ProductList";
 
 function HomePage() {
   return (
