@@ -1,12 +1,15 @@
 /* eslint-disable @typescript-eslint/no-empty-function */
 import { PropsWithChildren, createContext, useContext, useEffect } from "react";
 import { IProduct } from "../context/ProductContext";
-import { useLocalStorage } from "../utils/useLocalStorage";
+import { useLocalStorage } from "../hooks/useLocalStorage";
 
 interface CartContext {
   cart: CartItem[];
   addToCart: (product: IProduct) => void;
   removeItem: (productId: number) => void;
+  increaseCartQuantity: (product: IProduct) => void;
+  decreaseCartQuantity: (product: IProduct) => void;
+  totalSum: number;
 }
 
 export interface CartItem {
@@ -18,12 +21,16 @@ const CartContext = createContext<CartContext>({
   cart: [],
   addToCart: () => {},
   removeItem: () => {},
+  increaseCartQuantity: () => {},
+  decreaseCartQuantity: () => {},
+  totalSum: 0,
 });
 
 export const useCartContext = () => useContext(CartContext);
 
 const CartProvider = ({ children }: PropsWithChildren<object>) => {
   const [cart, setCart] = useLocalStorage("cart", []);
+
   const addToCart = (product: IProduct) => {
     const existingItem = cart.find(
       (item: CartItem) => item.product._id === product._id
@@ -31,10 +38,10 @@ const CartProvider = ({ children }: PropsWithChildren<object>) => {
     if (existingItem) {
       existingItem.quantity++;
       setCart([...cart]);
+    } else {
+      setCart([...cart, { product, quantity: 1 }]);
     }
-    setCart([...cart, { product, quantity: 1 }]);
   };
-
 
   useEffect(() => {
     console.log(cart);
@@ -47,14 +54,48 @@ const CartProvider = ({ children }: PropsWithChildren<object>) => {
     setCart(newItemList);
   };
 
-  // useEffect(() => {
-  //   console.log(products);
-  // }, [products]);
+  const increaseCartQuantity = (product: IProduct) => {
+    const currentItem = cart.find(
+      (item: CartItem) => item.product._id === product._id
+    );
+    if (currentItem) {
+      currentItem.quantity++;
+      setCart([...cart]);
+    } else {
+      setCart([...cart, { product, quantity: 1 }]);
+    }
+  };
 
+  const decreaseCartQuantity = (product: IProduct) => {
+    const currentItem = cart.find(
+      (item: CartItem) => item.product._id === product._id
+    );
+    if (currentItem) {
+      currentItem.quantity--;
+      setCart([...cart]);
+    } else {
+      setCart([...cart, { product, quantity: -1 }]);
+    }
+  };
+
+  const totalSum = cart.reduce(
+    (accumulator: number, item: CartItem) =>
+      accumulator + item.product.price * item.quantity,
+    0
+  );
 
   return (
     <div>
-      <CartContext.Provider value={{ cart, addToCart, removeItem }}>
+      <CartContext.Provider
+        value={{
+          cart,
+          addToCart,
+          removeItem,
+          increaseCartQuantity,
+          decreaseCartQuantity,
+          totalSum,
+        }}
+      >
         {children}
       </CartContext.Provider>
     </div>
