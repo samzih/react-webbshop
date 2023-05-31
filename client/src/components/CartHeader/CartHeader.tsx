@@ -45,8 +45,6 @@ function CartHeader() {
         <Space>
           <Badge offset={[0, 13]} count={cartItemCount}>
             <ShoppingCartOutlined style={{ fontSize: 50 }} onClick={showDrawer} />
-            <Badge count={cartItemCount}>
-              <span />
           </Badge>
         </Space>
         <Drawer
@@ -58,7 +56,7 @@ function CartHeader() {
           extra={
             <Space>
               <NavLink to="./cart">
-                <Button type="primary" onClick={onClose}>
+                <Button type="primary" disabled={cartItemCount <= 0} onClick={onClose}>
                   Gå till kassan
                 </Button>
               </NavLink>
@@ -114,7 +112,6 @@ function CartHeader() {
                   </ButtonGroup>
                 </Card>
               </Link>
-              <p>{"Totalsumma: " + totalSum}</p>
             </div>
           ))}
           <p>{`Totalsumma: ${totalSum} kr`}</p>
