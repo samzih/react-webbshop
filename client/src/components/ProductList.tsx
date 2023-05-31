@@ -8,7 +8,7 @@ function ProductList() {
   const { products } = useProductContext();
 
   return (
-    <>
+    <div style={{ display: "flex", flexWrap: "wrap" }}>
       {products.map((product) => (
         <div key={product._id}>
           <Link to={`/${product._id}`} key={product._id}>
@@ -25,7 +25,7 @@ function ProductList() {
           </Link>
         </div>
       ))}
-    </>
+    </div>
   );
 }
 
