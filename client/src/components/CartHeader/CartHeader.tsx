@@ -118,6 +118,7 @@ function CartHeader() {
               <p>{"Totalsumma: " + totalSum}</p>
             </div>
           ))}
+          <p>{`Totalsumma: ${totalSum} kr`}</p>
         </Drawer>
       </>
     </div>
