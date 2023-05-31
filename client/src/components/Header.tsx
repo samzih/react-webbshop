@@ -1,7 +1,6 @@
 import Nav from "./Nav";
 import Cart from "./Cart";
 import Login from "./Login";
-import { Button, Space } from "antd";
 
 import "../component-styling/Header.css";
 
