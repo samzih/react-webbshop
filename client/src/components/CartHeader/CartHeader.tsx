@@ -38,17 +38,16 @@ function CartHeader() {
   cart.forEach((item) => {
     cartItemCount += item.quantity;
   });
-  
+
   return (
     <div>
       <>
         <Space>
-          <div>
+          <Badge offset={[0, 13]} count={cartItemCount}>
             <ShoppingCartOutlined style={{ fontSize: 50 }} onClick={showDrawer} />
             <Badge count={cartItemCount}>
               <span />
-            </Badge>
-          </div>
+          </Badge>
         </Space>
         <Drawer
           title="KUNDVAGN"
