@@ -1,21 +1,23 @@
 import React, { useState } from "react";
 import { Button, message, Steps, theme } from "antd";
+import CartItem from "../components/CartItem";
 
-const steps = [
-  {
-    title: "Kundvagn",
-    content: "cart-content",
-  },
-  {
-    title: "Personuppgifter",
-    content: "Second-content",
-  },
-  {
-    title: "Fraktsätt",
-    content: "Last-content",
-  },
-];
 function Checkout() {
+  const steps = [
+    {
+      title: "Kundvagn",
+      content: <CartItem />,
+    },
+    {
+      title: "Personuppgifter",
+      content: "PersonalInfo-content",
+    },
+    {
+      title: "Fraktsätt",
+      content: "Shipping-content",
+    },
+  ];
+
   const { token } = theme.useToken();
   const [current, setCurrent] = useState(0);
 
@@ -40,7 +42,7 @@ function Checkout() {
   };
 
   return (
-    <>
+    <div style={{ margin: 90 }}>
       <Steps current={current} items={items} />
       <div style={contentStyle}>{steps[current].content}</div>
       <div style={{ marginTop: 24 }}>
@@ -63,7 +65,7 @@ function Checkout() {
           </Button>
         )}
       </div>
-    </>
+    </div>
   );
 }
 

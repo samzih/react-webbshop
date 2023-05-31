@@ -13,8 +13,6 @@ type Props = {
 function CartPanel(props: Props) {
   const [placement] = useState<DrawerProps["placement"]>("right");
 
-  const { totalSum } = useCartContext();
-
   return (
     <div>
       <Drawer
@@ -38,7 +36,6 @@ function CartPanel(props: Props) {
         }
       >
         <CartItem />
-        <p>{`Totalsumma: ${totalSum} kr`}</p>
       </Drawer>
     </div>
   );

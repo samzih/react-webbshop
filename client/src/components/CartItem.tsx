@@ -13,56 +13,71 @@ function CartItem() {
   };
 
   const ButtonGroup = Button.Group;
-
+  const { totalSum } = useCartContext();
   return (
     <div>
       {cart.map((cartItem) => (
         <div key={cartItem.product._id}>
-          <Link to={`/${cartItem.product._id}`} key={cartItem.product._id}>
-            <Card
-              bordered
-              size="small"
-              hoverable
-              style={{ width: 200, padding: 10, margin: 10 }}
-              cover={<img alt="example" src={cartItem.product.image} />}
-            >
-              <Meta
-                title={cartItem.product.title}
-                description={cartItem.product.price * cartItem.quantity + " kr"}
-              />
-              <DeleteOutlined
-                onClick={() => handleClick(cartItem.product._id)}
-              />
+          <Card
+            bordered
+            size="small"
+            hoverable
+            style={{
+              width: 200,
+              padding: 10,
+              margin: 10,
+              pointerEvents: "none",
+            }}
+            cover={<img alt="example" src={cartItem.product.image} />}
+          >
+            <div style={{ pointerEvents: "auto" }}>
+              <Link to={`/${cartItem.product._id}`} key={cartItem.product._id}>
+                {cartItem.product.title && (
+                  <Meta
+                    title={cartItem.product.title}
+                    description={
+                      cartItem.product.price * cartItem.quantity + " kr"
+                    }
+                  />
+                )}
+              </Link>
+            </div>
 
-              <ButtonGroup>
-                <Button
-                  type="primary"
-                  size="small"
-                  shape="circle"
-                  onClick={(e) => {
-                    e.preventDefault();
-                    decreaseCartQuantity(cartItem.product);
-                  }}
-                  disabled={cartItem.quantity <= 1}
-                >
-                  -
-                </Button>
-                <p>{cartItem.quantity}</p>
-                <Button
-                  type="primary"
-                  size="small"
-                  shape="circle"
-                  onClick={(e) => {
-                    e.preventDefault();
-                    increaseCartQuantity(cartItem.product);
-                  }}
-                  disabled={cartItem.quantity >= cartItem.product.inStock}
-                >
-                  +
-                </Button>
-              </ButtonGroup>
-            </Card>
-          </Link>
+            <DeleteOutlined
+              onClick={() => handleClick(cartItem.product._id)}
+              style={{ pointerEvents: "auto" }}
+            />
+
+            <ButtonGroup style={{ pointerEvents: "auto" }}>
+              <Button
+                type="primary"
+                size="small"
+                shape="circle"
+                onClick={(e) => {
+                  e.preventDefault();
+                  decreaseCartQuantity(cartItem.product);
+                }}
+                disabled={cartItem.quantity <= 1}
+              >
+                -
+              </Button>
+              <p>{cartItem.quantity}</p>
+              <Button
+                type="primary"
+                size="small"
+                shape="circle"
+                onClick={(e) => {
+                  e.preventDefault();
+                  increaseCartQuantity(cartItem.product);
+                }}
+                disabled={cartItem.quantity >= cartItem.product.inStock}
+              >
+                +
+              </Button>
+            </ButtonGroup>
+          </Card>
+
+          <p>{`Totalsumma: ${totalSum} kr`}</p>
         </div>
       ))}
     </div>
