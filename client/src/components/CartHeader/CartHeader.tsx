@@ -1,7 +1,7 @@
 import { ShoppingCartOutlined, DeleteOutlined } from "@ant-design/icons";
 import { NavLink, Link } from "react-router-dom";
 import { useState } from "react";
-import { Button, Drawer, Space } from "antd";
+import { Badge, Button, Drawer, Space } from "antd";
 import type { DrawerProps } from "antd/es/drawer";
 import { Card } from "antd";
 import { useCartContext } from "../../context/CartContext";
@@ -32,11 +32,20 @@ function CartHeader() {
 
   const ButtonGroup = Button.Group;
 
+  // calculates total quantity of items in the cart
+  let cartItemCount = 0;
+
+  cart.forEach((item) => {
+    cartItemCount += item.quantity;
+  });
+
   return (
     <div>
       <>
         <Space>
-          <ShoppingCartOutlined onClick={showDrawer} />
+          <Badge offset={[0, 13]} count={cartItemCount}>
+            <ShoppingCartOutlined style={{ fontSize: 50 }} onClick={showDrawer} />
+          </Badge>
         </Space>
         <Drawer
           title="KUNDVAGN"
@@ -47,7 +56,7 @@ function CartHeader() {
           extra={
             <Space>
               <NavLink to="./cart">
-                <Button type="primary" onClick={onClose}>
+                <Button type="primary" disabled={cartItemCount <= 0} onClick={onClose}>
                   Gå till kassan
                 </Button>
               </NavLink>
@@ -103,9 +112,9 @@ function CartHeader() {
                   </ButtonGroup>
                 </Card>
               </Link>
-              <p>{"Totalsumma: " + totalSum}</p>
             </div>
           ))}
+          <p>{`Totalsumma: ${totalSum} kr`}</p>
         </Drawer>
       </>
     </div>
