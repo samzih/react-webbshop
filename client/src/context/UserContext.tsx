@@ -14,7 +14,7 @@ export interface Credentials {
   password: string;
 }
 
-interface User {
+export interface User {
   firstName: string;
   lastName: string;
   email: string;
@@ -25,7 +25,7 @@ interface User {
 interface UserContext {
   loginUser: User | null;
   fetchLoginUser: (user: Credentials) => void;
-  logoutUser: (user: User) => void;
+  logoutUser: () => void;
 }
 // Eventuellt lägga till Cart till userInterface
 
@@ -39,7 +39,6 @@ export const useUserContext = () => useContext(UserContext);
 
 const UserProvider = ({ children }: PropsWithChildren<object>) => {
   const [loginUser, setLoginUser] = useState<User | null>(null);
-
   //reminder: useEffect for auth
 
   async function fetchLoginUser(user: Credentials) {
@@ -53,28 +52,59 @@ const UserProvider = ({ children }: PropsWithChildren<object>) => {
       });
       const data = await response.json();
       setLoginUser(data);
+      if (response.status === 401) {
+        return data;
+      }
     } catch (error) {
       console.log(error);
     }
   }
 
-  async function logoutUser(user: User) {
+  async function logoutUser() {
     try {
       const response = await fetch("/api/users/logout", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(user),
+        body: JSON.stringify({}),
       });
-      const data = await response.json();
-      setLoginUser(data);
+      if (response.status === 204) {
+        setLoginUser(null);
+      } else {
+        const data = await response.json();
+        return data;
+      }
     } catch (error) {
       console.log(error);
     }
   }
+  // useEffect(() => {
+  // }, [loginUser]);
+
   useEffect(() => {
-    console.log(loginUser);
+    async function authorizeUser() {
+      try {
+        if (loginUser) {
+          // console.log("is logged in");
+        } else {
+          const response = await fetch("/api/users/authorize");
+          if (response.status === 200) {
+            // console.log("is logged in");
+            const data = await response.json();
+            setLoginUser(data);
+          } else if (response.status === 401) {
+            setLoginUser(null);
+            // console.log("you are not logged in");
+          } else {
+            console.log("Unexpected response from server");
+          }
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    }
+    authorizeUser();
   }, [loginUser]);
 
   return (

@@ -11,14 +11,7 @@ function Login() {
 
   const handleClick = () => {
     const user = { email, password };
-
     fetchLoginUser(user);
-  };
-
-  const handleLogout = () => {
-    if (loginUser) {
-      logoutUser(loginUser);
-    }
   };
 
   return (
@@ -38,13 +31,13 @@ function Login() {
           />
           <input
             type="text"
-            placeholder="Efternamn"
+            placeholder="lösenord"
             onChange={(e) => setPassword(e.target.value)}
           />
           <Button onClick={handleClick} type="primary">
             Login
           </Button>
-          <Button onClick={handleLogout} type="primary">
+          <Button onClick={logoutUser} type="primary">
             Logga ut
           </Button>
         </form>
