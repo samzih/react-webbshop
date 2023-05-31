@@ -4,7 +4,7 @@ import { Button } from "antd";
 import { useUserContext } from "../context/UserContext";
 import RegisterForm from "./RegisterForm";
 function Login() {
-  const { fetchLoginUser } = useUserContext();
+  const { fetchLoginUser, logoutUser, loginUser } = useUserContext();
   const [expandLogin, setExpandLogin] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -31,11 +31,14 @@ function Login() {
           />
           <input
             type="text"
-            placeholder="Efternamn"
+            placeholder="lösenord"
             onChange={(e) => setPassword(e.target.value)}
           />
           <Button onClick={handleClick} type="primary">
             Login
+          </Button>
+          <Button onClick={logoutUser} type="primary">
+            Logga ut
           </Button>
         </form>
       )}
