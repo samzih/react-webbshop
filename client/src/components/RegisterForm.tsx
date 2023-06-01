@@ -57,20 +57,20 @@ function RegisterForm() {
   return (
     <div>
       {loginUser && loginUser.firstName ? null : (
-        <Button type="primary" onClick={showDrawer} icon={<PlusOutlined />}>
-          New account
+        <Button type="default" onClick={showDrawer} icon={<PlusOutlined />}>
+          Skapa konto
         </Button>
       )}
 
       <Drawer
-        title="Create a new account"
+        title="Skapa ditt konto"
         width={720}
         onClose={onClose}
         open={open}
         bodyStyle={{ paddingBottom: 80 }}
         extra={
           <Space>
-            <Button onClick={onClose}>Cancel</Button>
+            <Button onClick={onClose}>Avbryt</Button>
           </Space>
         }
       >
@@ -79,10 +79,8 @@ function RegisterForm() {
             <Col span={12}>
               <Form.Item
                 name="firstName"
-                label="namn"
-                rules={[
-                  { required: true, message: "Please enter your first name" },
-                ]}
+                label="Namn"
+                rules={[{ required: true, message: "Ange ditt namn" }]}
               >
                 <Input placeholder="Johan" />
               </Form.Item>
@@ -90,10 +88,8 @@ function RegisterForm() {
             <Col span={12}>
               <Form.Item
                 name="lastName"
-                label="efternamn"
-                rules={[
-                  { required: true, message: "Please enter your last name" },
-                ]}
+                label="Efternamn"
+                rules={[{ required: true, message: "Ange ditt efternamn" }]}
               >
                 <Input placeholder="Karlsson" />
               </Form.Item>
@@ -101,21 +97,23 @@ function RegisterForm() {
           </Row>
           <Form.Item
             name="email"
-            label="Email"
-            rules={[{ required: true, message: "Please enter your email" }]}
+            label="E-postadress"
+            rules={[{ required: true, message: "Ange din E-postadress" }]}
           >
             <Input placeholder="Johan36@hotmail.com" />
           </Form.Item>
           <Form.Item
             name="password"
             label="Password"
-            rules={[{ required: true, message: "Please enter your password" }]}
+            rules={[{ required: true, message: "Ange ditt lösenord" }]}
           >
             <Input.Password placeholder="******" />
           </Form.Item>
-          <Button htmlType="submit">Submit form</Button>
+          <Button type="primary" htmlType="submit">
+            Fortsätt
+          </Button>
           {isSubmitted && (
-            <p className="isSubmitedParagraf">Account created!</p>
+            <p className="isSubmitedParagraf">Kontot är skapat!</p>
           )}
         </Form>
       </Drawer>

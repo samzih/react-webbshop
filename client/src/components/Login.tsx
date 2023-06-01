@@ -52,20 +52,20 @@ function Login() {
           </Button>
         ) : (
           <Button type="primary" onClick={showDrawer}>
-            Log In
+            Logga in
           </Button>
         )}
         <RegisterForm />
       </div>
       <Drawer
-        title="Log in"
+        title="Logga in"
         width={420}
         onClose={onClose}
         open={open}
         bodyStyle={{ paddingBottom: 80 }}
         extra={
           <Space>
-            <Button onClick={onClose}>Cancel</Button>
+            <Button onClick={onClose}>Avbryt</Button>
           </Space>
         }
       >
@@ -76,8 +76,8 @@ function Login() {
             <>
               <Form.Item
                 name="email"
-                label="Email"
-                rules={[{ required: true, message: "Please enter your email" }]}
+                label="E-postadress"
+                rules={[{ required: true, message: "Ange din E-postadress" }]}
               >
                 <Input
                   placeholder="Johan36@hotmail.com"
@@ -86,10 +86,8 @@ function Login() {
               </Form.Item>
               <Form.Item
                 name="password"
-                label="Password"
-                rules={[
-                  { required: true, message: "Please enter your password" },
-                ]}
+                label="Lösenord"
+                rules={[{ required: true, message: "Ange ditt lösenord" }]}
               >
                 <Input.Password
                   placeholder="******"
@@ -105,7 +103,7 @@ function Login() {
             </Button>
           ) : (
             <Button onClick={handleClick} type="primary">
-              Login
+              Logga in
             </Button>
           )}
         </Form>
