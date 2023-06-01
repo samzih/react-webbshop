@@ -1,11 +1,32 @@
+import { PlusOutlined } from "@ant-design/icons";
+import "../component-styling/RegisterForm.css";
+import {
+  Button,
+  Col,
+  DatePicker,
+  Drawer,
+  Form,
+  Input,
+  Row,
+  Select,
+  Space,
+} from "antd";
+
 import React, { useState, useEffect } from "react";
 import { UserOutlined } from "@ant-design/icons";
-import { Button } from "antd";
 import { useUserContext } from "../context/UserContext";
 import RegisterForm from "./RegisterForm";
+import "../component-styling/Login.css";
 function Login() {
+  const [open, setOpen] = useState(false);
+  const showDrawer = () => {
+    setOpen(true);
+  };
+
+  const onClose = () => {
+    setOpen(false);
+  };
   const { fetchLoginUser, logoutUser, loginUser } = useUserContext();
-  const [expandLogin, setExpandLogin] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -15,14 +36,28 @@ function Login() {
   };
 
   return (
-    <div>
-      <UserOutlined />
-      <div>
-        <p onClick={() => setExpandLogin((prevState) => !prevState)}>
-          Logga in
-        </p>
+    <div className="HandleUserContainer">
+      <p className="userIcon">
+        <UserOutlined />
+      </p>
+      <div className="LoginAndRegisterContainer">
+        <Button type="primary" onClick={showDrawer} icon={<PlusOutlined />}>
+          Log In
+        </Button>
+        <RegisterForm />
       </div>
-      {expandLogin && (
+      <Drawer
+        title="Create a new account"
+        width={420}
+        onClose={onClose}
+        open={open}
+        bodyStyle={{ paddingBottom: 80 }}
+        extra={
+          <Space>
+            <Button onClick={onClose}>Cancel</Button>
+          </Space>
+        }
+      >
         <form>
           <input
             type="text"
@@ -41,8 +76,7 @@ function Login() {
             Logga ut
           </Button>
         </form>
-      )}
-      <RegisterForm />
+      </Drawer>
     </div>
   );
 }

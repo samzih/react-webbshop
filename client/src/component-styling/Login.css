@@ -1,0 +1,11 @@
+.userIcon {
+    font-size:30px;
+}
+.HandleUserContainer{
+    display:flex;
+    
+}
+.LoginAndRegisterContainer{
+    display:flex;
+    flex-direction: column;
+}
