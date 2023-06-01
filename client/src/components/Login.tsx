@@ -29,10 +29,15 @@ function Login() {
   const { fetchLoginUser, logoutUser, loginUser } = useUserContext();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [form] = Form.useForm();
 
   const handleClick = () => {
     const user = { email, password };
     fetchLoginUser(user);
+    if (user.email) {
+      form.resetFields();
+      onClose();
+    }
   };
 
   return (
@@ -41,13 +46,13 @@ function Login() {
         <UserOutlined />
       </p>
       <div className="LoginAndRegisterContainer">
-        {!loginUser ? (
+        {loginUser && loginUser.firstName ? (
           <Button type="primary" onClick={showDrawer}>
-            Log In
+            {loginUser.firstName}
           </Button>
         ) : (
           <Button type="primary" onClick={showDrawer}>
-            {loginUser.firstName}
+            Log In
           </Button>
         )}
         <RegisterForm />
@@ -64,24 +69,37 @@ function Login() {
           </Space>
         }
       >
-        <form>
-          {!loginUser ? (
-            <>
-              <input
-                type="text"
-                placeholder="email"
-                onChange={(e) => setEmail(e.target.value)}
-              />
-              <input
-                type="text"
-                placeholder="lösenord"
-                onChange={(e) => setPassword(e.target.value)}
-              />
-            </>
-          ) : (
+        <Form form={form}>
+          {loginUser && loginUser.firstName ? (
             <p>Welcome {loginUser.firstName}</p>
+          ) : (
+            <>
+              <Form.Item
+                name="email"
+                label="Email"
+                rules={[{ required: true, message: "Please enter your email" }]}
+              >
+                <Input
+                  placeholder="Johan36@hotmail.com"
+                  onChange={(e) => setEmail(e.target.value)}
+                />
+              </Form.Item>
+              <Form.Item
+                name="password"
+                label="Password"
+                rules={[
+                  { required: true, message: "Please enter your password" },
+                ]}
+              >
+                <Input.Password
+                  placeholder="******"
+                  onChange={(e) => setPassword(e.target.value)}
+                />
+              </Form.Item>
+            </>
           )}
-          {loginUser ? (
+
+          {loginUser && loginUser.firstName ? (
             <Button onClick={logoutUser} type="primary">
               Logga ut
             </Button>
@@ -90,7 +108,7 @@ function Login() {
               Login
             </Button>
           )}
-        </form>
+        </Form>
       </Drawer>
     </div>
   );

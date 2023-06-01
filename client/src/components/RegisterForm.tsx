@@ -56,11 +56,11 @@ function RegisterForm() {
 
   return (
     <div>
-      {!loginUser ? (
+      {loginUser && loginUser.firstName ? null : (
         <Button type="primary" onClick={showDrawer} icon={<PlusOutlined />}>
           New account
         </Button>
-      ) : null}
+      )}
 
       <Drawer
         title="Create a new account"
