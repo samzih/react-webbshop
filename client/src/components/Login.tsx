@@ -41,13 +41,19 @@ function Login() {
         <UserOutlined />
       </p>
       <div className="LoginAndRegisterContainer">
-        <Button type="primary" onClick={showDrawer} icon={<PlusOutlined />}>
-          Log In
-        </Button>
+        {!loginUser ? (
+          <Button type="primary" onClick={showDrawer}>
+            Log In
+          </Button>
+        ) : (
+          <Button type="primary" onClick={showDrawer}>
+            {loginUser.firstName}
+          </Button>
+        )}
         <RegisterForm />
       </div>
       <Drawer
-        title="Create a new account"
+        title="Log in"
         width={420}
         onClose={onClose}
         open={open}
@@ -59,22 +65,31 @@ function Login() {
         }
       >
         <form>
-          <input
-            type="text"
-            placeholder="email"
-            onChange={(e) => setEmail(e.target.value)}
-          />
-          <input
-            type="text"
-            placeholder="lösenord"
-            onChange={(e) => setPassword(e.target.value)}
-          />
-          <Button onClick={handleClick} type="primary">
-            Login
-          </Button>
-          <Button onClick={logoutUser} type="primary">
-            Logga ut
-          </Button>
+          {!loginUser ? (
+            <>
+              <input
+                type="text"
+                placeholder="email"
+                onChange={(e) => setEmail(e.target.value)}
+              />
+              <input
+                type="text"
+                placeholder="lösenord"
+                onChange={(e) => setPassword(e.target.value)}
+              />
+            </>
+          ) : (
+            <p>Welcome {loginUser.firstName}</p>
+          )}
+          {loginUser ? (
+            <Button onClick={logoutUser} type="primary">
+              Logga ut
+            </Button>
+          ) : (
+            <Button onClick={handleClick} type="primary">
+              Login
+            </Button>
+          )}
         </form>
       </Drawer>
     </div>

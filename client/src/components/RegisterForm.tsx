@@ -14,10 +14,11 @@ import {
 } from "antd";
 
 const { Option } = Select;
-
+import { useUserContext } from "../context/UserContext";
 function RegisterForm() {
   const [open, setOpen] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const { loginUser } = useUserContext();
   const [form] = Form.useForm();
   const showDrawer = () => {
     setOpen(true);
@@ -55,9 +56,12 @@ function RegisterForm() {
 
   return (
     <div>
-      <Button type="primary" onClick={showDrawer} icon={<PlusOutlined />}>
-        New account
-      </Button>
+      {!loginUser ? (
+        <Button type="primary" onClick={showDrawer} icon={<PlusOutlined />}>
+          New account
+        </Button>
+      ) : null}
+
       <Drawer
         title="Create a new account"
         width={720}
