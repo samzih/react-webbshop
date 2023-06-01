@@ -43,6 +43,7 @@ function ProductDetail() {
         const data = await response.json();
 
         setProduct(data);
+        document.title += data.title;
       } catch (error) {
         console.log(error);
       }
