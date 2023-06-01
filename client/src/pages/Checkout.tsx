@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Button, message, Steps, theme } from "antd";
 import CartItem from "../components/CartItem";
+import CheckoutForm from "../components/CheckoutForm";
 
 function Checkout() {
   const steps = [
@@ -10,7 +11,7 @@ function Checkout() {
     },
     {
       title: "Personuppgifter",
-      content: "PersonalInfo-content",
+      content: <CheckoutForm />,
     },
     {
       title: "Fraktsätt",
