@@ -2,8 +2,8 @@ import { useState, useEffect } from "react";
 import { Card } from "antd";
 import { useParams } from "react-router-dom";
 
-import "./ProductDetail.css";
-import PurchaseButton from "../PurchaseButton/PurchaseButton";
+import "../component-styling/ProductDetail.css";
+import PurchaseButton from "../components/PurchaseButton";
 
 interface Product {
   _id: number;

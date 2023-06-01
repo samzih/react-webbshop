@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
-import PurchaseButton from "../PurchaseButton/PurchaseButton";
-import { useProductContext } from "../../context/ProductContext";
+import PurchaseButton from "./PurchaseButton";
+import { useProductContext } from "../context/ProductContext";
 import { Card } from "antd";
 
 function ProductList() {
@@ -8,7 +8,7 @@ function ProductList() {
   const { products } = useProductContext();
 
   return (
-    <>
+    <div style={{ display: "flex", flexWrap: "wrap" }}>
       {products.map((product) => (
         <div key={product._id}>
           <Link to={`/${product._id}`} key={product._id}>
@@ -25,7 +25,7 @@ function ProductList() {
           </Link>
         </div>
       ))}
-    </>
+    </div>
   );
 }
 
