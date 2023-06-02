@@ -5,10 +5,12 @@ import {
   Col,
   DatePicker,
   Drawer,
+  Typography,
   Form,
   Input,
   Row,
   Select,
+  Modal,
   Space,
 } from "antd";
 
@@ -17,15 +19,22 @@ import { UserOutlined } from "@ant-design/icons";
 import { useUserContext } from "../context/UserContext";
 import RegisterForm from "./RegisterForm";
 import "../component-styling/Login.css";
+const { Title, Text } = Typography;
 function Login() {
-  const [open, setOpen] = useState(false);
-  const showDrawer = () => {
-    setOpen(true);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const showModal = () => {
+    setIsModalOpen(true);
   };
 
-  const onClose = () => {
-    setOpen(false);
+  const handleOk = () => {
+    setIsModalOpen(false);
   };
+
+  const handleCancel = () => {
+    setIsModalOpen(false);
+  };
+
   const { fetchLoginUser, logoutUser, loginUser } = useUserContext();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -36,38 +45,34 @@ function Login() {
     fetchLoginUser(user);
     if (user.email) {
       form.resetFields();
-      onClose();
+      handleCancel();
     }
   };
 
   return (
     <div className="HandleUserContainer">
-      <p className="userIcon">
-        <UserOutlined />
-      </p>
       <div className="LoginAndRegisterContainer">
         {loginUser && loginUser.firstName ? (
-          <Button type="primary" onClick={showDrawer}>
-            {loginUser.firstName}
-          </Button>
+          <>
+            <p className="userIcon" onClick={showModal}>
+              <UserOutlined />
+            </p>
+            <Text className="LogoutAction" onClick={logoutUser}>
+              Logga ut
+            </Text>
+          </>
         ) : (
-          <Button type="primary" onClick={showDrawer}>
+          <Button type="primary" onClick={showModal}>
             Logga in
           </Button>
         )}
         <RegisterForm />
       </div>
-      <Drawer
+      <Modal
         title="Logga in"
-        width={420}
-        onClose={onClose}
-        open={open}
-        bodyStyle={{ paddingBottom: 80 }}
-        extra={
-          <Space>
-            <Button onClick={onClose}>Avbryt</Button>
-          </Space>
-        }
+        open={isModalOpen}
+        onOk={handleOk}
+        onCancel={handleCancel}
       >
         <Form form={form}>
           {loginUser && loginUser.firstName ? (
@@ -107,7 +112,7 @@ function Login() {
             </Button>
           )}
         </Form>
-      </Drawer>
+      </Modal>
     </div>
   );
 }
