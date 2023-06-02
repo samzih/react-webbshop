@@ -1,0 +1,23 @@
+.userIcon {
+    font-size:30px;
+}
+.HandleUserContainer{
+    display:flex;
+    
+}
+.LoginAndRegisterContainer{
+    display:flex;
+    flex-direction: column;
+}
+
+.nameOfUser:hover, .LogoutAction:hover, .userIcon:hover {
+    cursor: pointer;
+    background-color: beige;
+  }
+
+.nameOfUser, .userIcon{
+    padding:5px;
+    display:flex;
+    justify-content: center;
+    
+}

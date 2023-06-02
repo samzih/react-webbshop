@@ -51,7 +51,9 @@ const UserProvider = ({ children }: PropsWithChildren<object>) => {
         body: JSON.stringify(user),
       });
       const data = await response.json();
-      setLoginUser(data);
+      if (response.status === 200) {
+        setLoginUser(data);
+      }
       if (response.status === 401) {
         return data;
       }
