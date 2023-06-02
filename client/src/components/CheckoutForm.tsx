@@ -1,11 +1,11 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Form, Input } from "antd";
 import { useUserContext } from "../context/UserContext";
 import { UserContext } from "../context/UserContext";
 
 type SizeType = Parameters<typeof Form>[0]["size"];
 
-function CheckoutForm() {
+function CheckoutForm({setSubmittable}) {
   const [componentSize, setComponentSize] = useState<SizeType | "default">(
     "default"
   );
@@ -14,8 +14,28 @@ function CheckoutForm() {
   };
   const { loginUser }: UserContext = useUserContext();
 
+  const [form] = Form.useForm();
+
+  // Watch all values
+  const values = Form.useWatch([], form);
+
+  useEffect(() => {
+    form.validateFields({ validateOnly: true }).then(
+      () => {
+        // console.log("Alla inputfält är ifyllda!");
+        setSubmittable(false);
+      },
+      () => {
+        // console.log("Alla inputfält är inte ifyllda...");
+        setSubmittable(true);
+      },
+    );
+  }, [values]);
+
   return (
     <Form
+      form={form}
+      name="validateOnly"
       labelCol={{ span: 4 }}
       wrapperCol={{ span: 14 }}
       layout="horizontal"
@@ -34,19 +54,19 @@ function CheckoutForm() {
             <span>{loginUser.email}</span>
           </Form.Item>
 
-          <Form.Item htmlFor="street" label="Gata">
-            <Input name="street" type="text" autoComplete="address-line1"/>
+          <Form.Item name="gata" htmlFor="street" label="Gata" rules={[{ required: true }]}>
+            <Input name="street" type="text" autoComplete="address-line1" />
           </Form.Item>
 
-          <Form.Item htmlFor="postal" label="Postnummer">
+          <Form.Item name="postnummer" htmlFor="postal" label="Postnummer" rules={[{ required: true }]}>
             <Input name="postal" type="text" autoComplete="postal-code"/>
           </Form.Item>
 
-          <Form.Item htmlFor="city" label="Stad">
+          <Form.Item name="stad" htmlFor="city" label="Stad" rules={[{ required: true }]}>
             <Input name="city" type="text" autoComplete="address-level2"/>
           </Form.Item>
 
-          <Form.Item htmlFor="country" label="Land">
+          <Form.Item name="land" htmlFor="country" label="Land" rules={[{ required: true }]}>
             <Input name="country" type="text" autoComplete="country-name"/>
           </Form.Item>
         </>
