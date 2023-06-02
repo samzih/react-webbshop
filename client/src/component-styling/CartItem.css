@@ -1,0 +1,16 @@
+.ant-list-item-meta-content {
+  justify-content: flex-start;
+}
+
+.cartContentLeftside {
+  display: flex;
+}
+.decreaseIncreaseBtnContainer {
+  display: flex;
+}
+.cartContentRightside {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding-bottom: 2rem;
+}
