@@ -23,7 +23,7 @@ function CheckoutShipping() {
               <Radio value={2}>PostNord</Radio>
             </Card>
             <Card>
-              <Radio value={3}>Instabox</Radio>
+              <Radio value={3}>Schenker</Radio>
             </Card>
           </Space>
         </Radio.Group>
