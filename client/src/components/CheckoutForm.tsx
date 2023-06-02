@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Form, Input, Select } from "antd";
+import { Form, Input } from "antd";
 import { useUserContext } from "../context/UserContext";
 import { UserContext } from "../context/UserContext";
 
@@ -26,40 +26,33 @@ function CheckoutForm() {
     >
       {loginUser ? (
         <>
-          <Form.Item label="E-mail">
-            <Input value={loginUser.email} />
+          <Form.Item label="Namn">
+            <span>{`${loginUser.firstName} ${loginUser.lastName}`}</span>
           </Form.Item>
 
-          <Form.Item label="Förnamn">
-            <Input value={loginUser.firstName} />
+          <Form.Item label="Email">
+            <span>{loginUser.email}</span>
           </Form.Item>
 
-          <Form.Item label="Efternamn">
-            <Input value={loginUser.lastName} />
+          <Form.Item htmlFor="street" label="Gata">
+            <Input name="street" type="text" autoComplete="address-line1"/>
           </Form.Item>
 
-          <Form.Item label="Gata">
-            <Input />
+          <Form.Item htmlFor="postal" label="Postnummer">
+            <Input name="postal" type="text" autoComplete="postal-code"/>
           </Form.Item>
 
-          <Form.Item label="Postnummer">
-            <Input />
+          <Form.Item htmlFor="city" label="Stad">
+            <Input name="city" type="text" autoComplete="address-level2"/>
           </Form.Item>
 
-          <Form.Item label="Stad">
-            <Input />
-          </Form.Item>
-
-          <Form.Item label="Land">
-            <Select>
-              <Select.Option value="demo">Sverige</Select.Option>
-            </Select>
+          <Form.Item htmlFor="country" label="Land">
+            <Input name="country" type="text" autoComplete="country-name"/>
           </Form.Item>
         </>
       ) : (
         <p>
           Du måste logga in för att komma vidare.
-          <p />
         </p>
       )}
     </Form>
