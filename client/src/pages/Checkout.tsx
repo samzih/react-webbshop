@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { Button, message, Steps, theme } from "antd";
 import CartItem from "../components/CartItem";
+import CheckoutForm from "../components/CheckoutForm";
+import CheckoutShipping from "../components/CheckoutShipping";
 
 function Checkout() {
   const steps = [
@@ -10,11 +12,11 @@ function Checkout() {
     },
     {
       title: "Personuppgifter",
-      content: "PersonalInfo-content",
+      content: <CheckoutForm />,
     },
     {
       title: "Fraktsätt",
-      content: "Shipping-content",
+      content: <CheckoutShipping />,
     },
   ];
 
@@ -42,13 +44,22 @@ function Checkout() {
   };
 
   return (
-    <div style={{ margin: 90 }}>
+    <div
+      style={{
+        margin: 90,
+      }}
+    >
       <Steps current={current} items={items} />
       <div style={contentStyle}>{steps[current].content}</div>
       <div style={{ marginTop: 24 }}>
+        {current > 0 && (
+          <Button style={{ margin: "0 8px" }} onClick={() => prev()}>
+            Föregående | Gå tillbaka
+          </Button>
+        )}
         {current < steps.length - 1 && (
           <Button type="primary" onClick={() => next()}>
-            Next
+            Nästa | Fortsätt
           </Button>
         )}
         {current === steps.length - 1 && (
@@ -56,12 +67,7 @@ function Checkout() {
             type="primary"
             onClick={() => message.success("Processing complete!")}
           >
-            Done
-          </Button>
-        )}
-        {current > 0 && (
-          <Button style={{ margin: "0 8px" }} onClick={() => prev()}>
-            Previous
+            Genomför köp/beställning
           </Button>
         )}
       </div>

@@ -22,7 +22,7 @@ export interface User {
   isAdmin: boolean;
 }
 
-interface UserContext {
+export interface UserContext {
   loginUser: User | null;
   fetchLoginUser: (user: Credentials) => void;
   logoutUser: () => void;
