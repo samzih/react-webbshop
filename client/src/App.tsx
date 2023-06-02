@@ -4,16 +4,19 @@ import Main from "./components/Main";
 import CartProvider from "./context/CartContext";
 import UserProvider from "./context/UserContext";
 import ProductProvider from "./context/ProductContext";
+import ShippingProvider from "./context/CheckoutShippingContext";
 function App() {
   return (
     <div>
       <ProductProvider>
         <CartProvider>
-          <UserProvider>
-            <Header />
-            <Main />
-          </UserProvider>
-          <Footer />
+          <ShippingProvider>
+            <UserProvider>
+              <Header />
+              <Main />
+            </UserProvider>
+            <Footer />
+          </ShippingProvider>
         </CartProvider>
       </ProductProvider>
     </div>
