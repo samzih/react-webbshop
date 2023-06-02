@@ -28,7 +28,12 @@ function Login() {
   };
 
   const handleOk = () => {
-    setIsModalOpen(false);
+    const user = { email, password };
+    fetchLoginUser(user);
+    if (loginUser && loginUser.firstName) {
+      form.resetFields();
+      setIsModalOpen(false);
+    }
   };
 
   const handleCancel = () => {
@@ -40,14 +45,7 @@ function Login() {
   const [password, setPassword] = useState("");
   const [form] = Form.useForm();
 
-  const handleClick = () => {
-    const user = { email, password };
-    fetchLoginUser(user);
-    if (user.email) {
-      form.resetFields();
-      handleCancel();
-    }
-  };
+  const handleClick = () => {};
 
   return (
     <div className="HandleUserContainer">
@@ -63,13 +61,13 @@ function Login() {
           </>
         ) : (
           <Button type="primary" onClick={showModal}>
-            Logga in
+            <UserOutlined /> Logga in
           </Button>
         )}
         <RegisterForm />
       </div>
       <Modal
-        title="Logga in"
+        title="Inloggning"
         open={isModalOpen}
         onOk={handleOk}
         onCancel={handleCancel}
@@ -106,11 +104,7 @@ function Login() {
             <Button onClick={logoutUser} type="primary">
               Logga ut
             </Button>
-          ) : (
-            <Button onClick={handleClick} type="primary">
-              Logga in
-            </Button>
-          )}
+          ) : null}
         </Form>
       </Modal>
     </div>
