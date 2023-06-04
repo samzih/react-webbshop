@@ -46,12 +46,8 @@ const ShippingProvider = ({ children }: PropsWithChildren) => {
     const { deliveryTimeInHours } = shipping;
 
     const currentDate = new Date();
-
-    const calculatedTime = currentDate.setHours(
-      currentDate.getHours() + deliveryTimeInHours
-    );
-    console.log(calculatedTime);
-    return calculatedTime.toLocaleString();
+    currentDate.setHours(currentDate.getHours() + deliveryTimeInHours);
+    return currentDate.toLocaleString();
   };
 
   return (
