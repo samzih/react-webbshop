@@ -54,19 +54,19 @@ function CheckoutForm({setSubmittable}) {
             <span>{loginUser.email}</span>
           </Form.Item>
 
-          <Form.Item name="gata" htmlFor="street" label="Gata" rules={[{ required: true }]}>
+          <Form.Item help name="gata" htmlFor="street" label="Gata" rules={[{ required: true }]}>
             <Input name="street" type="text" autoComplete="address-line1" />
           </Form.Item>
 
-          <Form.Item name="postnummer" htmlFor="postal" label="Postnummer" rules={[{ required: true }]}>
+          <Form.Item help name="postnummer" htmlFor="postal" label="Postnummer" rules={[{ required: true, min: 5 }]}>
             <Input name="postal" type="text" autoComplete="postal-code"/>
           </Form.Item>
 
-          <Form.Item name="stad" htmlFor="city" label="Stad" rules={[{ required: true }]}>
+          <Form.Item help name="stad" htmlFor="city" label="Stad" rules={[{ required: true }]}>
             <Input name="city" type="text" autoComplete="address-level2"/>
           </Form.Item>
 
-          <Form.Item name="land" htmlFor="country" label="Land" rules={[{ required: true }]}>
+          <Form.Item help name="land" htmlFor="country" label="Land" rules={[{ required: true }]}>
             <Input name="country" type="text" autoComplete="country-name"/>
           </Form.Item>
         </>
