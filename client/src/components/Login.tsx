@@ -13,9 +13,9 @@ import {
   Modal,
   Space,
 } from "antd";
-
+import { Link } from "react-router-dom";
 import React, { useState, useEffect } from "react";
-import { UserOutlined } from "@ant-design/icons";
+import { UserOutlined, AndroidOutlined } from "@ant-design/icons";
 import { useUserContext } from "../context/UserContext";
 import RegisterForm from "./RegisterForm";
 import "../component-styling/Login.css";
@@ -52,9 +52,17 @@ function Login() {
       <div className="LoginAndRegisterContainer">
         {loginUser && loginUser.firstName ? (
           <>
-            <p className="userIcon" onClick={showModal}>
-              <UserOutlined />
-            </p>
+            {loginUser?.isAdmin ? (
+              <>
+                <Link to={"/admin"}>
+                  <AndroidOutlined className="adminIcon" />
+                </Link>
+              </>
+            ) : (
+              <p className="userIcon" onClick={showModal}>
+                <UserOutlined />
+              </p>
+            )}
             <Text className="LogoutAction" onClick={logoutUser}>
               Logga ut
             </Text>

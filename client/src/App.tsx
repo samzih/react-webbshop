@@ -5,6 +5,7 @@ import CartProvider from "./context/CartContext";
 import UserProvider from "./context/UserContext";
 import ProductProvider from "./context/ProductContext";
 import ShippingProvider from "./context/CheckoutShippingContext";
+import AdminProvider from "./context/AdminContext";
 function App() {
   return (
     <div>
@@ -12,6 +13,7 @@ function App() {
         <CartProvider>
           <ShippingProvider>
             <UserProvider>
+              <AdminProvider />
               <Header />
               <Main />
             </UserProvider>
