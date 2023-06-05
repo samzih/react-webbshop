@@ -5,6 +5,8 @@ import CheckoutForm from "../components/CheckoutForm";
 import CheckoutShipping from "../components/CheckoutShipping";
 
 function Checkout() {
+  const [submittable, setSubmittable] = useState(true);
+  
   const steps = [
     {
       title: "Kundvagn",
@@ -12,7 +14,7 @@ function Checkout() {
     },
     {
       title: "Personuppgifter",
-      content: <CheckoutForm />,
+      content: <CheckoutForm setSubmittable={setSubmittable} />,
     },
     {
       title: "Fraktsätt",
@@ -58,7 +60,7 @@ function Checkout() {
           </Button>
         )}
         {current < steps.length - 1 && (
-          <Button type="primary" onClick={() => next()}>
+          <Button type="primary" disabled={current > steps.length -3 && submittable} onClick={() => next()}>
             Nästa | Fortsätt
           </Button>
         )}
