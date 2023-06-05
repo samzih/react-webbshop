@@ -1,12 +1,20 @@
 import { PropsWithChildren, createContext, useContext, useEffect } from "react";
 import { IProduct } from "./ProductContext";
 interface AdminContext {
-  createNewProduct: (product: IProduct) => void;
+  createNewProduct: (product: CreateProduct) => object;
 }
 
 const AdminContext = createContext<AdminContext>({
-  createNewProduct: () => {},
+  createNewProduct: () => Object,
 });
+
+export interface CreateProduct {
+  title: string;
+  description: string;
+  image: string;
+  price: number;
+  inStock: number;
+}
 
 // const ProductCreateValidationSchema = Joi.object({
 //   title: Joi.string().strict().required(),
@@ -18,7 +26,7 @@ const AdminContext = createContext<AdminContext>({
 
 export const useAdminContext = () => useContext(AdminContext);
 const AdminProvider = ({ children }: PropsWithChildren<object>) => {
-  const createNewProduct = async (product: IProduct) => {
+  const createNewProduct = async (product: CreateProduct) => {
     try {
       const response = await fetch("/api/products", {
         method: "POST",
@@ -28,6 +36,7 @@ const AdminProvider = ({ children }: PropsWithChildren<object>) => {
         body: JSON.stringify(product),
       });
       const data = await response.json();
+      console.log(data);
       if (response.status === 200) {
         console.log("Success");
       }

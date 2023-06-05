@@ -27,51 +27,74 @@ const AdminCreateProduct = (props: Props) => {
 
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
-  const [price, setPrice] = useState(0);
+  const [price, setPrice] = useState("");
   const [image, setImage] = useState("");
-  const [inStock, setInStock] = useState(0);
+  const [inStock, setInStock] = useState("");
+  const [form] = Form.useForm();
+  function handleClick() {
+    const priceInNumb = parseFloat(price);
+    const inStockInNumb = parseInt(inStock);
 
+    const product = {
+      title,
+      description,
+      price: priceInNumb,
+      image,
+      inStock: inStockInNumb,
+    };
+    createNewProduct(product);
+  }
   return (
     <div>
-      <Form.Item
-        name="title"
-        label="Produktnamn"
-        rules={[{ required: true, message: "Lägg till en title" }]}
-      >
-        <Input placeholder="Cola" onChange={(e) => setTitle(e.target.value)} />
-      </Form.Item>
-      <Form.Item
-        name="description"
-        label="Produktbeskrivning"
-        rules={[{ required: true, message: "Ange en beskrivning" }]}
-      >
-        <Input
-          placeholder="Starta dagen med en Coca Cola..."
-          onChange={(e) => setDescription(e.target.value)}
-        />
-      </Form.Item>
-      <Form.Item
-        name="price"
-        label="Produktpris"
-        rules={[{ required: true, message: "Ange ett pris" }]}
-      >
-        <Input placeholder="100" onChange={(e) => setPrice(e.target.value)} />
-      </Form.Item>
-      <Form.Item
-        name="image"
-        label="Produktbild"
-        rules={[{ required: true, message: "----" }]}
-      >
-        <Input placeholder="url" onChange={(e) => setImage(e.target.value)} />
-      </Form.Item>
-      <Form.Item
-        name="inStock"
-        label="Produktantal"
-        rules={[{ required: true, message: "Ange antal produkter i lager" }]}
-      >
-        <Input placeholder="30" onChange={(e) => setInStock(e.target.value)} />
-      </Form.Item>
-      <Button>Skapa</Button>
+      <Form form={form}>
+        <Form.Item
+          name="title"
+          label="Produktnamn"
+          rules={[{ required: true, message: "Lägg till en title" }]}
+        >
+          <Input
+            placeholder="Cola"
+            onChange={(e) => setTitle(e.target.value)}
+          />
+        </Form.Item>
+        <Form.Item
+          name="description"
+          label="Produktbeskrivning"
+          rules={[{ required: true, message: "Ange en beskrivning" }]}
+        >
+          <Input
+            placeholder="Starta dagen med en Coca Cola..."
+            onChange={(e) => setDescription(e.target.value)}
+          />
+        </Form.Item>
+        <Form.Item
+          name="price"
+          label="Produktpris"
+          rules={[{ required: true, message: "Ange ett pris" }]}
+        >
+          <Input placeholder="100" onChange={(e) => setPrice(e.target.value)} />
+        </Form.Item>
+        <Form.Item
+          name="image"
+          label="Produktbild"
+          rules={[{ required: true, message: "----" }]}
+        >
+          <Input placeholder="url" onChange={(e) => setImage(e.target.value)} />
+        </Form.Item>
+        <Form.Item
+          name="inStock"
+          label="Produktantal"
+          rules={[{ required: true, message: "Ange antal produkter i lager" }]}
+        >
+          <Input
+            placeholder="30"
+            onChange={(e) => setInStock(e.target.value)}
+          />
+        </Form.Item>
+        <Button onClick={handleClick} type="primary">
+          Skapa Produkt
+        </Button>
+      </Form>
     </div>
   );
 };
