@@ -1,11 +1,15 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, Dispatch, SetStateAction } from "react";
 import { Form, Input } from "antd";
 import { useUserContext } from "../context/UserContext";
 import { UserContext } from "../context/UserContext";
 
 type SizeType = Parameters<typeof Form>[0]["size"];
 
-function CheckoutForm({setSubmittable}) {
+interface CheckoutFormProps {
+  setSubmittable: Dispatch<SetStateAction<boolean>>;
+}
+
+function CheckoutForm({setSubmittable}: CheckoutFormProps) {
   const [componentSize, setComponentSize] = useState<SizeType | "default">(
     "default"
   );
