@@ -46,7 +46,7 @@ const AdminCreateProduct = (props: Props) => {
   }
   return (
     <div>
-      <Form form={form}>
+      <Form form={form} onFinish={handleClick}>
         <Form.Item
           name="title"
           label="Produktnamn"
