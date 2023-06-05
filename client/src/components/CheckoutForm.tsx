@@ -48,7 +48,12 @@ function CheckoutForm({setSubmittable}: CheckoutFormProps) {
       wrapperCol={{ span: 14 }}
       layout="horizontal"
       // initialValues={{ size: componentSize }}
-      // initialValues={"123"}
+      initialValues={{
+        gata: order.deliveryAddress.street,
+        postnummer: order.deliveryAddress.zipcode,
+        stad: order.deliveryAddress.city,
+        land: order.deliveryAddress.country
+      }}
       onValuesChange={onFormLayoutChange}
       size={componentSize as SizeType}
       style={{ maxWidth: 600 }}
