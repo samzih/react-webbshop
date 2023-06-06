@@ -66,9 +66,9 @@ function Checkout() {
         }),
       });
       const data = await response.json();
-      console.log(data);
+      console.log(data); // Ta bort på slutet.
     } catch {
-      console.log(Error);
+      console.log(Error); // lämna?
     }
   }
 

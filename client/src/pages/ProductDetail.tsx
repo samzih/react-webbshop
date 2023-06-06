@@ -45,7 +45,7 @@ function ProductDetail() {
         setProduct(data);
         document.title = `${data.title} - ${document.title}`;
       } catch (error) {
-        console.log(error);
+        console.log(error); // Lämna?
       }
     }
 

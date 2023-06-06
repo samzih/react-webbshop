@@ -34,7 +34,7 @@ const ProductProvider = ({ children }: PropsWithChildren) => {
         const data = await response.json();
         setProducts(data);
       } catch (error) {
-        console.log(error);
+        console.log(error); // lämna?
       }
     }
 

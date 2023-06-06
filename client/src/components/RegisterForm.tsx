@@ -45,12 +45,11 @@ function RegisterForm() {
         }),
       });
       const data = await response.json();
-      console.log(data);
       onClose();
       form.resetFields();
       setIsSubmitted(true);
     } catch {
-      console.log(Error);
+      console.log(Error); // Lämna kvar?
     }
   }
 

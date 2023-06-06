@@ -6,7 +6,6 @@ function Nav() {
   const [current, setCurrent] = useState("start");
 
   const onClick: MenuProps["onClick"] = (e) => {
-    console.log("click ", e);
     setCurrent(e.key);
   };
 

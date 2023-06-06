@@ -33,7 +33,7 @@ const OrderProvider = ({ children }: PropsWithChildren) => {
     const [order, setOrder] = useState<Order>(defaultOrder)
 
     useEffect(() => {
-        console.log(order)
+        console.log(order) // Ta bort på slutet.
     }, [order]
     )
     

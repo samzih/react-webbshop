@@ -58,7 +58,7 @@ const UserProvider = ({ children }: PropsWithChildren<object>) => {
         return data;
       }
     } catch (error) {
-      console.log(error);
+      console.log(error); // Lämna kvar?
     }
   }
 
@@ -78,7 +78,7 @@ const UserProvider = ({ children }: PropsWithChildren<object>) => {
         return data;
       }
     } catch (error) {
-      console.log(error);
+      console.log(error); // Lämna kvar.
     }
   }
   // useEffect(() => {
@@ -87,23 +87,21 @@ const UserProvider = ({ children }: PropsWithChildren<object>) => {
   useEffect(() => {
     async function authorizeUser() {
       try {
-        if (loginUser) {
-          // console.log("is logged in");
-        } else {
+        if (loginUser) {} else {
           const response = await fetch("/api/users/authorize");
           if (response.status === 200) {
-            // console.log("is logged in");
+            
             const data = await response.json();
             setLoginUser(data);
           } else if (response.status === 401) {
             setLoginUser(null);
-            // console.log("you are not logged in");
+            
           } else {
-            console.log("Unexpected response from server");
+            console.log("Unexpected response from server"); // Lämna?
           }
         }
       } catch (error) {
-        console.log(error);
+        console.log(error); // lämna?
       }
     }
     authorizeUser();

@@ -43,9 +43,7 @@ const CartProvider = ({ children }: PropsWithChildren<object>) => {
     }
   };
 
-  useEffect(() => {
-    console.log(cart);
-  }, [cart]);
+  useEffect(() => {}, [cart]);
 
   const removeItem = (productId: number) => {
     const newItemList = cart.filter(

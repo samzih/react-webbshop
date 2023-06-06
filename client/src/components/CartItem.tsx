@@ -4,6 +4,7 @@ import { Button, List, Space } from "antd";
 import { Card } from "antd";
 import { useCartContext } from "../context/CartContext";
 import "../component-styling/CartItem.css";
+
 function CartItem() {
   const { Meta } = Card;
   const { cart, removeItem, increaseCartQuantity, decreaseCartQuantity } =

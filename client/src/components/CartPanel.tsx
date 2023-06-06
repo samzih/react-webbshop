@@ -4,6 +4,7 @@ import CartItem from "./CartItem";
 import { useCartContext } from "../context/CartContext";
 import { useState } from "react";
 import type { DrawerProps } from "antd/es/drawer";
+
 type Props = {
   cartItemCount: number;
   open: boolean;
