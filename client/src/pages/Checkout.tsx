@@ -4,6 +4,7 @@ import CartItem from "../components/CartItem";
 import CheckoutForm from "../components/CheckoutForm";
 import CheckoutShipping from "../components/CheckoutShipping";
 import { useOrderContext } from "../context/OrderContext";
+import { useShippingContext } from "../context/CheckoutShippingContext";
 import { useLocalStorage } from "../hooks/useLocalStorage";
 import Loader from "../components/Loader";
 
@@ -11,7 +12,8 @@ function Checkout() {
   const { order, setOrder } = useOrderContext();
   const [submittable, setSubmittable] = useState(true);
   const [spin, setSpin] = useState(false);
-  
+  const { shipping } = useShippingContext();
+
   const steps = [
     {
       title: "Kundvagn",
@@ -31,29 +33,29 @@ function Checkout() {
     //message.success("Processing complete!")
 
     setSpin(true);
-
-    let cartItem = localStorage.getItem("cart");
-    let orderItems: any[] = cartItem ? JSON.parse(cartItem) : [];
+    
+    const cartItem = localStorage.getItem("cart");
+    const orderItems: any[] = cartItem ? JSON.parse(cartItem) : [];
 
     // let orderItems = useLocalStorage("cart", "")
-    setOrder({...order, orderItems: orderItems})
+    setOrder({ ...order, orderItems: orderItems });
 
-    
-    sendOrder(order)
-  }
+    sendOrder(order);
+  };
 
-   async function sendOrder(order: any) {
+  async function sendOrder(order: any) {
     const { deliveryAddress, orderItems, shippingMethod } = order;
-  
-    let updatedOrderItems = orderItems.map(item => {
-      const { product: {_id} , ...rest } = item;
+
+    let updatedOrderItems = orderItems.map((item) => {
+      const {
+        product: { _id },
+        ...rest
+      } = item;
       return {
         ...rest,
-        product:_id
-
+        product: _id,
       };
     });
-
 
     try {
       const response = await fetch("/api/orders", {
@@ -79,6 +81,10 @@ function Checkout() {
 
   const next = () => {
     setCurrent(current + 1);
+
+    if (current === 1) {
+      setOrder({ ...order, shippingMethod: shipping[0]._id });
+    }
   };
 
   const prev = () => {
@@ -114,20 +120,20 @@ function Checkout() {
           </Button>
         )}
         {current < steps.length - 1 && (
-          <Button type="primary" disabled={current > steps.length -3 && submittable} onClick={() => next()}>
+          <Button
+            type="primary"
+            disabled={current > steps.length - 3 && submittable}
+            onClick={() => next()}
+          >
             Nästa | Fortsätt
           </Button>
         )}
         {current === steps.length - 1 && (
-          <Button
-            type="primary"
-            onClick={completeOrder}
-          >
+          <Button type="primary" onClick={completeOrder}>
             Genomför köp/beställning
           </Button>
         )}
       </div>
-    
     </div>
   );
 }
