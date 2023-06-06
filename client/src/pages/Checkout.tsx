@@ -5,10 +5,12 @@ import CheckoutForm from "../components/CheckoutForm";
 import CheckoutShipping from "../components/CheckoutShipping";
 import { useOrderContext } from "../context/OrderContext";
 import { useLocalStorage } from "../hooks/useLocalStorage";
+import Loader from "../components/Loader";
 
 function Checkout() {
   const { order, setOrder } = useOrderContext();
   const [submittable, setSubmittable] = useState(true);
+  
   
   const steps = [
     {
@@ -26,27 +28,40 @@ function Checkout() {
   ];
 
   const completeOrder = () => {
-    message.success("Processing complete!")
+    //message.success("Processing complete!")
 
-    let orderItems = JSON.parse(localStorage.getItem("cart"))
+    let cartItem = localStorage.getItem("cart");
+    let orderItems: any[] = cartItem ? JSON.parse(cartItem) : [];
 
     // let orderItems = useLocalStorage("cart", "")
     setOrder({...order, orderItems: orderItems})
 
+    
     sendOrder(order)
   }
 
    async function sendOrder(order: any) {
     const { deliveryAddress, orderItems, shippingMethod } = order;
+  
+    let updatedOrderItems = orderItems.map(item => {
+      const { product: {_id} , ...rest } = item;
+      return {
+        ...rest,
+        product:_id
+
+      };
+    });
+
+
     try {
-      const response = await fetch("http://localhost:3000/api/orders", {
+      const response = await fetch("/api/orders", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
+          orderItems: updatedOrderItems,
           deliveryAddress,
-          orderItems,
           shippingMethod,
         }),
       });
@@ -108,6 +123,7 @@ function Checkout() {
           </Button>
         )}
       </div>
+    
     </div>
   );
 }
