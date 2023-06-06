@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Button, message, Steps, theme } from "antd";
+import { Button, message, Spin, Steps, theme } from "antd";
 import CartItem from "../components/CartItem";
 import CheckoutForm from "../components/CheckoutForm";
 import CheckoutShipping from "../components/CheckoutShipping";
@@ -11,6 +11,7 @@ import Loader from "../components/Loader";
 function Checkout() {
   const { order, setOrder } = useOrderContext();
   const [submittable, setSubmittable] = useState(true);
+  const [spin, setSpin] = useState(false);
   const { shipping } = useShippingContext();
 
   const steps = [
@@ -31,6 +32,8 @@ function Checkout() {
   const completeOrder = () => {
     //message.success("Processing complete!")
 
+    setSpin(true);
+    
     const cartItem = localStorage.getItem("cart");
     const orderItems: any[] = cartItem ? JSON.parse(cartItem) : [];
 
@@ -107,7 +110,9 @@ function Checkout() {
       }}
     >
       <Steps current={current} items={items} />
-      <div style={contentStyle}>{steps[current].content}</div>
+      <Spin spinning={spin} tip="Vänligen vänta..." size="large">
+        <div style={contentStyle}>{steps[current].content}</div>
+      </Spin>
       <div style={{ marginTop: 24 }}>
         {current > 0 && (
           <Button style={{ margin: "0 8px" }} onClick={() => prev()}>
