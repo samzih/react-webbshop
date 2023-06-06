@@ -1,6 +1,5 @@
 import AdminCreateProduct from "../components/AdminCreateProduct";
-type Props = {};
-const AdminCenter = (props: Props) => {
+const AdminCenter = () => {
   return (
     <div>
       <h1>initial</h1>

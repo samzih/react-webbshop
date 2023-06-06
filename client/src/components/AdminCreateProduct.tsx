@@ -21,8 +21,7 @@ import {
 // });
 
 import { useAdminContext } from "../context/AdminContext";
-type Props = {};
-const AdminCreateProduct = (props: Props) => {
+const AdminCreateProduct = () => {
   const { createNewProduct } = useAdminContext();
 
   const [title, setTitle] = useState("");

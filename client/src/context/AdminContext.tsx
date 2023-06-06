@@ -1,5 +1,4 @@
-import { PropsWithChildren, createContext, useContext, useEffect } from "react";
-import { IProduct } from "./ProductContext";
+import { PropsWithChildren, createContext, useContext } from "react";
 interface AdminContext {
   createNewProduct: (product: CreateProduct) => object;
 }

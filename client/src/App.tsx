@@ -13,9 +13,10 @@ function App() {
         <CartProvider>
           <ShippingProvider>
             <UserProvider>
-              <AdminProvider />
-              <Header />
-              <Main />
+              <AdminProvider>
+                <Header />
+                <Main />
+              </AdminProvider>
             </UserProvider>
             <Footer />
           </ShippingProvider>
