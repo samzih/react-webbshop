@@ -45,7 +45,10 @@ function Login() {
   const [password, setPassword] = useState("");
   const [form] = Form.useForm();
 
-  const handleClick = () => {};
+  const handleClick = () => {
+    logoutUser();
+    window.location.href = "/";
+  };
 
   return (
     <div className="HandleUserContainer">
@@ -63,7 +66,7 @@ function Login() {
                 <UserOutlined />
               </p>
             )}
-            <Text className="LogoutAction" onClick={logoutUser}>
+            <Text className="LogoutAction" onClick={handleClick}>
               Logga ut
             </Text>
           </>
