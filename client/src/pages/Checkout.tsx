@@ -1,12 +1,19 @@
 import React, { useState } from "react";
-import { Button, message, Steps, theme } from "antd";
+import { Button, message, Spin, Steps, theme } from "antd";
 import CartItem from "../components/CartItem";
 import CheckoutForm from "../components/CheckoutForm";
 import CheckoutShipping from "../components/CheckoutShipping";
+import { useOrderContext } from "../context/OrderContext";
+import { useShippingContext } from "../context/CheckoutShippingContext";
+import { useLocalStorage } from "../hooks/useLocalStorage";
+import Loader from "../components/Loader";
 
 function Checkout() {
+  const { order, setOrder } = useOrderContext();
   const [submittable, setSubmittable] = useState(true);
-  
+  const [spin, setSpin] = useState(false);
+  const { shipping } = useShippingContext();
+
   const steps = [
     {
       title: "Kundvagn",
@@ -22,11 +29,62 @@ function Checkout() {
     },
   ];
 
+  const completeOrder = () => {
+    //message.success("Processing complete!")
+
+    setSpin(true);
+    
+    const cartItem = localStorage.getItem("cart");
+    const orderItems: any[] = cartItem ? JSON.parse(cartItem) : [];
+
+    // let orderItems = useLocalStorage("cart", "")
+    setOrder({ ...order, orderItems: orderItems });
+
+    sendOrder(order);
+  };
+
+  async function sendOrder(order: any) {
+    const { deliveryAddress, orderItems, shippingMethod } = order;
+
+    let updatedOrderItems = orderItems.map((item) => {
+      const {
+        product: { _id },
+        ...rest
+      } = item;
+      return {
+        ...rest,
+        product: _id,
+      };
+    });
+
+    try {
+      const response = await fetch("/api/orders", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          orderItems: updatedOrderItems,
+          deliveryAddress,
+          shippingMethod,
+        }),
+      });
+      const data = await response.json();
+      console.log(data);
+    } catch {
+      console.log(Error);
+    }
+  }
+
   const { token } = theme.useToken();
   const [current, setCurrent] = useState(0);
 
   const next = () => {
     setCurrent(current + 1);
+
+    if (current === 1) {
+      setOrder({ ...order, shippingMethod: shipping[0]._id });
+    }
   };
 
   const prev = () => {
@@ -52,7 +110,9 @@ function Checkout() {
       }}
     >
       <Steps current={current} items={items} />
-      <div style={contentStyle}>{steps[current].content}</div>
+      <Spin spinning={spin} tip="Vänligen vänta..." size="large">
+        <div style={contentStyle}>{steps[current].content}</div>
+      </Spin>
       <div style={{ marginTop: 24 }}>
         {current > 0 && (
           <Button style={{ margin: "0 8px" }} onClick={() => prev()}>
@@ -60,15 +120,16 @@ function Checkout() {
           </Button>
         )}
         {current < steps.length - 1 && (
-          <Button type="primary" disabled={current > steps.length -3 && submittable} onClick={() => next()}>
+          <Button
+            type="primary"
+            disabled={current > steps.length - 3 && submittable}
+            onClick={() => next()}
+          >
             Nästa | Fortsätt
           </Button>
         )}
         {current === steps.length - 1 && (
-          <Button
-            type="primary"
-            onClick={() => message.success("Processing complete!")}
-          >
+          <Button type="primary" onClick={completeOrder}>
             Genomför köp/beställning
           </Button>
         )}
