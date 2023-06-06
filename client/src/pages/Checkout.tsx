@@ -3,9 +3,14 @@ import { Button, message, Steps, theme } from "antd";
 import CartItem from "../components/CartItem";
 import CheckoutForm from "../components/CheckoutForm";
 import CheckoutShipping from "../components/CheckoutShipping";
+import { useOrderContext } from "../context/OrderContext";
+import { useLocalStorage } from "../hooks/useLocalStorage";
+import Loader from "../components/Loader";
 
 function Checkout() {
+  const { order, setOrder } = useOrderContext();
   const [submittable, setSubmittable] = useState(true);
+  
   
   const steps = [
     {
@@ -21,6 +26,51 @@ function Checkout() {
       content: <CheckoutShipping />,
     },
   ];
+
+  const completeOrder = () => {
+    //message.success("Processing complete!")
+
+    let cartItem = localStorage.getItem("cart");
+    let orderItems: any[] = cartItem ? JSON.parse(cartItem) : [];
+
+    // let orderItems = useLocalStorage("cart", "")
+    setOrder({...order, orderItems: orderItems})
+
+    
+    sendOrder(order)
+  }
+
+   async function sendOrder(order: any) {
+    const { deliveryAddress, orderItems, shippingMethod } = order;
+  
+    let updatedOrderItems = orderItems.map(item => {
+      const { product: {_id} , ...rest } = item;
+      return {
+        ...rest,
+        product:_id
+
+      };
+    });
+
+
+    try {
+      const response = await fetch("/api/orders", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          orderItems: updatedOrderItems,
+          deliveryAddress,
+          shippingMethod,
+        }),
+      });
+      const data = await response.json();
+      console.log(data);
+    } catch {
+      console.log(Error);
+    }
+  }
 
   const { token } = theme.useToken();
   const [current, setCurrent] = useState(0);
@@ -67,12 +117,13 @@ function Checkout() {
         {current === steps.length - 1 && (
           <Button
             type="primary"
-            onClick={() => message.success("Processing complete!")}
+            onClick={completeOrder}
           >
             Genomför köp/beställning
           </Button>
         )}
       </div>
+    
     </div>
   );
 }

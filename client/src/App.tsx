@@ -5,16 +5,19 @@ import CartProvider from "./context/CartContext";
 import UserProvider from "./context/UserContext";
 import ProductProvider from "./context/ProductContext";
 import ShippingProvider from "./context/CheckoutShippingContext";
+import OrderProvider from "./context/OrderContext";
 function App() {
   return (
     <div>
       <ProductProvider>
         <CartProvider>
           <ShippingProvider>
+            <OrderProvider>
             <UserProvider>
               <Header />
               <Main />
             </UserProvider>
+            </OrderProvider>
             <Footer />
           </ShippingProvider>
         </CartProvider>
