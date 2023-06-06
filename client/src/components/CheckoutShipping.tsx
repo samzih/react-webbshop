@@ -7,21 +7,22 @@ import { useOrderContext } from "../context/OrderContext";
 
 function CheckoutShipping() {
   const { shipping, calcDelivery } = useShippingContext();
-  const {totalSum} = useCartContext()
-  const [value, setValue] = useState(shipping[0]);
+  const { totalSum } = useCartContext();
   const { order, setOrder } = useOrderContext();
+  const [value, setValue] = useState(shipping[0]);
 
   const onChange = (e: RadioChangeEvent) => {
     console.log("radio checked", e.target.value);
     setValue(e.target.value);
-    setOrder({...order, shippingMethod: e.target.value._id})
+    setOrder({ ...order, shippingMethod: e.target.value._id });
   };
+
   return (
     <div>
-      {shipping.map((shipping) => (
-        <div key={shipping._id}>
-          <Card>
-            <Radio.Group onChange={onChange} value={value}>
+      <Radio.Group onChange={onChange} value={value}>
+        {shipping.map((shipping) => (
+          <div key={shipping._id}>
+            <Card>
               <Space direction="vertical">
                 <Card>
                   <Radio value={shipping}>{shipping.company}</Radio>
@@ -29,11 +30,11 @@ function CheckoutShipping() {
                   <p>Leveransdatum: {calcDelivery(shipping)} </p>
                 </Card>
               </Space>
-            </Radio.Group>
-          </Card>
-        </div>
-      ))}
-      <p>Totalpris: {totalSum + value.price}  </p>
+            </Card>
+          </div>
+        ))}
+        <p>Totalpris: {totalSum + value.price} </p>
+      </Radio.Group>
     </div>
   );
 }
