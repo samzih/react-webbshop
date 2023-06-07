@@ -1,12 +1,10 @@
 import React, { useState } from "react";
-import { Button, message, Spin, Steps, theme } from "antd";
+import { Button, Spin, Steps, theme } from "antd";
 import CartItem from "../components/CartItem";
 import CheckoutForm from "../components/CheckoutForm";
 import CheckoutShipping from "../components/CheckoutShipping";
 import { useOrderContext } from "../context/OrderContext";
 import { useShippingContext } from "../context/CheckoutShippingContext";
-import { useLocalStorage } from "../hooks/useLocalStorage";
-import Loader from "../components/Loader";
 import { NavLink } from "react-router-dom";
 
 function Checkout() {
@@ -31,21 +29,11 @@ function Checkout() {
   ];
 
   const completeOrder = () => {
-    //message.success("Processing complete!")
 
     setSpin(true);
 
     const cartItem = localStorage.getItem("cart");
     const orderItems: any[] = cartItem ? JSON.parse(cartItem) : [];
-
-    // let orderItems = useLocalStorage("cart", "")
-    setOrder({ ...order, orderItems: orderItems });
-
-    sendOrder(order);
-  };
-
-  async function sendOrder(order: any) {
-    const { deliveryAddress, orderItems, shippingMethod } = order;
 
     let updatedOrderItems = orderItems.map((item) => {
       const {
@@ -58,6 +46,13 @@ function Checkout() {
       };
     });
 
+    const orderToSend = {...order, orderItems: updatedOrderItems};
+    setOrder(orderToSend);
+    sendOrder(orderToSend);
+  };
+
+  async function sendOrder(order: any) {
+    const { deliveryAddress, orderItems, shippingMethod } = order;
     try {
       const response = await fetch("/api/orders", {
         method: "POST",
@@ -65,13 +60,13 @@ function Checkout() {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          orderItems: updatedOrderItems,
+          orderItems,
           deliveryAddress,
           shippingMethod,
         }),
       });
       const data = await response.json();
-      console.log(data);
+      console.log("Detta är vad som skickas till DB:", data);
     } catch {
       console.log(Error);
     }
