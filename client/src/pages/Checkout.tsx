@@ -1,9 +1,10 @@
 import React, { useState } from "react";
-import { Button, message, Steps, theme } from "antd";
+import { Button, message, Spin, Steps, theme } from "antd";
 import CartItem from "../components/CartItem";
 import CheckoutForm from "../components/CheckoutForm";
 import CheckoutShipping from "../components/CheckoutShipping";
 import { useOrderContext } from "../context/OrderContext";
+import { useShippingContext } from "../context/CheckoutShippingContext";
 import { useLocalStorage } from "../hooks/useLocalStorage";
 import Loader from "../components/Loader";
 import { NavLink } from "react-router-dom";
@@ -11,6 +12,8 @@ import { NavLink } from "react-router-dom";
 function Checkout() {
   const { order, setOrder } = useOrderContext();
   const [submittable, setSubmittable] = useState(true);
+  const [spin, setSpin] = useState(false);
+  const { shipping } = useShippingContext();
 
   const steps = [
     {
@@ -30,8 +33,10 @@ function Checkout() {
   const completeOrder = () => {
     //message.success("Processing complete!")
 
-    let cartItem = localStorage.getItem("cart");
-    let orderItems: any[] = cartItem ? JSON.parse(cartItem) : [];
+    setSpin(true);
+
+    const cartItem = localStorage.getItem("cart");
+    const orderItems: any[] = cartItem ? JSON.parse(cartItem) : [];
 
     // let orderItems = useLocalStorage("cart", "")
     setOrder({ ...order, orderItems: orderItems });
@@ -77,6 +82,10 @@ function Checkout() {
 
   const next = () => {
     setCurrent(current + 1);
+
+    if (current === 1) {
+      setOrder({ ...order, shippingMethod: shipping[0]._id });
+    }
   };
 
   const prev = () => {
@@ -102,7 +111,9 @@ function Checkout() {
       }}
     >
       <Steps current={current} items={items} />
-      <div style={contentStyle}>{steps[current].content}</div>
+      <Spin spinning={spin} tip="Vänligen vänta..." size="large">
+        <div style={contentStyle}>{steps[current].content}</div>
+      </Spin>
       <div style={{ marginTop: 24 }}>
         {current > 0 && (
           <Button style={{ margin: "0 8px" }} onClick={() => prev()}>

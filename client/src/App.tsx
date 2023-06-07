@@ -6,6 +6,7 @@ import UserProvider from "./context/UserContext";
 import ProductProvider from "./context/ProductContext";
 import ShippingProvider from "./context/CheckoutShippingContext";
 import OrderProvider from "./context/OrderContext";
+import AdminProvider from "./context/AdminContext";
 function App() {
   return (
     <div>
@@ -14,8 +15,10 @@ function App() {
           <ShippingProvider>
             <OrderProvider>
             <UserProvider>
-              <Header />
-              <Main />
+              <AdminProvider>
+                <Header />
+                <Main />
+              </AdminProvider>
             </UserProvider>
             </OrderProvider>
             <Footer />

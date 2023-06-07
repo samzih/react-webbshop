@@ -1,6 +1,7 @@
-.userIcon {
+.userIcon, .adminIcon {
     font-size:30px;
 }
+
 .HandleUserContainer{
     display:flex;
     

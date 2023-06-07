@@ -12,13 +12,14 @@ function CheckoutShipping() {
 
   useEffect(() => {
     setValue(shipping[0]);
-  }, [value]);
+  }, []);
 
   const onChange = (e: RadioChangeEvent) => {
     console.log("radio checked", e.target.value);
     setValue(e.target.value);
     setOrder({ ...order, shippingMethod: e.target.value._id });
   };
+
   return (
     <div>
       <Radio.Group onChange={onChange} value={value}>
@@ -35,8 +36,8 @@ function CheckoutShipping() {
             </Card>
           </div>
         ))}
+        <p>Totalpris: {totalSum + value.price} </p>
       </Radio.Group>
-      <p>Totalpris: {totalSum + value.price} </p>
     </div>
   );
 }
