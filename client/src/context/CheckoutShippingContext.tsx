@@ -16,17 +16,28 @@ export interface Shipping {
 export interface ShippingContext {
   shipping: Shipping[];
   calcDelivery: (shipping: Shipping) => string;
+  setValue: React.Dispatch<React.SetStateAction<Shipping>>;
+  value: Shipping;
 }
+const defaultShipping = {
+  _id: 0,
+  company: "",
+  price: 0,
+  deliveryTimeInHours: 0,
+};
 
 const ShippingContext = createContext<ShippingContext>({
   shipping: [],
   calcDelivery: (shipping) => "",
+  setValue: () => {},
+  value: defaultShipping,
 });
 
 export const useShippingContext = () => useContext(ShippingContext);
 
 const ShippingProvider = ({ children }: PropsWithChildren) => {
   const [shipping, setShipping] = useState<Shipping[]>([]);
+  const [value, setValue] = useState<Shipping>(defaultShipping);
 
   useEffect(() => {
     async function fetchShippingMethod() {
@@ -52,7 +63,9 @@ const ShippingProvider = ({ children }: PropsWithChildren) => {
 
   return (
     <div>
-      <ShippingContext.Provider value={{ shipping, calcDelivery }}>
+      <ShippingContext.Provider
+        value={{ shipping, calcDelivery, setValue, value }}
+      >
         {children}
       </ShippingContext.Provider>
     </div>
