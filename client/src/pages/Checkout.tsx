@@ -7,6 +7,7 @@ import { useOrderContext } from "../context/OrderContext";
 import { useShippingContext } from "../context/CheckoutShippingContext";
 import { useLocalStorage } from "../hooks/useLocalStorage";
 import Loader from "../components/Loader";
+import { NavLink } from "react-router-dom";
 
 function Checkout() {
   const { order, setOrder } = useOrderContext();
@@ -33,7 +34,7 @@ function Checkout() {
     //message.success("Processing complete!")
 
     setSpin(true);
-    
+
     const cartItem = localStorage.getItem("cart");
     const orderItems: any[] = cartItem ? JSON.parse(cartItem) : [];
 
@@ -129,9 +130,11 @@ function Checkout() {
           </Button>
         )}
         {current === steps.length - 1 && (
-          <Button type="primary" onClick={completeOrder}>
-            Genomför köp/beställning
-          </Button>
+          <NavLink to="/confirmation">
+            <Button type="primary" onClick={completeOrder}>
+              Genomför köp/beställning
+            </Button>
+          </NavLink>
         )}
       </div>
     </div>

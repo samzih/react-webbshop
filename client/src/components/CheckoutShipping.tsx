@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Card, Divider, RadioChangeEvent } from "antd";
 import { Input, Radio, Space } from "antd";
 import { useShippingContext } from "../context/CheckoutShippingContext";
@@ -6,10 +6,13 @@ import { useCartContext } from "../context/CartContext";
 import { useOrderContext } from "../context/OrderContext";
 
 function CheckoutShipping() {
-  const { shipping, calcDelivery } = useShippingContext();
+  const { shipping, calcDelivery, value, setValue } = useShippingContext();
   const { totalSum } = useCartContext();
   const { order, setOrder } = useOrderContext();
-  const [value, setValue] = useState(shipping[0]);
+
+  useEffect(() => {
+    setValue(shipping[0]);
+  }, []);
 
   const onChange = (e: RadioChangeEvent) => {
     console.log("radio checked", e.target.value);

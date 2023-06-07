@@ -3,6 +3,7 @@ import HomePage from "../pages/HomePage";
 import ProductDetail from "../pages/ProductDetail";
 import Checkout from "../pages/Checkout";
 import AdminCenter from "../pages/AdminCenter";
+import OrderConfirmation from "../pages/OrderConfirmation";
 // import CartItem from "../../App";
 
 function Main() {
@@ -13,6 +14,7 @@ function Main() {
         <Route path="/:id" element={<ProductDetail />} />
         <Route path="/checkout" element={<Checkout />} />
         <Route path="/admin" element={<AdminCenter />} />
+        <Route path="/confirmation" element={<OrderConfirmation />} />
       </Routes>
     </main>
   );
