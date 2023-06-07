@@ -8,7 +8,7 @@ import { useShippingContext } from "../context/CheckoutShippingContext";
 import { NavLink } from "react-router-dom";
 
 function Checkout() {
-  const { order, setOrder } = useOrderContext();
+  const { order, setOrder, sendOrder } = useOrderContext();
   const [submittable, setSubmittable] = useState(true);
   const [spin, setSpin] = useState(false);
   const { shipping } = useShippingContext();
@@ -29,7 +29,6 @@ function Checkout() {
   ];
 
   const completeOrder = () => {
-
     setSpin(true);
 
     const cartItem = localStorage.getItem("cart");
@@ -46,31 +45,10 @@ function Checkout() {
       };
     });
 
-    const orderToSend = {...order, orderItems: updatedOrderItems};
+    const orderToSend = { ...order, orderItems: updatedOrderItems };
     setOrder(orderToSend);
     sendOrder(orderToSend);
   };
-
-  async function sendOrder(order: any) {
-    const { deliveryAddress, orderItems, shippingMethod } = order;
-    try {
-      const response = await fetch("/api/orders", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          orderItems,
-          deliveryAddress,
-          shippingMethod,
-        }),
-      });
-      const data = await response.json();
-      console.log("Detta är vad som skickas till DB:", data);
-    } catch {
-      console.log(Error);
-    }
-  }
 
   const { token } = theme.useToken();
   const [current, setCurrent] = useState(0);

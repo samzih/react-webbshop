@@ -24,6 +24,8 @@ export interface Order {
 interface OrderContext {
   order: Order;
   setOrder: React.Dispatch<React.SetStateAction<Order>>;
+  sendOrder: (order) => void;
+  orderNr: string;
 }
 
 const defaultOrder = {
@@ -35,20 +37,45 @@ const defaultOrder = {
 const OrderContext = createContext<OrderContext>({
   order: defaultOrder,
   setOrder: () => {},
+  sendOrder: () => {},
+  orderNr: "",
 });
 
 export const useOrderContext = () => useContext(OrderContext);
 
 const OrderProvider = ({ children }: PropsWithChildren) => {
   const [order, setOrder] = useState<Order>(defaultOrder);
+  const [orderNr, setOrderNr] = useState("");
 
   useEffect(() => {
     console.log(order);
   }, [order]);
 
+  async function sendOrder(order: any) {
+    const { deliveryAddress, orderItems, shippingMethod } = order;
+    try {
+      const response = await fetch("/api/orders", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          orderItems,
+          deliveryAddress,
+          shippingMethod,
+        }),
+      });
+      const data = await response.json();
+      console.log("Detta är vad som skickas till DB:", data);
+      setOrderNr(data.orderNumber);
+    } catch {
+      console.log(Error);
+    }
+  }
+
   return (
     <div>
-      <OrderContext.Provider value={{ order, setOrder }}>
+      <OrderContext.Provider value={{ order, setOrder, sendOrder, orderNr }}>
         {children}
       </OrderContext.Provider>
     </div>
