@@ -1,8 +1,13 @@
+
+/*Grundinställningar header*/
 #header {
-  background-color: rgb(227, 224, 223);
+  background-color: #edf6f9;
+  color: #83c5be;
   display: flex;
   flex-direction: row;
   justify-content: space-around;
+  padding-top: 2%;
+  padding-bottom: 2%;
 }
 
 /* Gör klart när header är klar. */
@@ -10,4 +15,35 @@
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+}
+
+/* Kundvagnen*/
+.ant-badge {
+padding-left: 10% ;
+color: #e29578 ;
+margin-left: 25%;
+margin-top: 25%;
+}
+
+/*Loggain/skapakonto knapparna*/
+.ant-btn {
+  color: #e29578;
+  background-color: #ffddd2 ;
+  margin-top: 5%;
+}
+
+/* Backgrunden till "count"-kundvagnen */
+.ant-scroll-number.ant-badge-count{
+  background-color: #83c5be;
+}
+
+/*Siffran på kundkorgen*/
+.ant-scroll-number-only-unit {
+  color: #006d77;
+}
+
+/*Titeln*/
+h1 {
+  font-size: 4rem;
+  font-style: bold;
 }
