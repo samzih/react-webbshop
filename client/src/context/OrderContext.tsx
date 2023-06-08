@@ -24,7 +24,7 @@ export interface Order {
 interface OrderContext {
   order: Order;
   setOrder: React.Dispatch<React.SetStateAction<Order>>;
-  sendOrder: (order) => void;
+  sendOrder: (order: Order, navigate: (path: string) => void) => void;
   orderNr: string;
 }
 
@@ -51,7 +51,7 @@ const OrderProvider = ({ children }: PropsWithChildren) => {
     console.log(order);
   }, [order]);
 
-  async function sendOrder(order: any) {
+  async function sendOrder(order: Order, navigate: (path: string) => void ) {
     const { deliveryAddress, orderItems, shippingMethod } = order;
     try {
       const response = await fetch("/api/orders", {
@@ -68,6 +68,7 @@ const OrderProvider = ({ children }: PropsWithChildren) => {
       const data = await response.json();
       console.log("Detta är vad som skickas till DB:", data);
       setOrderNr(data.orderNumber);
+      navigate("/confirmation")
     } catch {
       console.log(Error);
     }

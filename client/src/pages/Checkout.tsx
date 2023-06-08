@@ -5,13 +5,14 @@ import CheckoutForm from "../components/CheckoutForm";
 import CheckoutShipping from "../components/CheckoutShipping";
 import { useOrderContext } from "../context/OrderContext";
 import { useShippingContext } from "../context/CheckoutShippingContext";
-import { NavLink } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 function Checkout() {
   const { order, setOrder, sendOrder } = useOrderContext();
   const [submittable, setSubmittable] = useState(true);
   const [spin, setSpin] = useState(false);
   const { shipping } = useShippingContext();
+  const navigate = useNavigate();
 
   const steps = [
     {
@@ -47,7 +48,7 @@ function Checkout() {
 
     const orderToSend = { ...order, orderItems: updatedOrderItems };
     setOrder(orderToSend);
-    sendOrder(orderToSend);
+    sendOrder(orderToSend, navigate);
   };
 
   const { token } = theme.useToken();
@@ -103,11 +104,9 @@ function Checkout() {
           </Button>
         )}
         {current === steps.length - 1 && (
-          <NavLink to="/confirmation">
             <Button type="primary" onClick={completeOrder}>
               Genomför köp/beställning
             </Button>
-          </NavLink>
         )}
       </div>
     </div>
