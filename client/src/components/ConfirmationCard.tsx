@@ -5,6 +5,8 @@ import { useCartContext } from "../context/CartContext";
 import { useUserContext } from "../context/UserContext";
 import { UserContext } from "../context/UserContext";
 import { useShippingContext } from "../context/CheckoutShippingContext";
+import { BsFillCartCheckFill } from "react-icons/Bs";
+import "../component-styling/ConfirmationCard.css";
 function ConfirmationCard() {
   const { order, orderNr } = useOrderContext();
   console.log(order);
@@ -23,12 +25,13 @@ function ConfirmationCard() {
   console.log(cartItem);
   if (!cartItem) return null;
   return (
-    <div>
-      <div>
-        <h2>Tack för din beställning</h2>
+    <div className="confirmContainer">
+      <div className="confimMessage">
+        <BsFillCartCheckFill style={{ fontSize: "50px" }} />
+        <h2>Tack för din beställning!</h2>
         <h3>Beräknad leverans: {calcDelivery(value)}</h3>
+        <h2>Ordernummer: {orderNr} </h2>
       </div>
-      <h2>Ordernummer: {orderNr} </h2>
 
       <Card style={{ width: "80%" }}>
         <Descriptions title="Din order ">
