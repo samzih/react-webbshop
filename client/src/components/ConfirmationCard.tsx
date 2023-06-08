@@ -1,4 +1,5 @@
 import { Card, Descriptions } from "antd";
+import { useEffect } from "react";
 import { useOrderContext } from "../context/OrderContext";
 import { useCartContext } from "../context/CartContext";
 import { useUserContext } from "../context/UserContext";
@@ -11,9 +12,13 @@ function ConfirmationCard() {
   const { value, calcDelivery } = useShippingContext();
   const { loginUser }: UserContext = useUserContext();
   if (!loginUser) return null;
-  setTimeout(() => {
-    localStorage.removeItem("cart");
-  }, 2000);
+
+  useEffect(() => {
+    console.log(`order exists right now, let's clean it:`, order);
+    if (order && cartItem) {
+      localStorage.removeItem("cart");
+    }
+  }, [order]);
   const cartItem = JSON.parse(localStorage.getItem("cart"));
   console.log(cartItem);
   if (!cartItem) return null;
