@@ -6,14 +6,14 @@ import CheckoutShipping from "../components/CheckoutShipping";
 import { useOrderContext } from "../context/OrderContext";
 import { useShippingContext } from "../context/CheckoutShippingContext";
 import { useNavigate } from "react-router-dom";
-
+import { useCartContext } from "../context/CartContext";
 function Checkout() {
   const { order, setOrder, sendOrder } = useOrderContext();
   const [submittable, setSubmittable] = useState(true);
   const [spin, setSpin] = useState(false);
   const { shipping } = useShippingContext();
   const navigate = useNavigate();
-
+  const cartItem = JSON.parse(localStorage.getItem("cart"));
   const steps = [
     {
       title: "Kundvagn",
@@ -84,31 +84,38 @@ function Checkout() {
         margin: 90,
       }}
     >
-      <Steps current={current} items={items} />
-      <Spin spinning={spin} tip="Vänligen vänta..." size="large">
-        <div style={contentStyle}>{steps[current].content}</div>
-      </Spin>
-      <div style={{ marginTop: 24 }}>
-        {current > 0 && (
-          <Button style={{ margin: "0 8px" }} onClick={() => prev()}>
-            Föregående | Gå tillbaka
-          </Button>
-        )}
-        {current < steps.length - 1 && (
-          <Button
-            type="primary"
-            disabled={current > steps.length - 3 && submittable}
-            onClick={() => next()}
-          >
-            Nästa | Fortsätt
-          </Button>
-        )}
-        {current === steps.length - 1 && (
-            <Button type="primary" onClick={completeOrder}>
-              Genomför köp/beställning
-            </Button>
-        )}
-      </div>
+      {cartItem != null ? (
+        <>
+          <Steps current={current} items={items} />
+          <Spin spinning={spin} tip="Vänligen vänta..." size="large">
+            <div style={contentStyle}>{steps[current].content}</div>
+          </Spin>
+          <div style={{ marginTop: 24 }}>
+            {current > 0 && (
+              <Button style={{ margin: "0 8px" }} onClick={() => prev()}>
+                Föregående | Gå tillbaka
+              </Button>
+            )}
+            {current < steps.length - 1 && (
+              <Button
+                type="primary"
+                disabled={current > steps.length - 3 && submittable}
+                onClick={() => next()}
+              >
+                Nästa | Fortsätt
+              </Button>
+            )}
+
+            {current === steps.length - 1 && (
+              <Button type="primary" onClick={completeOrder}>
+                Genomför köp/beställning
+              </Button>
+            )}
+          </div>
+        </>
+      ) : (
+        <>{(window.location.href = "/")}</>
+      )}
     </div>
   );
 }

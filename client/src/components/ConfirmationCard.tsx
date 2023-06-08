@@ -11,7 +11,9 @@ function ConfirmationCard() {
   const { value, calcDelivery } = useShippingContext();
   const { loginUser }: UserContext = useUserContext();
   if (!loginUser) return null;
-
+  setTimeout(() => {
+    localStorage.removeItem("cart");
+  }, 2000);
   const cartItem = JSON.parse(localStorage.getItem("cart"));
   console.log(cartItem);
   if (!cartItem) return null;

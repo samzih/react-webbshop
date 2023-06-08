@@ -3,14 +3,13 @@ import { Form, Input, Button } from "antd";
 import { useUserContext } from "../context/UserContext";
 import { UserContext } from "../context/UserContext";
 import { useOrderContext } from "../context/OrderContext";
-
 type SizeType = Parameters<typeof Form>[0]["size"];
 
 interface CheckoutFormProps {
   setSubmittable: Dispatch<SetStateAction<boolean>>;
 }
 
-function CheckoutForm({setSubmittable}: CheckoutFormProps) {
+function CheckoutForm({ setSubmittable }: CheckoutFormProps) {
   const [componentSize, setComponentSize] = useState<SizeType | "default">(
     "default"
   );
@@ -23,7 +22,6 @@ function CheckoutForm({setSubmittable}: CheckoutFormProps) {
   // const [postal, setPostal] = useState("");
 
   const [form] = Form.useForm();
-
   // Watch all values
   const values = Form.useWatch([], form);
 
@@ -36,7 +34,7 @@ function CheckoutForm({setSubmittable}: CheckoutFormProps) {
       () => {
         // console.log("Alla inputfält är inte ifyllda...");
         setSubmittable(true);
-      },
+      }
     );
   }, [values]);
 
@@ -52,7 +50,7 @@ function CheckoutForm({setSubmittable}: CheckoutFormProps) {
         gata: order.deliveryAddress.street,
         postnummer: order.deliveryAddress.zipcode,
         stad: order.deliveryAddress.city,
-        land: order.deliveryAddress.country
+        land: order.deliveryAddress.country,
       }}
       onValuesChange={onFormLayoutChange}
       size={componentSize as SizeType}
@@ -69,27 +67,100 @@ function CheckoutForm({setSubmittable}: CheckoutFormProps) {
             <span>{loginUser.email}</span>
           </Form.Item>
 
-          <Form.Item help name="gata" htmlFor="street" label="Gata" rules={[{ required: true }]}>
-            <Input name="street" type="text" autoComplete="address-line1" onChange={(e)=>setOrder({...order, deliveryAddress: {...order.deliveryAddress, street: e.target.value}})}/>
+          <Form.Item
+            help
+            name="gata"
+            htmlFor="street"
+            label="Gata"
+            rules={[{ required: true }]}
+          >
+            <Input
+              name="street"
+              type="text"
+              autoComplete="address-line1"
+              onChange={(e) =>
+                setOrder({
+                  ...order,
+                  deliveryAddress: {
+                    ...order.deliveryAddress,
+                    street: e.target.value,
+                  },
+                })
+              }
+            />
           </Form.Item>
 
-          <Form.Item help name="postnummer" htmlFor="postal" label="Postnummer" rules={[{ required: true, min: 5 }]}>
-            <Input name="postal" type="text" autoComplete="postal-code" onChange={(e)=>setOrder({...order, deliveryAddress: {...order.deliveryAddress, zipcode: e.target.value}})}/>
+          <Form.Item
+            help
+            name="postnummer"
+            htmlFor="postal"
+            label="Postnummer"
+            rules={[{ required: true, min: 5 }]}
+          >
+            <Input
+              name="postal"
+              type="text"
+              autoComplete="postal-code"
+              onChange={(e) =>
+                setOrder({
+                  ...order,
+                  deliveryAddress: {
+                    ...order.deliveryAddress,
+                    zipcode: e.target.value,
+                  },
+                })
+              }
+            />
           </Form.Item>
 
-          <Form.Item help name="stad" htmlFor="city" label="Stad" rules={[{ required: true }]}>
-            <Input name="city" type="text" autoComplete="address-level2" onChange={(e)=>setOrder({...order, deliveryAddress: {...order.deliveryAddress, city: e.target.value}})}/>
+          <Form.Item
+            help
+            name="stad"
+            htmlFor="city"
+            label="Stad"
+            rules={[{ required: true }]}
+          >
+            <Input
+              name="city"
+              type="text"
+              autoComplete="address-level2"
+              onChange={(e) =>
+                setOrder({
+                  ...order,
+                  deliveryAddress: {
+                    ...order.deliveryAddress,
+                    city: e.target.value,
+                  },
+                })
+              }
+            />
           </Form.Item>
 
-          <Form.Item help name="land" htmlFor="country" label="Land" rules={[{ required: true }]}>
-            <Input name="country" type="text" autoComplete="country-name" onChange={(e)=>setOrder({...order, deliveryAddress: {...order.deliveryAddress, country: e.target.value}})}/>
+          <Form.Item
+            help
+            name="land"
+            htmlFor="country"
+            label="Land"
+            rules={[{ required: true }]}
+          >
+            <Input
+              name="country"
+              type="text"
+              autoComplete="country-name"
+              onChange={(e) =>
+                setOrder({
+                  ...order,
+                  deliveryAddress: {
+                    ...order.deliveryAddress,
+                    country: e.target.value,
+                  },
+                })
+              }
+            />
           </Form.Item>
-        
         </>
       ) : (
-        <p>
-          Du måste logga in för att komma vidare.
-        </p>
+        <p>Du måste logga in för att komma vidare.</p>
       )}
     </Form>
   );
