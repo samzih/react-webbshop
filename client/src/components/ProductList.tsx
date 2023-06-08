@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import PurchaseButton from "./PurchaseButton";
 import { useProductContext } from "../context/ProductContext";
 import { Card } from "antd";
+import "../component-styling/ProductList.css";
 
 function ProductList() {
   const { Meta } = Card;
