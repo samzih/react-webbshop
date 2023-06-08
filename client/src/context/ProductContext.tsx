@@ -30,7 +30,7 @@ const ProductProvider = ({ children }: PropsWithChildren) => {
   useEffect(() => {
     async function fetchProducts() {
       try {
-        const response = await fetch("http://localhost:3000/api/products");
+        const response = await fetch("/api/products");
         const data = await response.json();
         setProducts(data);
       } catch (error) {
