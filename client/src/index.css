@@ -1,5 +1,20 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600&family=Noto+Sans+JP:wght@100&display=swap');
+
 * {
   padding: 0;
   margin: 0;
   box-sizing: border-box;
+ 
+  font-family: 'Montserrat', sans-serif;
+  font-family: 'Noto Sans JP', sans-serif;
 }
+
+h1 {
+  
+}
+/*
+.button {
+  background-color: #e29578;
+  color: #ffddd2;
+}
+*/

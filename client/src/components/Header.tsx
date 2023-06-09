@@ -1,7 +1,6 @@
 import Nav from "./Nav";
 import Cart from "./Cart";
 import Login from "./Login";
-
 import "../component-styling/Header.css";
 
 function Header() {
@@ -11,8 +10,11 @@ function Header() {
         <h1>KJOSK</h1>
 
         <div id="right-content">
+         
           <Login />
-          <Cart />
+          
+          <Cart  />
+          
         </div>
       </div>
       <Nav />
