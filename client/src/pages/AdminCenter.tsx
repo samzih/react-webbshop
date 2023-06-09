@@ -12,7 +12,21 @@ const AdminCenter = () => {
   // lite styling för AdminCard (IGNORE THIS!)
   const orderStyle = {
     color: "green",
-    backgroundColor: "rgba(0,255,0,0.3)",
+    backgroundColor: "rgba(0,255,0,0.25)",
+    borderRadius: 24,
+    fontSize: 24,
+    padding: 8,
+  }
+  const inventoryStyle = {
+    color: "blue",
+    backgroundColor: "rgba(0,0,255,0.25)",
+    borderRadius: 24,
+    fontSize: 24,
+    padding: 8,
+  }
+  const revenueStyle = {
+    color: "#fd5c63",
+    backgroundColor: "rgba(255,0,0,0.25)",
     borderRadius: 24,
     fontSize: 24,
     padding: 8,
