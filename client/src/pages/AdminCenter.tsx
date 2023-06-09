@@ -9,7 +9,15 @@ import { Card, Typography } from "antd";
 const AdminCenter = () => {
   const { loginUser } = useUserContext();
 
-  // lite styling för AdminCard (IGNORE THIS!)
+  // Goes into every order and adds order sum to totalRevenue
+  let totalRevenue = 0;
+  function calcRevenue(totalRevenue) {
+    orders.map(order => order.orderItems.map(orderItem => totalRevenue += orderItem.price))
+    console.log("totalRevenue:", totalRevenue)
+    return totalRevenue
+  }
+
+  // some styling for AdminCard (IGNORE THIS!)
   const orderStyle = {
     color: "green",
     backgroundColor: "rgba(0,255,0,0.25)",
