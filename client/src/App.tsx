@@ -5,8 +5,8 @@ import CartProvider from "./context/CartContext";
 import UserProvider from "./context/UserContext";
 import ProductProvider from "./context/ProductContext";
 import ShippingProvider from "./context/CheckoutShippingContext";
-import OrderProvider from "./context/OrderContext";
 import AdminProvider from "./context/AdminContext";
+import OrderProvider from "./context/OrderContext";
 function App() {
   return (
     <div>
@@ -14,12 +14,12 @@ function App() {
         <CartProvider>
           <ShippingProvider>
             <OrderProvider>
-            <UserProvider>
-              <AdminProvider>
-                <Header />
-                <Main />
-              </AdminProvider>
-            </UserProvider>
+              <UserProvider>
+                <AdminProvider>
+                  <Header />
+                  <Main />
+                </AdminProvider>
+              </UserProvider>
             </OrderProvider>
             <Footer />
           </ShippingProvider>

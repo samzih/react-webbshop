@@ -1,6 +1,7 @@
 import { PlusOutlined } from "@ant-design/icons";
 import "../component-styling/RegisterForm.css";
 import {
+  Alert,
   Button,
   Col,
   DatePicker,
@@ -18,26 +19,40 @@ import React, { useState, useEffect } from "react";
 import { UserOutlined, AndroidOutlined } from "@ant-design/icons";
 import { useUserContext } from "../context/UserContext";
 import RegisterForm from "./RegisterForm";
-import "../component-styling/Login.css";
+import "../component-styling/Header.css";
+
 const { Title, Text } = Typography;
 function Login() {
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
+  const [loginSuccess, setLoginSuccess] = useState(false);
+  const [showSuccessMessage, setSuccessMessage] = useState(false);
 
   const showModal = () => {
     setIsModalOpen(true);
+    setLoginSuccess(false);
   };
 
-  const handleOk = () => {
+  const handleOk = async () => {
     const user = { email, password };
-    fetchLoginUser(user);
-    if (loginUser && loginUser.firstName) {
+    const response = await fetchLoginUser(user);
+    console.log(response);
+    if (
+      typeof response === "string" &&
+      response === "Wrong password or username"
+    ) {
+      setErrorMessage(response);
+      setLoginSuccess(false);
+    } else {
+      setErrorMessage("");
       form.resetFields();
-      setIsModalOpen(false);
+      setIsModalOpen(true);
     }
   };
 
   const handleCancel = () => {
     setIsModalOpen(false);
+    setErrorMessage("");
   };
 
   const { fetchLoginUser, logoutUser, loginUser } = useUserContext();
@@ -71,8 +86,8 @@ function Login() {
             </Text>
           </>
         ) : (
-          <Button type="primary" onClick={showModal}>
-            <UserOutlined /> Logga in
+          <Button className="headerbtn"  type="text" onClick={showModal}>
+            <UserOutlined /> <span className="logintext">Logga in</span> 
           </Button>
         )}
         <RegisterForm />
@@ -83,6 +98,10 @@ function Login() {
         onOk={handleOk}
         onCancel={handleCancel}
       >
+        {errorMessage && !loginSuccess && (
+          <Alert message={errorMessage} type="error" showIcon />
+        )}
+        {loginSuccess && <p>Welcome {loginUser?.firstName}</p>}
         <Form form={form}>
           {loginUser && loginUser.firstName ? (
             <p>Welcome {loginUser.firstName}</p>
@@ -112,7 +131,7 @@ function Login() {
           )}
 
           {loginUser && loginUser.firstName ? (
-            <Button onClick={logoutUser} type="primary">
+            <Button onClick={logoutUser} type="text">
               Logga ut
             </Button>
           ) : null}

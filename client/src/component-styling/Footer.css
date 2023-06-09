@@ -1,20 +1,29 @@
 footer {
-  background-color: #edf6f9;
+  background-color: #d5bdaf;
+  color: #4b4844;
   display: flex;
   flex-direction: row;
   justify-content: space-around;
   padding-top: 5%;
   padding-bottom: 5%;
-  color: #83c5be;
+  
    
   }
 
-  .anticon {
-    color: #006d77;
+  .anticon-facebook {
+    color: #373430;
+  }
+
+  .anticon-instagram {
+    color: #373430;
+  }
+
+  .anticon-twitter-circle {
+    color: #373430;
   }
 
 
 h5 {
   font-size: 1.3rem;
-  color: #006d77;
+  color: #373430;
 }

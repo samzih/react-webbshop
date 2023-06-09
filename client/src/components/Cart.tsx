@@ -21,7 +21,7 @@ function Cart() {
 
   return (
     <div>
-      <Badge offset={[0, 13]} count={cartItemCount}>
+      <Badge className="shoppingcart" offset={[0, 13]} count={cartItemCount}>
         <ShoppingCartOutlined style={{ fontSize: 50 }} onClick={showPanel} />
       </Badge>
       <CartPanel cartItemCount={cartItemCount} open={open} close={onClose} />

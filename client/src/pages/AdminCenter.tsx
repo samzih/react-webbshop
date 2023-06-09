@@ -4,7 +4,10 @@ import AdminProductTable from "../components/AdminProductTable";
 import { Space } from "antd";
 import { ShoppingCartOutlined, TeamOutlined, SkinOutlined, DollarOutlined } from '@ant-design/icons';
 
+import { useUserContext } from "../context/UserContext";
+import { Card, Typography } from "antd";
 const AdminCenter = () => {
+  const { loginUser } = useUserContext();
 
   // lite styling för AdminCard (IGNORE THIS!)
   const orderStyle = {
@@ -15,7 +18,7 @@ const AdminCenter = () => {
     padding: 8,
   }
 
-  return (
+  return loginUser && loginUser.isAdmin ? (
     <div>
       <h1>initial</h1>
       <AdminCreateProduct />
@@ -29,6 +32,8 @@ const AdminCenter = () => {
 
       <AdminProductTable />
     </div>
+  ) : (
+    <h1>404 You can't access this page</h1>
   );
 };
 
