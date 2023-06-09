@@ -4,6 +4,8 @@ import CartItem from "./CartItem";
 import { useCartContext } from "../context/CartContext";
 import { useState } from "react";
 import type { DrawerProps } from "antd/es/drawer";
+import "../component-styling/Header.css"
+import "../component-styling/CartPanel.css"
 type Props = {
   cartItemCount: number;
   open: boolean;
@@ -25,7 +27,8 @@ function CartPanel(props: Props) {
           <Space>
             <NavLink to="./checkout">
               <Button
-                type="primary"
+                type="text"
+                className="headerbtn"
                 disabled={props.cartItemCount <= 0}
                 onClick={props.close}
               >

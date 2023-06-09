@@ -1,0 +1,15 @@
+
+
+@media (max-width: 320px) {
+.ant-drawer-body {
+width: 70% ;
+
+
+}
+
+.ant-drawer-header{
+    width: 70%;
+
+}
+
+}

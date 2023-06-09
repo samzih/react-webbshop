@@ -7,6 +7,9 @@ import { useOrderContext } from "../context/OrderContext";
 import { useShippingContext } from "../context/CheckoutShippingContext";
 import { useNavigate } from "react-router-dom";
 import { useCartContext } from "../context/CartContext";
+import "../component-styling/Checkout.css"
+
+
 function Checkout() {
   const { order, setOrder, sendOrder } = useOrderContext();
   const [submittable, setSubmittable] = useState(true);
@@ -92,13 +95,15 @@ function Checkout() {
           </Spin>
           <div style={{ marginTop: 24 }}>
             {current > 0 && (
-              <Button style={{ margin: "0 8px" }} onClick={() => prev()}>
+              <Button type="text"
+              className="checkoutbtn" style={{ margin: "0 8px" }} onClick={() => prev()}>
                 Föregående | Gå tillbaka
               </Button>
             )}
             {current < steps.length - 1 && (
               <Button
-                type="primary"
+              type="text"
+              className="checkoutbtn"
                 disabled={current > steps.length - 3 && submittable}
                 onClick={() => next()}
               >
@@ -107,7 +112,8 @@ function Checkout() {
             )}
 
             {current === steps.length - 1 && (
-              <Button type="primary" onClick={completeOrder}>
+              <Button type="text"
+              className="checkoutbtn" onClick={completeOrder}>
                 Genomför köp/beställning
               </Button>
             )}

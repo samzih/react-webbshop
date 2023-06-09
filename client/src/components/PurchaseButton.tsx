@@ -14,13 +14,13 @@ function PurchaseButton({ product }: Props) {
     <div>
       <Button 
       className="button"
+      type="text"
         onClick={(e) => {
           e.preventDefault();
           addToCart(product);
         }}
-        type="primary"
       >
-        Köp
+        Handla
       </Button>
     </div>
   );

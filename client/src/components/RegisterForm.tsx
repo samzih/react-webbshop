@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { PlusOutlined } from "@ant-design/icons";
 import "../component-styling/RegisterForm.css";
+import "../component-styling/Header.css";
 import {
   Button,
   Col,
@@ -57,8 +58,8 @@ function RegisterForm() {
   return (
     <div>
       {loginUser && loginUser.firstName ? null : (
-        <Button type="default" onClick={showDrawer} icon={<PlusOutlined />}>
-          Skapa konto
+        <Button className="headerbtn" type="text" onClick={showDrawer} icon={<PlusOutlined />}>
+          <span className="createaccounttext">Skapa konto</span>
         </Button>
       )}
 
@@ -109,7 +110,7 @@ function RegisterForm() {
           >
             <Input.Password placeholder="******" />
           </Form.Item>
-          <Button type="primary" htmlType="submit">
+          <Button type="text" className="headerbtn" htmlType="submit">
             Fortsätt
           </Button>
           {isSubmitted && (

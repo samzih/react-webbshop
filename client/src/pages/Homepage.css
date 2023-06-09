@@ -1,0 +1,41 @@
+
+h1{
+    display: flex;
+    justify-content: center;
+    margin-bottom: 5%;
+    font-size: 6rem;
+    color: #03646d;
+}
+
+
+.button {
+    margin-top: 15%;
+    background-color: #046269;
+    color: #e8f2f1;
+  }
+
+
+
+@media (max-width: 1080px) {
+    h1 {
+      font-size: 5rem;
+    }
+  }
+
+  @media (max-width: 900px) {
+    h1 {
+      font-size: 4rem;
+    }
+  }
+
+  @media (max-width: 750px) {
+    h1 {
+      font-size: 3rem;
+    }
+  }
+
+  @media (max-width: 520px) {
+    h1 {
+      font-size: 2rem;
+    }
+  }
