@@ -5,6 +5,7 @@ import { Card } from "antd";
 import { useCartContext } from "../context/CartContext";
 import "../component-styling/CartItem.css";
 import "../component-styling/Header.css"
+import "../component-styling/CartPanel.css"
 
 function CartItem() {
   const { Meta } = Card;
@@ -49,7 +50,7 @@ function CartItem() {
               <div className="decreaseIncreaseBtnContainer">
                 <Button
                   type="text"
-                  className="headerbtn"
+                  className="decreasebtn"
                   size="small"
                   shape="circle"
                   onClick={(e) => {
@@ -63,7 +64,7 @@ function CartItem() {
                 <p>{cartItem.quantity}</p>
                 <Button
                   type="text"
-                  className="headerbtn"
+                  className="increasebtn"
                   size="small"
                   shape="circle"
                   onClick={(e) => {

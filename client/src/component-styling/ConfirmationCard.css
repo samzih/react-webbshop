@@ -4,6 +4,7 @@
   flex-direction: column;
   height: 100vh;
   padding: 2rem;
+  
 }
 
 .confimMessage {
@@ -11,4 +12,10 @@
   flex-direction: column;
   align-items: center;
   padding: 2rem;
+  
+}
+
+.ant-descriptions{ /* gör om gör rätt*/
+  background-color: #f7f6f5;
+  padding: 1rem;
 }

@@ -97,7 +97,7 @@ function Checkout() {
             {current > 0 && (
               <Button type="text"
               className="checkoutbtn" style={{ margin: "0 8px" }} onClick={() => prev()}>
-                Föregående | Gå tillbaka
+                Föregående
               </Button>
             )}
             {current < steps.length - 1 && (
@@ -107,14 +107,14 @@ function Checkout() {
                 disabled={current > steps.length - 3 && submittable}
                 onClick={() => next()}
               >
-                Nästa | Fortsätt
+                Nästa
               </Button>
             )}
 
             {current === steps.length - 1 && (
               <Button type="text"
               className="checkoutbtn" onClick={completeOrder}>
-                Genomför köp/beställning
+                Genomför köp
               </Button>
             )}
           </div>
