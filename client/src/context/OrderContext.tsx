@@ -26,6 +26,7 @@ interface OrderContext {
   setOrder: React.Dispatch<React.SetStateAction<Order>>;
   sendOrder: (order: Order, navigate: (path: string) => void) => void;
   orderNr: string;
+  orders: [],
 }
 
 const defaultOrder = {
@@ -39,6 +40,7 @@ const OrderContext = createContext<OrderContext>({
   setOrder: () => {},
   sendOrder: () => {},
   orderNr: "",
+  orders: [],
 });
 
 export const useOrderContext = () => useContext(OrderContext);
@@ -46,6 +48,7 @@ export const useOrderContext = () => useContext(OrderContext);
 const OrderProvider = ({ children }: PropsWithChildren) => {
   const [order, setOrder] = useState<Order>(defaultOrder);
   const [orderNr, setOrderNr] = useState("");
+  const [orders, setOrders] = useState([]);
 
   useEffect(() => {
     console.log(order);
@@ -74,13 +77,27 @@ const OrderProvider = ({ children }: PropsWithChildren) => {
     }
   }
 
-  // Vi behöver en ny GET som hämtar in orders från Databasen
+  // Fetches all the orders from database
+  useEffect(() => {
+    async function fetchOrders() {
+      try {
+        const response = await fetch("/api/orders");
+        const data = await response.json();
+        setOrders(data);
+        // console.log("Fetches all the orders from database:", data);
+      } catch (error) {
+        console.log(error);
+      }
+    }
+
+    fetchOrders();
+  }, [])
 
   // Och sedan även en ny PUT som skickar/uppdaterar data ifall en order har blivit skickad/shipped eller inte (true/false)
 
   return (
     <div>
-      <OrderContext.Provider value={{ order, setOrder, sendOrder, orderNr }}>
+      <OrderContext.Provider value={{ order, setOrder, sendOrder, orderNr, orders }}>
         {children}
       </OrderContext.Provider>
     </div>
