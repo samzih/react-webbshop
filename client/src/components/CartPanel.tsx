@@ -1,7 +1,6 @@
 import { Button, Drawer, Space } from "antd";
-import { NavLink } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import CartItem from "./CartItem";
-import { useCartContext } from "../context/CartContext";
 import { useState } from "react";
 import type { DrawerProps } from "antd/es/drawer";
 import "../component-styling/Header.css"
@@ -14,6 +13,14 @@ type Props = {
 
 function CartPanel(props: Props) {
   const [placement] = useState<DrawerProps["placement"]>("right");
+  const navigate = useNavigate();
+
+  function checkCart() {
+    if (props.cartItemCount >= 0) {
+      navigate("/checkout");
+      props.close();
+    }
+  }
 
   return (
     <div>
@@ -25,16 +32,14 @@ function CartPanel(props: Props) {
         open={props.open}
         extra={
           <Space>
-            <NavLink to="./checkout">
-              <Button
-                type="text"
+            <Button
+              type="text"
                 className="headerbtn"
-                disabled={props.cartItemCount <= 0}
-                onClick={props.close}
-              >
-                Gå till kassan
-              </Button>
-            </NavLink>
+              disabled={props.cartItemCount <= 0}
+              onClick={checkCart}
+            >
+              Gå till kassan
+            </Button>
           </Space>
         }
       >

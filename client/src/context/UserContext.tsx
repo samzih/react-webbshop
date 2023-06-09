@@ -24,14 +24,14 @@ export interface User {
 
 export interface UserContext {
   loginUser: User | null;
-  fetchLoginUser: (user: Credentials) => void;
+  fetchLoginUser: (user: Credentials) => Promise<string | void>;
   logoutUser: () => void;
 }
 // Eventuellt lägga till Cart till userInterface
 
 const UserContext = createContext<UserContext>({
   loginUser: null,
-  fetchLoginUser: () => {},
+  fetchLoginUser: async () => {},
   logoutUser: () => {},
 });
 
@@ -41,7 +41,7 @@ const UserProvider = ({ children }: PropsWithChildren<object>) => {
   const [loginUser, setLoginUser] = useState<User | null>(null);
   //reminder: useEffect for auth
 
-  async function fetchLoginUser(user: Credentials) {
+  async function fetchLoginUser(user: Credentials): Promise<void> {
     try {
       const response = await fetch("/api/users/login", {
         method: "POST",

@@ -28,8 +28,10 @@ function CheckoutForm({ setSubmittable }: CheckoutFormProps) {
   useEffect(() => {
     form.validateFields({ validateOnly: true }).then(
       () => {
+        if (loginUser) {
+          setSubmittable(false);
+        }
         // console.log("Alla inputfält är ifyllda!");
-        setSubmittable(false);
       },
       () => {
         // console.log("Alla inputfält är inte ifyllda...");
