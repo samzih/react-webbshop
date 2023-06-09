@@ -1,0 +1,49 @@
+
+
+.ant-menu-horizontal {
+    background-color: #4b4741 ;
+    color: #a49f9a ;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    font-size: 1.5rem;
+    display: flex;
+    justify-content: center;
+    padding-right: 20%;
+    padding-left: 20%;
+    text-decoration: none;
+}
+
+
+.navtext a {
+    text-decoration: none;
+}
+
+.ant-menu-item-selected  a{
+    text-decoration: block;
+}
+
+@media (max-width: 700px) {
+    .ant-menu-horizontal {
+        padding-top: 0.8rem;
+        padding-bottom: 0.8rem;
+        font-size: 1.2rem;
+        padding-right: 10%;
+        padding-left: 10%;
+    }
+}
+
+@media (max-width: 550px) {
+    .ant-menu-horizontal {
+        padding-top: 0.6rem;
+        padding-bottom: 0.6rem;
+        font-size: 1rem;
+    }
+}
+
+@media (max-width: 400px) {
+    .ant-menu-horizontal {
+        padding-top: 0.4rem;
+        padding-bottom: 0.4rem;
+        font-size: 0.8rem;
+    }
+}

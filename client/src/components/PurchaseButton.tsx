@@ -20,16 +20,16 @@ function PurchaseButton({ product }: Props) {
 
   return (
     <div>
-      <Button
-        className="button"
+      <Button 
+      className="button"
+      type="text"
         onClick={(e) => {
           e.preventDefault();
           addToCart(product);
         }}
         disabled={disableButtonCondition}
-        type="primary"
       >
-        Köp
+        Handla
       </Button>
     </div>
   );

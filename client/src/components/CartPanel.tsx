@@ -3,6 +3,8 @@ import { useNavigate } from "react-router-dom";
 import CartItem from "./CartItem";
 import { useState } from "react";
 import type { DrawerProps } from "antd/es/drawer";
+import "../component-styling/Header.css"
+import "../component-styling/CartPanel.css"
 type Props = {
   cartItemCount: number;
   open: boolean;
@@ -31,7 +33,8 @@ function CartPanel(props: Props) {
         extra={
           <Space>
             <Button
-              type="primary"
+              type="text"
+                className="headerbtn"
               disabled={props.cartItemCount <= 0}
               onClick={checkCart}
             >

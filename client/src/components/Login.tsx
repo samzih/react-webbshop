@@ -19,7 +19,8 @@ import React, { useState, useEffect } from "react";
 import { UserOutlined, AndroidOutlined } from "@ant-design/icons";
 import { useUserContext } from "../context/UserContext";
 import RegisterForm from "./RegisterForm";
-import "../component-styling/Login.css";
+import "../component-styling/Header.css";
+
 const { Title, Text } = Typography;
 function Login() {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -85,8 +86,8 @@ function Login() {
             </Text>
           </>
         ) : (
-          <Button type="primary" onClick={showModal}>
-            <UserOutlined /> Logga in
+          <Button className="headerbtn"  type="text" onClick={showModal}>
+            <UserOutlined /> <span className="logintext">Logga in</span> 
           </Button>
         )}
         <RegisterForm />
@@ -130,7 +131,7 @@ function Login() {
           )}
 
           {loginUser && loginUser.firstName ? (
-            <Button onClick={logoutUser} type="primary">
+            <Button onClick={logoutUser} type="text">
               Logga ut
             </Button>
           ) : null}

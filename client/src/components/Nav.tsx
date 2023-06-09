@@ -1,6 +1,7 @@
 import { useState } from "react";
 import type { MenuProps } from "antd";
 import { Menu } from "antd";
+import "../component-styling/Nav.css";
 
 function Nav() {
   const [current, setCurrent] = useState("start");

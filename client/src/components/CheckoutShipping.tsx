@@ -22,7 +22,7 @@ function CheckoutShipping() {
 
   return (
     <div>
-      <Radio.Group onChange={onChange} value={value}>
+      <Radio.Group  onChange={onChange} value={value}>
         {shipping.map((shipping) => (
           <div key={shipping._id}>
             <Card>

@@ -8,13 +8,9 @@ function Header() {
     <header>
       <div id="header">
         <h1>KJOSK</h1>
-
         <div id="right-content">
-         
           <Login />
-          
           <Cart  />
-          
         </div>
       </div>
       <Nav />

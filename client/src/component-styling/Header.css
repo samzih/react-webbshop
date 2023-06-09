@@ -1,49 +1,186 @@
 
 /*Grundinställningar header*/
 #header {
-  background-color: #edf6f9;
-  color: #83c5be;
+  background-color: #d5bdaf;
+  color: #e3d5ca;
   display: flex;
   flex-direction: row;
-  justify-content: space-around;
-  padding-top: 2%;
-  padding-bottom: 2%;
+  justify-content: space-between;
+  padding-top: 1%;
 }
 
 /* Gör klart när header är klar. */
 #right-content {
   display: flex;
-  flex-direction: row;
-  justify-content: space-between;
+ margin-right: 5%;
 }
 
 /* Kundvagnen*/
 .ant-badge {
-padding-left: 10% ;
-color: #e29578 ;
-margin-left: 25%;
+color: #4b4741 ;
+margin-left: 15%;
 margin-top: 25%;
 }
 
 /*Loggain/skapakonto knapparna*/
 .ant-btn {
-  color: #e29578;
-  background-color: #ffddd2 ;
+  background-color: #807972;
+  color: #e3d5ca;
   margin-top: 5%;
 }
 
+.anticon-user{
+  color: #4b4741;
+}
+
+.anticon-plus{
+  color: #4b4741;
+}
+
+
 /* Backgrunden till "count"-kundvagnen */
 .ant-scroll-number.ant-badge-count{
-  background-color: #83c5be;
+  background-color: #4b4741;
 }
 
 /*Siffran på kundkorgen*/
 .ant-scroll-number-only-unit {
-  color: #006d77;
+  color: #e3d5ca;
 }
 
 /*Titeln*/
-h1 {
-  font-size: 4rem;
+#header h1 {
+  font-size: 5rem;
   font-style: bold;
+  color: #605b54;
+  margin-left: 40%;
+  letter-spacing: 1rem;
+}
+
+.ant-badge {
+  color: #4b4741 ;
+  margin-left: 15%;
+  margin-top: 25%;
+  }
+  
+  /*Loggain/skapakonto knapparna*/
+  .ant-btn {
+    background-color: #807972;
+    color: #e3d5ca;
+    margin-top: 5%;
+  }
+  
+  .anticon-user{
+    color: #4b4741;
+  }
+  
+  .anticon-plus{
+    color: #4b4741;
+  }
+  
+  
+  /* Backgrunden till "count"-kundvagnen */
+  .ant-scroll-number.ant-badge-count{
+    background-color: #4b4741;
+  }
+  
+  /*Siffran på kundkorgen*/
+  .ant-scroll-number-only-unit {
+    color: #e3d5ca;
+  }
+
+  .headerbtn:hover{
+    background-color: #807972;
+    color: #e3d5ca;
+  }
+
+  .headerbtn  {
+    text-decoration: none;
+  }
+
+
+@media (max-width: 1250px) {
+  #header h1 {
+    font-size: 3.8rem;
+    margin-left: 40%;
+  }
+
+  .ant-btn {
+    margin-top: 5%;
+  }
+}
+
+@media (max-width: 1050px) {
+  #header h1 {
+    font-size: 3.6rem;
+    margin-left: 40%;
+  }
+}
+
+
+@media (max-width: 950px) {
+  #header h1 {
+    font-size: 3.3rem;
+    margin-left: 40%;
+  }
+}
+
+@media (max-width: 850px) {
+  #header h1 {
+    font-size: 3.1rem;
+    margin-left: 40%;
+  }
+
+  span.logintext {
+    display: none;
+}
+
+span.createaccounttext{
+  display: none;
+}
+}
+
+@media (max-width: 780px) {
+  #header h1 {
+    font-size: 2.9rem;
+    margin-left: 40%;
+  }
+}
+
+@media (max-width: 680px) {
+  #header h1 {
+    font-size: 2.3rem;
+    margin-left: 40%;
+  }
+}
+
+@media (max-width: 600px) {
+  #header h1 {
+    font-size: 2rem;
+    margin-left: 30%;
+  }
+}
+
+@media (max-width: 500px) {
+  .ant-btn {
+    margin-left: -5% ;
+    padding: 2%;
+
+}
+
+
+}
+
+@media (max-width: 440px) {
+  #header h1 {
+    font-size: 1.6rem;
+    margin-left: 20%;
+  }
+}
+
+@media (max-width: 340px) {
+  #header h1 {
+    font-size: 1rem;
+    margin-left: 40%;
+  }
 }
