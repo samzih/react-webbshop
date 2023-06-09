@@ -55,7 +55,7 @@ const AdminCenter = () => {
       <AdminProductTable />
     </div>
   ) : (
-    <h1>404 You can't access this page</h1>
+    <Result status="403" title="403" subTitle="Tyvärr, du har inte behörighet att komma åt den här sidan." />
   );
 };
 
