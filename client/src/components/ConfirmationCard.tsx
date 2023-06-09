@@ -13,15 +13,12 @@ function ConfirmationCard() {
   const { totalSum } = useCartContext();
   const { value, calcDelivery } = useShippingContext();
   const { loginUser }: UserContext = useUserContext();
-  if (!loginUser) return null;
-
+  const cartItem = JSON.parse(localStorage.getItem("cart"));
   useEffect(() => {
     console.log(`order exists right now, let's clean it:`, order);
-    if (order && cartItem) {
-      localStorage.removeItem("cart");
-    }
-  }, [order]);
-  const cartItem = JSON.parse(localStorage.getItem("cart"));
+    localStorage.removeItem("cart");
+  }, [order, cartItem]);
+  if (!loginUser) return null;
   console.log(cartItem);
   if (!cartItem) return null;
   return (
