@@ -1,13 +1,19 @@
 import AdminCreateProduct from "../components/AdminCreateProduct";
 import AdminCard from "../components/AdminCard";
 import AdminProductTable from "../components/AdminProductTable";
-import { Space } from "antd";
-import { ShoppingCartOutlined, TeamOutlined, SkinOutlined, DollarOutlined } from '@ant-design/icons';
-
 import { useUserContext } from "../context/UserContext";
-import { Card, Typography } from "antd";
+import { Space, Result } from "antd";
+import { ShoppingCartOutlined, SkinOutlined, DollarOutlined } from '@ant-design/icons';
+import AdminOrdersTable from "../components/AdminOrdersTable";
+import { useOrderContext } from "../context/OrderContext";
+import { useProductContext } from "../context/ProductContext";
+
 const AdminCenter = () => {
   const { loginUser } = useUserContext();
+  const { products } = useProductContext();
+  const { orders } = useOrderContext();
+
+  // console.log(allOrders[0].orderItems[0].price)
 
   // Goes into every order and adds order sum to totalRevenue
   let totalRevenue = 0;
@@ -46,13 +52,14 @@ const AdminCenter = () => {
       <AdminCreateProduct />
 
       <Space direction="horizontal">
-        <AdminCard title={"Beställningar/Orders"} value={274} icon={<ShoppingCartOutlined style={orderStyle} />} />
-        <AdminCard title={"Lager"} value={25} icon={<SkinOutlined />} />
-        <AdminCard title={"Användare/Kunder"} value={98} icon={<TeamOutlined />} />
-        <AdminCard title={"Intäkter/Inkomst"} value={9782 + " kr"} icon={<DollarOutlined />} />
+        <AdminCard title={"Beställningar/Orders"} value={orders.length} icon={<ShoppingCartOutlined style={orderStyle} />} />
+        <AdminCard title={"Lager"} value={products.length} icon={<SkinOutlined style={inventoryStyle} />} />
+        {/* <AdminCard title={"Användare/Kunder"} value={98} icon={<TeamOutlined />} /> */}
+        <AdminCard title={"Intäkter/Inkomst"} value={`${calcRevenue(totalRevenue)} kr`} icon={<DollarOutlined style={revenueStyle} />} />
       </Space>
 
       <AdminProductTable />
+      <AdminOrdersTable />
     </div>
   ) : (
     <Result status="403" title="403" subTitle="Tyvärr, du har inte behörighet att komma åt den här sidan." />
