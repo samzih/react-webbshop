@@ -94,9 +94,7 @@ margin-top: 25%;
     color: #e3d5ca;
   }
 
-  .headerbtn  {
-    text-decoration: none;
-  }
+
 
 
 @media (max-width: 1250px) {
@@ -152,6 +150,10 @@ span.createaccounttext{
     font-size: 2.3rem;
     margin-left: 40%;
   }
+
+  .ant-btn {
+    padding: 2%;
+}
 }
 
 @media (max-width: 600px) {
@@ -161,15 +163,7 @@ span.createaccounttext{
   }
 }
 
-@media (max-width: 500px) {
-  .ant-btn {
-    margin-left: -5% ;
-    padding: 2%;
 
-}
-
-
-}
 
 @media (max-width: 440px) {
   #header h1 {
