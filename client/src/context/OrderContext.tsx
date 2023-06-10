@@ -106,6 +106,10 @@ const OrderProvider = ({ children }: PropsWithChildren) => {
     }
   }
 
+  // Vi behöver en ny GET som hämtar in orders från Databasen
+
+  // Och sedan även en ny PUT som skickar/uppdaterar data ifall en order har blivit skickad/shipped eller inte (true/false)
+
   return (
     <div>
       <OrderContext.Provider value={{ order, setOrder, sendOrder, orderNr }}>

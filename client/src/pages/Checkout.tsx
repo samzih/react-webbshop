@@ -101,7 +101,7 @@ function Checkout() {
                 style={{ margin: "0 8px" }}
                 onClick={() => prev()}
               >
-                Föregående | Gå tillbaka
+                Föregående
               </Button>
             )}
             {cart.length >= 1 ? (
@@ -128,7 +128,7 @@ function Checkout() {
                 className="checkoutbtn"
                 onClick={completeOrder}
               >
-                Genomför köp/beställning
+                Genomför köp
               </Button>
             )}
           </div>
