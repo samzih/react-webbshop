@@ -51,7 +51,7 @@ const OrderProvider = ({ children }: PropsWithChildren) => {
     console.log(order);
   }, [order]);
 
-  async function sendOrder(order: Order, navigate: (path: string) => void ) {
+  async function sendOrder(order: Order, navigate: (path: string) => void) {
     const { deliveryAddress, orderItems, shippingMethod } = order;
     try {
       const response = await fetch("/api/orders", {
@@ -67,8 +67,24 @@ const OrderProvider = ({ children }: PropsWithChildren) => {
       });
       const data = await response.json();
       console.log("Detta är vad som skickas till DB:", data);
+
+      /// HÄR MÅSTE VI FÖRA ÖVER SAKER TILL ORDERITEMS, ALLTSÅ DET VÄRDET SOM VARUKOGEN HAR!!
+      // let updatedOrderItems = orderItems.map((item) => {
+      //   const {
+      //     product: { _id },
+      //     ...rest
+      //   } = item;
+      //   return {
+      //     ...rest,
+      //     product: _id,
+      //   };
+      // });
+
+      // const orderToSend = { ...order, orderItems: updatedOrderItems };
+      // setOrder(orderToSend);
+
       setOrderNr(data.orderNumber);
-      navigate("/confirmation")
+      navigate("/confirmation");
     } catch {
       console.log(Error);
     }

@@ -9,6 +9,7 @@ interface CartContext {
   removeItem: (productId: number) => void;
   increaseCartQuantity: (product: IProduct) => void;
   decreaseCartQuantity: (product: IProduct) => void;
+  clearCart: () => void;
   totalSum: number;
 }
 
@@ -23,6 +24,7 @@ const CartContext = createContext<CartContext>({
   removeItem: () => {},
   increaseCartQuantity: () => {},
   decreaseCartQuantity: () => {},
+  clearCart: () => {},
   totalSum: 0,
 });
 
@@ -31,6 +33,9 @@ export const useCartContext = () => useContext(CartContext);
 const CartProvider = ({ children }: PropsWithChildren<object>) => {
   const [cart, setCart] = useLocalStorage("cart", []);
 
+  const clearCart = () => {
+    setCart([]);
+  };
   const addToCart = (product: IProduct) => {
     const existingItem = cart.find(
       (item: CartItem) => item.product._id === product._id
@@ -89,6 +94,7 @@ const CartProvider = ({ children }: PropsWithChildren<object>) => {
       <CartContext.Provider
         value={{
           cart,
+          clearCart,
           addToCart,
           removeItem,
           increaseCartQuantity,

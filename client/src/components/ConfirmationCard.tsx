@@ -14,10 +14,16 @@ function ConfirmationCard() {
   const { value, calcDelivery } = useShippingContext();
   const { loginUser }: UserContext = useUserContext();
   const cartItem = JSON.parse(localStorage.getItem("cart"));
-  useEffect(() => {
-    console.log(`order exists right now, let's clean it:`, order);
-    localStorage.removeItem("cart");
-  }, [order, cartItem]);
+  const { orderItems } = order;
+  console.log("This is my orderItems:", orderItems);
+  console.log("Detta är mina varukorgitems:", cartItem);
+  // if (cartItem && order) {
+  //   setTimeout(() => {
+  //     localStorage.removeItem("cart");
+  //     clearCart();
+
+  console.log(order.orderItems);
+
   if (!loginUser) return null;
   console.log(cartItem);
   if (!cartItem) return null;
@@ -49,10 +55,10 @@ function ConfirmationCard() {
           <Descriptions.Item label="Produkter: ">
             {" "}
             <ul style={{ listStyleType: "none" }}>
-              {cartItem.map((item) => (
-                <div key={item.product._id}>
+              {orderItems.map((item) => (
+                <div key={item.product}>
                   <li>
-                    {item.product.title} <br /> x{item.quantity}
+                    {item.product} <br /> x{item.quantity}
                   </li>
                   <br />
                 </div>
