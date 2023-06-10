@@ -113,7 +113,7 @@ function Checkout() {
                     disabled={current > steps.length - 3 && submittable}
                     onClick={() => next()}
                   >
-                    Nästa | Fortsätt
+                    Nästa
                   </Button>
                 )}
               </>
