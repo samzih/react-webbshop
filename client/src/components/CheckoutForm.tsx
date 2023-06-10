@@ -3,6 +3,7 @@ import { Form, Input, Button } from "antd";
 import { useUserContext } from "../context/UserContext";
 import { UserContext } from "../context/UserContext";
 import { useOrderContext } from "../context/OrderContext";
+import { useCartContext } from "../context/CartContext";
 type SizeType = Parameters<typeof Form>[0]["size"];
 
 interface CheckoutFormProps {
@@ -18,6 +19,7 @@ function CheckoutForm({ setSubmittable }: CheckoutFormProps) {
   };
   const { order, setOrder } = useOrderContext();
   const { loginUser }: UserContext = useUserContext();
+  const { cart } = useCartContext();
   // const [address, setAddress] = useState("");
   // const [postal, setPostal] = useState("");
 
@@ -28,7 +30,7 @@ function CheckoutForm({ setSubmittable }: CheckoutFormProps) {
   useEffect(() => {
     form.validateFields({ validateOnly: true }).then(
       () => {
-        if (loginUser) {
+        if (loginUser && cart.length >= 1) {
           setSubmittable(false);
         }
         // console.log("Alla inputfält är ifyllda!");
