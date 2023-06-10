@@ -35,6 +35,9 @@ const CartProvider = ({ children }: PropsWithChildren<object>) => {
 
   const clearCart = () => {
     setCart([]);
+    // setTimeout(() => {
+    //   localStorage.removeItem("cart");
+    // }, 2000);
   };
   const addToCart = (product: IProduct) => {
     const existingItem = cart.find(
