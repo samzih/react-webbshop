@@ -48,6 +48,10 @@ function Login() {
       form.resetFields();
       setIsModalOpen(true);
     }
+
+    if (loginUser?.firstName) {
+      setIsModalOpen(false);
+    }
   };
 
   const handleCancel = () => {
@@ -86,8 +90,8 @@ function Login() {
             </Text>
           </>
         ) : (
-          <Button className="headerbtn"  type="text" onClick={showModal}>
-            <UserOutlined /> <span className="logintext">Logga in</span> 
+          <Button className="headerbtn" type="text" onClick={showModal}>
+            <UserOutlined /> <span className="logintext">Logga in</span>
           </Button>
         )}
         <RegisterForm />
@@ -101,10 +105,10 @@ function Login() {
         {errorMessage && !loginSuccess && (
           <Alert message={errorMessage} type="error" showIcon />
         )}
-        {loginSuccess && <p>Welcome {loginUser?.firstName}</p>}
+        {loginSuccess && <p>Välkommen {loginUser?.firstName}</p>}
         <Form form={form}>
           {loginUser && loginUser.firstName ? (
-            <p>Welcome {loginUser.firstName}</p>
+            <Title>Welcome {loginUser.firstName}</Title>
           ) : (
             <>
               <Form.Item
