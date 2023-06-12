@@ -10,14 +10,16 @@ import "../component-styling/ConfirmationCard.css";
 function ConfirmationCard() {
   const { order, orderNr } = useOrderContext();
   console.log(order);
-  const { totalSum } = useCartContext();
+  // const { totalSum } = useCartContext();
   const { value, calcDelivery } = useShippingContext();
   const { loginUser }: UserContext = useUserContext();
   const cartItem = JSON.parse(localStorage.getItem("cart"));
-  useEffect(() => {
-    console.log(`order exists right now, let's clean it:`, order);
-    localStorage.removeItem("cart");
-  }, [order, cartItem]);
+  const { orderItems, totalSum } = order;
+
+  console.log("This is my orderItems:", orderItems);
+  console.log("Detta är mina varukorgitems:", cartItem);
+  console.log(order.orderItems);
+
   if (!loginUser) return null;
   console.log(cartItem);
   if (!cartItem) return null;
@@ -49,7 +51,7 @@ function ConfirmationCard() {
           <Descriptions.Item label="Produkter: ">
             {" "}
             <ul style={{ listStyleType: "none" }}>
-              {cartItem.map((item) => (
+              {orderItems.map((item) => (
                 <div key={item.product._id}>
                   <li>
                     {item.product.title} <br /> x{item.quantity}
@@ -63,7 +65,7 @@ function ConfirmationCard() {
             {value.company}
           </Descriptions.Item>
           <Descriptions.Item label="Totalpris: " style={{ fontSize: 56 }}>
-            {totalSum + value.price}
+            {totalSum + value.price} kr
           </Descriptions.Item>
         </Descriptions>
       </Card>
