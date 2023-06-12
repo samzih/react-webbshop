@@ -25,6 +25,7 @@ interface OrderContext {
   setOrder: React.Dispatch<React.SetStateAction<Order>>;
   sendOrder: (order: Order, navigate: (path: string) => void) => void;
   orderNr: string;
+  orders: [],
 }
 
 const defaultOrder = {
@@ -38,6 +39,7 @@ const OrderContext = createContext<OrderContext>({
   setOrder: () => {},
   sendOrder: () => {},
   orderNr: "",
+  orders: [],
 });
 
 export const useOrderContext = () => useContext(OrderContext);
@@ -48,6 +50,8 @@ const OrderProvider = ({ children }: PropsWithChildren) => {
   const [order, setOrder] = useState<Order>(defaultOrder);
   const [orderNr, setOrderNr] = useState("");
   const { clearCart, totalSum } = useCartContext();
+  const [orders, setOrders] = useState([]);
+
   useEffect(() => {
     console.log(order);
   }, [order]);
@@ -106,13 +110,46 @@ const OrderProvider = ({ children }: PropsWithChildren) => {
     }
   }
 
-  // Vi behöver en ny GET som hämtar in orders från Databasen
+  // Fetches all the orders from database
+   async function fetchOrders() {
+      try {
+        const response = await fetch("/api/orders");
+        const data = await response.json();
+        setOrders(data);
+        // console.log("Fetches all the orders from database:", data);
+      } catch (error) {
+        console.log(error);
+      }
+    }
 
-  // Och sedan även en ny PUT som skickar/uppdaterar data ifall en order har blivit skickad/shipped eller inte (true/false)
+  useEffect(() => {
+    fetchOrders();
+  }, [])
+
+  // En ny funktion för att fectha backend shipped samma på fetchOrders endpoint med /id, kalla på fetchOrders i denna funktion och skicka in id:et
+async function shippedFunc(shipped, id) {
+
+  console.log(shipped, id)
+  
+  try{
+    await fetch(`/api/orders/${id}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        shipped: shipped,
+      }),
+    });
+    fetchOrders();
+  } catch (error) {
+    console.log(error);
+  }
+}
 
   return (
     <div>
-      <OrderContext.Provider value={{ order, setOrder, sendOrder, orderNr }}>
+      <OrderContext.Provider value={{ order, setOrder, sendOrder, orderNr, orders, shippedFunc }}>
         {children}
       </OrderContext.Provider>
     </div>

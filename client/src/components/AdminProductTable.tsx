@@ -3,9 +3,16 @@ import { useProductContext } from "../context/ProductContext";
 import { EditOutlined, CloseOutlined, PlusOutlined } from '@ant-design/icons';
 
 function AdminProductTable() {
-    
     const { products } = useProductContext();
     console.log("Produkter som kommer in:", products)
+
+    // Maps over the products array and modifies the keyname "_id" to "key"
+    const data = products.map(product => {
+      const { _id, ...rest } = product;
+      return { key: _id, ...rest };
+    });
+
+    console.log(data)
   
     const columns = [
     {
@@ -51,7 +58,7 @@ function AdminProductTable() {
 
   return (
     <>
-        <Table columns={columns} dataSource={products} size="middle" bordered caption={titleButton}/>
+        <Table columns={columns} dataSource={data} size="middle" bordered caption={titleButton}/>
     </>
   );
 }
