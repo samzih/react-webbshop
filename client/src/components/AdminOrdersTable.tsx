@@ -3,9 +3,9 @@ import { useOrderContext } from "../context/OrderContext";
 import { useState } from "react";
 
 function AdminOrdersTable() {
-    const { orders } = useOrderContext();
-    const [shippedOrder, setShippedOrder] = useState(orders.map(order => order.shipped));
-    console.log("Orders som kommer in:", orders);
+    const { orders, shippedFunc } = useOrderContext();
+    // const [shippedOrder, setShippedOrder] = useState(orders.map(order => order.shipped));
+    // console.log("Orders som kommer in:", orders);
 
     const data = orders.map((order) => {
         const { _id, orderNumber, shipped, createdAt, customer, deliveryAddress, orderItems } = order;
@@ -57,9 +57,9 @@ function AdminOrdersTable() {
         {
             title: "Skickad",
             dataIndex: "shipped",
-            key: "should be the same as dataindex here",
-            render: (shipped) => {
-                return <Checkbox checked={shipped} />
+            key: "shipped",
+            render: (shipped, data) => {
+                return <Checkbox checked={shipped} onChange={(e) => shippedFunc(e.target.checked, data.key)}/>
             }
         }
     ]
