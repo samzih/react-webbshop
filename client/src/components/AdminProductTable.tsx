@@ -1,19 +1,14 @@
 import { Avatar, Button, Card, Space, Table } from "antd";
 import { useProductContext } from "../context/ProductContext";
 import { EditOutlined, CloseOutlined, PlusOutlined } from '@ant-design/icons';
+import { useAdminContext } from "../context/AdminContext";
 
 function AdminProductTable() {
     const { products } = useProductContext();
+    const { deleteProduct } = useAdminContext();
     console.log("Produkter som kommer in:", products)
 
-    // Maps over the products array and modifies the keyname "_id" to "key"
-    const data = products.map(product => {
-      const { _id, ...rest } = product;
-      return { key: _id, ...rest };
-    });
 
-    console.log(data)
-  
     const columns = [
     {
       title: "Bild",
@@ -41,12 +36,12 @@ function AdminProductTable() {
     },
     {
         title: "Åtgärder/Operationer",
-        render: () => {
+        render: (products) => {
             return (
                 <>
                     <Space>
                         <Button type="primary" icon={<EditOutlined style={{ color: "white" }} />} ></Button>
-                        <Button type="primary" icon={<CloseOutlined style={{ color: "white" }} />} danger></Button>
+                        <Button type="primary" onClick={() => deleteProduct(products)} icon={<CloseOutlined style={{ color: "white" }} />} danger ></Button>
                     </Space>
                 </>
             );
@@ -58,7 +53,7 @@ function AdminProductTable() {
 
   return (
     <>
-        <Table columns={columns} dataSource={data} size="middle" bordered caption={titleButton}/>
+        <Table columns={columns} dataSource={products} size="middle" bordered  rowKey="_id" caption={titleButton}/>
     </>
   );
 }
