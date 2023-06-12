@@ -55,7 +55,7 @@ const AdminCenter = () => {
         <AdminCard title={"Beställningar/Orders"} value={orders.length} icon={<ShoppingCartOutlined style={orderStyle} />} />
         <AdminCard title={"Lager"} value={products.length} icon={<SkinOutlined style={inventoryStyle} />} />
         {/* <AdminCard title={"Användare/Kunder"} value={98} icon={<TeamOutlined />} /> */}
-        <AdminCard title={"Intäkter/Inkomst"} value={`${calcRevenue(totalRevenue)} kr`} icon={<DollarOutlined style={revenueStyle} />} />
+        <AdminCard title={"Intäkter/Inkomst"} value={`${orders && calcRevenue(totalRevenue)} kr`} icon={<DollarOutlined style={revenueStyle} />} />
       </Space>
 
       <AdminProductTable />
