@@ -78,8 +78,7 @@ const OrderProvider = ({ children }: PropsWithChildren) => {
   }
 
   // Fetches all the orders from database
-  useEffect(() => {
-    async function fetchOrders() {
+   async function fetchOrders() {
       try {
         const response = await fetch("/api/orders");
         const data = await response.json();
@@ -90,14 +89,34 @@ const OrderProvider = ({ children }: PropsWithChildren) => {
       }
     }
 
+  useEffect(() => {
     fetchOrders();
   }, [])
 
-  // Och sedan även en ny PUT som skickar/uppdaterar data ifall en order har blivit skickad/shipped eller inte (true/false)
+  // En ny funktion för att fectha backend shipped samma på fetchOrders endpoint med /id, kalla på fetchOrders i denna funktion och skicka in id:et
+async function shippedFunc(shipped, id) {
+
+  console.log(shipped, id)
+  
+  try{
+    await fetch(`/api/orders/${id}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        shipped: shipped,
+      }),
+    });
+    fetchOrders();
+  } catch (error) {
+    console.log(error);
+  }
+}
 
   return (
     <div>
-      <OrderContext.Provider value={{ order, setOrder, sendOrder, orderNr, orders }}>
+      <OrderContext.Provider value={{ order, setOrder, sendOrder, orderNr, orders, shippedFunc }}>
         {children}
       </OrderContext.Provider>
     </div>
