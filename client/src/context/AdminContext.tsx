@@ -43,7 +43,7 @@ const AdminProvider = ({ children }: PropsWithChildren<object>) => {
       if (response.status === 200) {
         console.log("Success");
       }
-      if (response.status === 401) {
+      if (response.status === 401 || response.status === 400) {
         console.log("Nope");
       }
     } catch (error) {
