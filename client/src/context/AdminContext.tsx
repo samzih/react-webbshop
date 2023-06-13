@@ -16,7 +16,6 @@ export interface CreateProduct {
   inStock: number;
 }
 
-
 // const ProductCreateValidationSchema = Joi.object({
 //   title: Joi.string().strict().required(),
 //   description: Joi.string().strict().required(),
@@ -28,7 +27,7 @@ export interface CreateProduct {
 export const useAdminContext = () => useContext(AdminContext);
 const AdminProvider = ({ children }: PropsWithChildren<object>) => {
   const { fetchProducts } = useProductContext();
-  
+
   const createNewProduct = async (product: CreateProduct) => {
     try {
       const response = await fetch("/api/products", {
@@ -53,34 +52,50 @@ const AdminProvider = ({ children }: PropsWithChildren<object>) => {
 
   // Put operation for product soft-deleted (true/false)
   async function deleteProduct(data) {
+    console.log(data);
 
-  console.log(data)
+    data = { ...data, deleted: true };
+    console.log("NEW!", data);
 
-    data = { ...data, deleted: true }
-    console.log("NEW!", data)
-  
-   try{
-    await fetch(`/api/products/${data._id}`, {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(
-        data
-      ),
-    });
-    fetchProducts();
-  } catch (error) {
-    console.log(error);
-  } 
-}
+    try {
+      await fetch(`/api/products/${data._id}`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      });
+      fetchProducts();
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  //En put för att uppdatera produkt
+  async function updateProduct(data) {
+    console.log("updateProduct", data);
+
+    try {
+      await fetch(`/api/products/${data._id}`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      });
+      fetchProducts();
+    } catch (error) {
+      console.log(error);
+    }
+  }
 
   return (
     <div>
       <AdminContext.Provider
         value={{
           createNewProduct,
-          deleteProduct
+          deleteProduct,
+          updateProduct,
         }}
       >
         {children}
