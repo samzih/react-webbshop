@@ -145,7 +145,7 @@ async function shippedFunc(shipped, id) {
 
   return (
     <div>
-      <OrderContext.Provider value={{ order, setOrder, sendOrder, orderNr, orders, shippedFunc }}>
+      <OrderContext.Provider value={{ order, setOrder, sendOrder, orderNr, orders, shippedFunc, fetchOrders }}>
         {children}
       </OrderContext.Provider>
     </div>

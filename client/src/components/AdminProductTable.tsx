@@ -68,7 +68,6 @@ function AdminProductTable() {
       title: "Pris",
       dataIndex: "price",
       render: (price: number, product: IProduct) => {
-        console.log("i render", price);
         if (editingRow === product._id) {
           return (
             <Form.Item

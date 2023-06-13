@@ -13,7 +13,7 @@ import { useEffect, useState } from "react";
 const AdminCenter = () => {
   const { loginUser } = useUserContext();
   const { products } = useProductContext();
-  const { orders } = useOrderContext();
+  const { orders, fetchOrders } = useOrderContext();
   const [totalRevenue, setTotalRevenue] = useState(0);
 
   // Goes into every order and adds order totalPrice to totalRevenue state
@@ -32,6 +32,11 @@ const AdminCenter = () => {
       setTotalRevenue(totalPrice);
     }
   }, [orders]);
+
+  // Runs fetchOrders when user changes occur like logging in while on admin page
+  useEffect(() => {
+    fetchOrders()
+  }, [loginUser])
 
   // some styling for AdminCard (IGNORE THIS!)
   const orderStyle = {
