@@ -36,7 +36,7 @@ const ProductProvider = ({ children }: PropsWithChildren) => {
       console.log(error);
     }
   }
-  
+
   useEffect(() => {
     fetchProducts();
   }, []);
