@@ -12,14 +12,18 @@ export interface IProduct {
   image: string;
   price: number;
   inStock: number;
+  description?: string;
+  deleted?: boolean;
 }
 
 interface IProductContext {
   products: IProduct[];
+  fetchProducts: () => void;
 }
 
 const ProductContext = createContext<IProductContext>({
   products: [],
+  fetchProducts: () => Promise.resolve(),
 });
 
 export const useProductContext = () => useContext(ProductContext);
