@@ -1,31 +1,17 @@
-import {
-  Avatar,
-  Button,
-  Card,
-  Form,
-  Input,
-  InputNumber,
-  Space,
-  Table,
-} from "antd";
-import { IProduct, useProductContext } from "../context/ProductContext";
+import { Avatar, Button, Form, Input, InputNumber, Space, Table } from "antd";
+import { useProductContext } from "../context/ProductContext";
 import { EditOutlined, CloseOutlined, PlusOutlined } from "@ant-design/icons";
 import { useAdminContext } from "../context/AdminContext";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Product } from "../pages/ProductDetail";
 
 function AdminProductTable() {
   const { products } = useProductContext();
   const { deleteProduct, updateProduct } = useAdminContext();
   console.log("Produkter som kommer in:", products);
-  // const [dataSource, setDataSource] = useState([]);
   const [editingRow, setEditingRow] = useState<number | null>(null);
   const [form] = Form.useForm();
   const [saveBtn, setSaveBtn] = useState(true);
-
-  // useEffect(() => {
-  //   setDataSource(products);
-  // }, []);
 
   const columns = [
     {
@@ -34,7 +20,14 @@ function AdminProductTable() {
       render: (image: string, product: Product) => {
         if (editingRow === product._id) {
           return (
-            <Form.Item name="image">
+            <Form.Item
+              name="image"
+              rules={[
+                { required: true, message: "Ange en giltig URL" },
+                { type: "url", message: "Ange en giltig URL" },
+                { type: "string", min: 6, message: "Minst 6 tecken krävs" },
+              ]}
+            >
               <Input />
             </Form.Item>
           );
@@ -56,7 +49,14 @@ function AdminProductTable() {
       render: (title: string, product: Product) => {
         if (editingRow === product._id) {
           return (
-            <Form.Item name="title">
+            <Form.Item
+              name="title"
+              rules={[
+                { required: true, message: "Ange en titel" },
+                { type: "string", message: "Ange en titel" },
+                { type: "string", min: 3, message: "Minst 3 tecken krävs" },
+              ]}
+            >
               <Input />
             </Form.Item>
           );
@@ -72,7 +72,13 @@ function AdminProductTable() {
         console.log("i render", price);
         if (editingRow === product._id) {
           return (
-            <Form.Item name="price">
+            <Form.Item
+              name="price"
+              rules={[
+                { required: true, message: "Ange ett nummer" },
+                { type: "number", message: "Ange ett nummer" },
+              ]}
+            >
               <InputNumber />
             </Form.Item>
           );
@@ -87,7 +93,14 @@ function AdminProductTable() {
       render: (description: string, product: Product) => {
         if (editingRow === product._id) {
           return (
-            <Form.Item name="description">
+            <Form.Item
+              name="description"
+              rules={[
+                { required: true, message: "Ange en beskrivning" },
+                { type: "string", message: "Ange en beskrivning" },
+                { type: "string", min: 6, message: "Minst 6 tecken krävs" },
+              ]}
+            >
               <Input />
             </Form.Item>
           );
@@ -102,7 +115,13 @@ function AdminProductTable() {
       render: (inStock: number, product: Product) => {
         if (editingRow === product._id) {
           return (
-            <Form.Item name="inStock">
+            <Form.Item
+              name="inStock"
+              rules={[
+                { required: true, message: "Ange ett nummer" },
+                { type: "number", message: "Ange ett nummer" },
+              ]}
+            >
               <InputNumber />
             </Form.Item>
           );
@@ -126,7 +145,6 @@ function AdminProductTable() {
               <Button
                 type="primary"
                 onClick={() => {
-                  // console.log("!!!!!!!!!!", products.price);
                   setEditingRow(product._id);
                   setSaveBtn(false);
                   form.setFieldsValue({
@@ -152,11 +170,6 @@ function AdminProductTable() {
     },
   ];
 
-  const titleButton = (
-    <Button type="primary" icon={<PlusOutlined />} style={{ margin: 18 }}>
-      Lägg till ny produkt
-    </Button>
-  );
   const onFinish = (values: any) => {
     console.log("hehe", values);
     console.log("är detta id?", editingRow);
@@ -168,6 +181,7 @@ function AdminProductTable() {
   };
   return (
     <>
+      <h2>Produktlista</h2>
       <Form form={form} onFinish={onFinish}>
         <Table
           columns={columns}
@@ -175,7 +189,6 @@ function AdminProductTable() {
           size="middle"
           bordered
           rowKey="_id"
-          caption={titleButton}
         />
       </Form>
     </>
@@ -183,10 +196,3 @@ function AdminProductTable() {
 }
 
 export default AdminProductTable;
-//kom ihåg att lägga rules på form.items för validering
-// rules={[
-//   {
-//     required: true,
-//     message: "Please enter title",
-//   },
-// ]}

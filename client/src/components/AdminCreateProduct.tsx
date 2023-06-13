@@ -84,7 +84,7 @@ const AdminCreateProduct = () => {
         type="primary"
         onClick={showModal}
         icon={<PlusOutlined />}
-        style={{ margin: 18 }}
+        style={{ margin: 18, display: "flex", justifyContent: "end" }}
       >
         Lägg till ny produkt
       </Button>
