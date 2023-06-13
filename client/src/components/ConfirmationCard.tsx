@@ -1,7 +1,5 @@
 import { Card, Descriptions } from "antd";
-import { useEffect } from "react";
 import { useOrderContext } from "../context/OrderContext";
-import { useCartContext } from "../context/CartContext";
 import { useUserContext } from "../context/UserContext";
 import { UserContext } from "../context/UserContext";
 import { useShippingContext } from "../context/CheckoutShippingContext";
@@ -34,21 +32,21 @@ function ConfirmationCard() {
 
       <Card style={{ width: "80%" }}>
         <Descriptions title="Din order ">
-          <Descriptions.Item label="Namn: ">
+          <Descriptions.Item label="Namn">
             {loginUser.firstName + " " + loginUser.lastName}
           </Descriptions.Item>
-          <Descriptions.Item label="Leveransadress: ">
+          <Descriptions.Item label="Leveransadress">
             {order.deliveryAddress.street} <br />
             {order.deliveryAddress.zipcode} {order.deliveryAddress.city} <br />
             {order.deliveryAddress.country}
           </Descriptions.Item>
 
-          <Descriptions.Item label="Pris: " style={{ fontSize: 56 }}>
+          <Descriptions.Item label="Pris" style={{ fontSize: 56 }}>
             {"Order: " + totalSum + " kr"} <br />
             {"Frakt: " + value.price + " kr"}
           </Descriptions.Item>
 
-          <Descriptions.Item label="Produkter: ">
+          <Descriptions.Item label="Produkter">
             {" "}
             <ul style={{ listStyleType: "none" }}>
               {orderItems.map((item) => (
@@ -61,10 +59,10 @@ function ConfirmationCard() {
               ))}
             </ul>
           </Descriptions.Item>
-          <Descriptions.Item label="Fraktsätt: ">
+          <Descriptions.Item label="Fraktsätt">
             {value.company}
           </Descriptions.Item>
-          <Descriptions.Item label="Totalpris: " style={{ fontSize: 56 }}>
+          <Descriptions.Item label="Totalpris" style={{ fontSize: 56 }}>
             {totalSum + value.price} kr
           </Descriptions.Item>
         </Descriptions>
