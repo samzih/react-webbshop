@@ -6,7 +6,6 @@ function ImgCarousel() {
     color: "#fff",
     lineHeight: "160px",
     textAlign: "center",
-    background: "red",
     backgroundSize: "cover",
     backgroundPosition: "center",
   };

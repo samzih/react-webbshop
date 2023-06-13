@@ -1,6 +1,6 @@
-import { Avatar, Button, Form, Input, InputNumber, Space, Table } from "antd";
+import { Avatar, Button, Form, Input, InputNumber, Popconfirm, Space, Table } from "antd";
 import { useProductContext } from "../context/ProductContext";
-import { EditOutlined, CloseOutlined, PlusOutlined } from "@ant-design/icons";
+import { EditOutlined, CloseOutlined, DeleteOutlined  } from "@ant-design/icons";
 import { useAdminContext } from "../context/AdminContext";
 import { useState } from "react";
 import { IProduct } from "../context/ProductContext";
@@ -156,12 +156,13 @@ function AdminProductTable() {
                 }}
                 icon={<EditOutlined style={{ color: "white" }} />}
               ></Button>
+              <Popconfirm title="Ta bort produkten" onConfirm={() => deleteProduct(product)} okText="Ja" cancelText="Nej" icon={<DeleteOutlined style={{ color: 'red' }} />}>
               <Button
                 type="primary"
-                onClick={() => deleteProduct(product)}
                 icon={<CloseOutlined style={{ color: "white" }} />}
                 danger
               ></Button>
+              </Popconfirm>
             </Space>
           </>
         );
