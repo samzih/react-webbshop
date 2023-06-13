@@ -25,7 +25,7 @@ interface OrderContext {
   setOrder: React.Dispatch<React.SetStateAction<Order>>;
   sendOrder: (order: Order, navigate: (path: string) => void) => void;
   orderNr: string;
-  orders: [],
+  orders: any,
 }
 
 const defaultOrder = {
@@ -58,22 +58,18 @@ const OrderProvider = ({ children }: PropsWithChildren) => {
 
   const addDataToOrderItems = () => {
     const cartItem = localStorage.getItem("cart");
-    const orderItems: any[] = cartItem ? JSON.parse(cartItem) : [];
+    const orderItems: CartItem[] = cartItem ? JSON.parse(cartItem) : [];
     totalSum;
     const updatedOrderItems = orderItems.map((item) => {
       const {
-        product: { _id, title },
+        product: { _id, title, image, price, inStock },
         ...rest
       } = item;
       return {
         ...rest,
-        product: { _id, title },
+        product: { _id, title, image, price, inStock },
       };
     });
-    // const updatedOrderItemsWithTotalSum = {
-    //   ...updatedOrderItems,
-    //   totalSum: totalSum,
-    // };
 
     const orderToSend = {
       ...order,
@@ -115,8 +111,8 @@ const OrderProvider = ({ children }: PropsWithChildren) => {
       try {
         const response = await fetch("/api/orders");
         const data = await response.json();
-        setOrders(data);
-        // console.log("Fetches all the orders from database:", data);
+        response.ok && setOrders(data);
+        console.log("Fetches all the orders from database:", data);
       } catch (error) {
         console.log(error);
       }

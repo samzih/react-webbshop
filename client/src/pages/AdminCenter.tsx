@@ -2,32 +2,36 @@ import AdminCreateProduct from "../components/AdminCreateProduct";
 import AdminCard from "../components/AdminCard";
 import AdminProductTable from "../components/AdminProductTable";
 import { useUserContext } from "../context/UserContext";
-import { Space, Result } from "antd";
-import {
-  ShoppingCartOutlined,
-  SkinOutlined,
-  DollarOutlined,
-} from "@ant-design/icons";
+import { Space, Result, Typography } from "antd";
+import { ShoppingCartOutlined, SkinOutlined, DollarOutlined } from '@ant-design/icons';
 import AdminOrdersTable from "../components/AdminOrdersTable";
 import { useOrderContext } from "../context/OrderContext";
 import { useProductContext } from "../context/ProductContext";
+import { useEffect, useState } from "react";
+
 
 const AdminCenter = () => {
   const { loginUser } = useUserContext();
   const { products } = useProductContext();
   const { orders } = useOrderContext();
+  const [totalRevenue, setTotalRevenue] = useState(0);
 
-  // console.log(allOrders[0].orderItems[0].price)
+  // Goes into every order and adds order totalPrice to totalRevenue state
+  useEffect(() => {
+    console.log("!!!!!!", orders)
+    if (orders.length >= 1) {
+      const totalPrice = orders.reduce((accumulator: number, order) => {
+        const orderItems = order.orderItems;
+        const orderTotal = orderItems.reduce((subtotal: number, item) => {
+          const itemPrice = item.price;
+          return subtotal + itemPrice;
+        }, 0);
+        return accumulator + orderTotal;
+      }, 0);
 
-  // Goes into every order and adds order sum to totalRevenue
-  let totalRevenue = 0;
-  function calcRevenue(totalRevenue) {
-    orders.map((order) =>
-      order.orderItems.map((orderItem) => (totalRevenue += orderItem.price))
-    );
-    console.log("totalRevenue:", totalRevenue);
-    return totalRevenue;
-  }
+      setTotalRevenue(totalPrice);
+    }
+  }, [orders]);
 
   // some styling for AdminCard (IGNORE THIS!)
   const orderStyle = {
@@ -68,22 +72,14 @@ const AdminCenter = () => {
           icon={<SkinOutlined style={inventoryStyle} />}
         />
         {/* <AdminCard title={"Användare/Kunder"} value={98} icon={<TeamOutlined />} /> */}
-        <AdminCard
-          title={"Intäkter/Inkomst"}
-          value={`${orders && calcRevenue(totalRevenue)} kr`}
-          icon={<DollarOutlined style={revenueStyle} />}
-        />
+        <AdminCard title={"Intäkter/Inkomst"} value={`${totalRevenue} kr`} icon={<DollarOutlined style={revenueStyle} />} />
       </Space>
       <AdminCreateProduct />
       <AdminProductTable />
       <AdminOrdersTable />
     </div>
   ) : (
-    <Result
-      status="403"
-      title="403"
-      subTitle="Tyvärr, du har inte behörighet att komma åt den här sidan."
-    />
+    <Result status="403" title="403" subTitle={<Typography.Title level={4}>Tyvärr, du har inte behörighet att komma åt den här sidan.</Typography.Title>} />
   );
 };
 
