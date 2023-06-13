@@ -69,7 +69,7 @@ function AdminProductTable() {
       title: "Pris",
       dataIndex: "price",
       render: (price: number, product: Product) => {
-        console.log("i render", price);
+        // console.log("i render", price);
         if (editingRow === product._id) {
           return (
             <Form.Item
@@ -159,7 +159,7 @@ function AdminProductTable() {
               ></Button>
               <Button
                 type="primary"
-                onClick={() => deleteProduct(products)}
+                onClick={() => deleteProduct(product)}
                 icon={<CloseOutlined style={{ color: "white" }} />}
                 danger
               ></Button>
@@ -171,10 +171,10 @@ function AdminProductTable() {
   ];
 
   const onFinish = (values: any) => {
-    console.log("hehe", values);
-    console.log("är detta id?", editingRow);
+    // console.log("hehe", values);
+    // console.log("är detta id?", editingRow);
     const newValue = { _id: editingRow, deleted: false, ...values };
-    console.log("new value", newValue);
+    // console.log("new value", newValue);
     updateProduct(newValue);
     setEditingRow(null);
     setSaveBtn(true);
