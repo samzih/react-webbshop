@@ -3,8 +3,7 @@ import { useProductContext } from "../context/ProductContext";
 import { EditOutlined, CloseOutlined, PlusOutlined } from "@ant-design/icons";
 import { useAdminContext } from "../context/AdminContext";
 import { useState } from "react";
-import { Product } from "../pages/ProductDetail";
-
+import { IProduct } from "../context/ProductContext";
 function AdminProductTable() {
   const { products } = useProductContext();
   const { deleteProduct, updateProduct } = useAdminContext();
@@ -17,7 +16,7 @@ function AdminProductTable() {
     {
       title: "Bild",
       dataIndex: "image",
-      render: (image: string, product: Product) => {
+      render: (image: string, product: IProduct) => {
         if (editingRow === product._id) {
           return (
             <Form.Item
@@ -46,7 +45,7 @@ function AdminProductTable() {
     {
       title: "Titel",
       dataIndex: "title",
-      render: (title: string, product: Product) => {
+      render: (title: string, product: IProduct) => {
         if (editingRow === product._id) {
           return (
             <Form.Item
@@ -68,7 +67,7 @@ function AdminProductTable() {
     {
       title: "Pris",
       dataIndex: "price",
-      render: (price: number, product: Product) => {
+      render: (price: number, product: IProduct) => {
         console.log("i render", price);
         if (editingRow === product._id) {
           return (
@@ -90,7 +89,7 @@ function AdminProductTable() {
     {
       title: "Beskrivning",
       dataIndex: "description",
-      render: (description: string, product: Product) => {
+      render: (description: string, product: IProduct) => {
         if (editingRow === product._id) {
           return (
             <Form.Item
@@ -112,7 +111,7 @@ function AdminProductTable() {
     {
       title: "I lager",
       dataIndex: "inStock",
-      render: (inStock: number, product: Product) => {
+      render: (inStock: number, product: IProduct) => {
         if (editingRow === product._id) {
           return (
             <Form.Item
@@ -132,7 +131,8 @@ function AdminProductTable() {
     },
     {
       title: "Åtgärder/Operationer",
-      render: (_, product: Product) => {
+      //unusedParameter måste vara här
+      render: (unusedParameter: any, product: IProduct) => {
         return (
           <>
             <Space>
@@ -159,7 +159,7 @@ function AdminProductTable() {
               ></Button>
               <Button
                 type="primary"
-                onClick={() => deleteProduct(products)}
+                onClick={() => deleteProduct(product)}
                 icon={<CloseOutlined style={{ color: "white" }} />}
                 danger
               ></Button>
@@ -169,12 +169,9 @@ function AdminProductTable() {
       },
     },
   ];
-
+  //HELP, vad ska vi ha istället för any?
   const onFinish = (values: any) => {
-    console.log("hehe", values);
-    console.log("är detta id?", editingRow);
     const newValue = { _id: editingRow, deleted: false, ...values };
-    console.log("new value", newValue);
     updateProduct(newValue);
     setEditingRow(null);
     setSaveBtn(true);

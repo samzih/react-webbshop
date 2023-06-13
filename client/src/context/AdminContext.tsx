@@ -1,11 +1,17 @@
 import { PropsWithChildren, createContext, useContext } from "react";
-import { useProductContext } from "./ProductContext";
+import { IProduct, useProductContext } from "./ProductContext";
 interface AdminContext {
   createNewProduct: (product: CreateProduct) => object;
+  deleteProduct: (data: IProduct) => void;
+  updateProduct: (data: IProduct) => void;
+  fetchProducts: () => void;
 }
 
 const AdminContext = createContext<AdminContext>({
   createNewProduct: () => Object,
+  deleteProduct: () => Promise.resolve(),
+  updateProduct: () => Promise.resolve(),
+  fetchProducts: () => Promise.resolve(),
 });
 
 export interface CreateProduct {
@@ -15,14 +21,6 @@ export interface CreateProduct {
   price: number;
   inStock: number;
 }
-
-// const ProductCreateValidationSchema = Joi.object({
-//   title: Joi.string().strict().required(),
-//   description: Joi.string().strict().required(),
-//   price: Joi.number().strict().required(),
-//   image: Joi.string().uri().allow("image/png", "image/jpeg").required(),
-//   inStock: Joi.number().strict().required(),
-// });
 
 export const useAdminContext = () => useContext(AdminContext);
 const AdminProvider = ({ children }: PropsWithChildren<object>) => {
@@ -51,12 +49,8 @@ const AdminProvider = ({ children }: PropsWithChildren<object>) => {
   };
 
   // Put operation for product soft-deleted (true/false)
-  async function deleteProduct(data) {
-    console.log(data);
-
+  async function deleteProduct(data: IProduct) {
     data = { ...data, deleted: true };
-    console.log("NEW!", data);
-
     try {
       await fetch(`/api/products/${data._id}`, {
         method: "PUT",
@@ -72,9 +66,7 @@ const AdminProvider = ({ children }: PropsWithChildren<object>) => {
   }
 
   //En put för att uppdatera produkt
-  async function updateProduct(data) {
-    console.log("updateProduct", data);
-
+  async function updateProduct(data: IProduct) {
     try {
       await fetch(`/api/products/${data._id}`, {
         method: "PUT",
@@ -96,6 +88,7 @@ const AdminProvider = ({ children }: PropsWithChildren<object>) => {
           createNewProduct,
           deleteProduct,
           updateProduct,
+          fetchProducts,
         }}
       >
         {children}
