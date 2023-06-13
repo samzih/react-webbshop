@@ -40,34 +40,41 @@ const AdminCenter = () => {
     borderRadius: 24,
     fontSize: 24,
     padding: 8,
-  }
+  };
   const inventoryStyle = {
     color: "blue",
     backgroundColor: "rgba(0,0,255,0.25)",
     borderRadius: 24,
     fontSize: 24,
     padding: 8,
-  }
+  };
   const revenueStyle = {
     color: "#fd5c63",
     backgroundColor: "rgba(255,0,0,0.25)",
     borderRadius: 24,
     fontSize: 24,
     padding: 8,
-  }
+  };
 
   return loginUser && loginUser.isAdmin ? (
     <div>
-      <h1>initial</h1>
-      <AdminCreateProduct />
+      <h1>Adminpanel</h1>
 
       <Space direction="horizontal">
-        <AdminCard title={"Beställningar/Orders"} value={orders.length} icon={<ShoppingCartOutlined style={orderStyle} />} />
-        <AdminCard title={"Lager"} value={products.length} icon={<SkinOutlined style={inventoryStyle} />} />
+        <AdminCard
+          title={"Beställningar/Orders"}
+          value={orders.length}
+          icon={<ShoppingCartOutlined style={orderStyle} />}
+        />
+        <AdminCard
+          title={"Lager"}
+          value={products.length}
+          icon={<SkinOutlined style={inventoryStyle} />}
+        />
         {/* <AdminCard title={"Användare/Kunder"} value={98} icon={<TeamOutlined />} /> */}
         <AdminCard title={"Intäkter/Inkomst"} value={`${totalRevenue} kr`} icon={<DollarOutlined style={revenueStyle} />} />
       </Space>
-
+      <AdminCreateProduct />
       <AdminProductTable />
       <AdminOrdersTable />
     </div>
