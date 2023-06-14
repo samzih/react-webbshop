@@ -1,6 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
-/* eslint-disable react-refresh/only-export-components */
-/* eslint-disable @typescript-eslint/no-empty-function */
 import {
   PropsWithChildren,
   useEffect,
@@ -27,19 +24,17 @@ export interface UserContext {
   fetchLoginUser: (user: Credentials) => Promise<string | void>;
   logoutUser: () => void;
 }
-// Eventuellt lägga till Cart till userInterface
 
 const UserContext = createContext<UserContext>({
   loginUser: null,
-  fetchLoginUser: async () => {},
-  logoutUser: () => {},
+  fetchLoginUser: async () => Promise.resolve(),
+  logoutUser: () => Promise.resolve(),
 });
 
 export const useUserContext = () => useContext(UserContext);
 
 const UserProvider = ({ children }: PropsWithChildren<object>) => {
   const [loginUser, setLoginUser] = useState<User | null>(null);
-  //reminder: useEffect for auth
 
   async function fetchLoginUser(user: Credentials): Promise<void> {
     try {
@@ -81,8 +76,6 @@ const UserProvider = ({ children }: PropsWithChildren<object>) => {
       console.log(error);
     }
   }
-  // useEffect(() => {
-  // }, [loginUser]);
 
   useEffect(() => {
     async function authorizeUser() {

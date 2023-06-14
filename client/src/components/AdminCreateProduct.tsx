@@ -1,26 +1,6 @@
-import { useContext, useState } from "react";
-// import { IProduct } from "../context/ProductContext";
-import {
-  Alert,
-  Button,
-  Col,
-  Typography,
-  Form,
-  Input,
-  Row,
-  Select,
-  Modal,
-  Space,
-} from "antd";
+import { useState } from "react";
+import { Alert, Button, Form, Input, Modal } from "antd";
 import { PlusOutlined } from "@ant-design/icons";
-
-// const ProductCreateValidationSchema = Joi.object({
-//   title: Joi.string().strict().required(),
-//   description: Joi.string().strict().required(),
-//   price: Joi.number().strict().required(),
-//   image: Joi.string().uri().allow("image/png", "image/jpeg").required(),
-//   inStock: Joi.number().strict().required(),
-// });
 
 import { useAdminContext } from "../context/AdminContext";
 const AdminCreateProduct = () => {

@@ -16,7 +16,8 @@ function Checkout() {
   const [spin, setSpin] = useState(false);
   const { shipping } = useShippingContext();
   const navigate = useNavigate();
-  const cartItem = JSON.parse(localStorage.getItem("cart"));
+  const cartItemString = localStorage.getItem("cart");
+  const cartItem = cartItemString ? JSON.parse(cartItemString) : null;
   const steps = [
     {
       title: "Kundvagn",
@@ -34,11 +35,13 @@ function Checkout() {
 
   const completeOrder = () => {
     setSpin(true);
+    // VI TROR ATT DET SKA FUNGERA UTAN DENNA MEN TA INTE BORT DEN FÖRRÄN SIST!
+    // const cartItem = localStorage.getItem("cart");
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const orderItems: any[] = cartItemString ? JSON.parse(cartItemString) : [];
 
-    const cartItem = localStorage.getItem("cart");
-    const orderItems: any[] = cartItem ? JSON.parse(cartItem) : [];
-
-    let updatedOrderItems = orderItems.map((item) => {
+    //Loop through cartitems and add them to order
+    const updatedOrderItems = orderItems.map((item) => {
       const {
         product: { _id },
         ...rest

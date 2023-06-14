@@ -8,6 +8,9 @@ type Props = {
   product: IProduct;
 };
 
+// PurchaseButton tar in produkt och går bara att trycka på om produkten finns i lager
+// och lägger till i kundvagnen genom funktionen addToCart
+
 function PurchaseButton({ product }: Props) {
   const { cart } = useCartContext();
   const { addToCart } = useCartContext();
@@ -20,9 +23,9 @@ function PurchaseButton({ product }: Props) {
 
   return (
     <div>
-      <Button 
-      className="button"
-      type="text"
+      <Button
+        className="button"
+        type="text"
         onClick={(e) => {
           e.preventDefault();
           addToCart(product);

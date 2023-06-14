@@ -5,7 +5,6 @@ import {
   PropsWithChildren,
   useEffect,
 } from "react";
-import { Shipping } from "../context/CheckoutShippingContext";
 import { CartItem } from "../context/CartContext";
 interface Address {
   street: string;
@@ -18,6 +17,7 @@ export interface Order {
   orderItems: CartItem[];
   deliveryAddress: Address;
   shippingMethod: string | number;
+  totalSum: number;
 }
 
 interface OrderContext {
@@ -25,21 +25,26 @@ interface OrderContext {
   setOrder: React.Dispatch<React.SetStateAction<Order>>;
   sendOrder: (order: Order, navigate: (path: string) => void) => void;
   orderNr: string;
-  orders: any,
+  orders: Order[];
+  shippedUpdate: (shipped: boolean, id: string | number) => Promise<void>;
+  fetchOrders: () => Promise<void>;
 }
 
 const defaultOrder = {
   orderItems: [],
   deliveryAddress: {} as Address,
   shippingMethod: "",
+  totalSum: 0,
 };
 
 const OrderContext = createContext<OrderContext>({
   order: defaultOrder,
-  setOrder: () => {},
-  sendOrder: () => {},
+  setOrder: () => Promise.resolve(),
+  sendOrder: () => Promise.resolve(),
   orderNr: "",
-  orders: [],
+  orders: [] as Order[],
+  shippedUpdate: () => Promise.resolve(),
+  fetchOrders: () => Promise.resolve(),
 });
 
 export const useOrderContext = () => useContext(OrderContext);
@@ -52,9 +57,9 @@ const OrderProvider = ({ children }: PropsWithChildren) => {
   const { clearCart, totalSum } = useCartContext();
   const [orders, setOrders] = useState([]);
 
-  useEffect(() => {
-    console.log(order);
-  }, [order]);
+  // useEffect(() => {
+  //   console.log(order);
+  // }, [order]);
 
   const addDataToOrderItems = () => {
     const cartItem = localStorage.getItem("cart");
@@ -77,11 +82,13 @@ const OrderProvider = ({ children }: PropsWithChildren) => {
       totalSum: totalSum,
     };
     setOrder(orderToSend);
-    console.log("Nu flätar vi om cartItemet:", orderToSend);
+    // console.log("Nu flätar vi om cartItemet:", orderToSend);
   };
 
   async function sendOrder(order: Order, navigate: (path: string) => void) {
     const { deliveryAddress, orderItems, shippingMethod } = order;
+    // console.log("ORDERITEMS: ", orderItems);
+
     try {
       const response = await fetch("/api/orders", {
         method: "POST",
@@ -95,7 +102,7 @@ const OrderProvider = ({ children }: PropsWithChildren) => {
         }),
       });
       const data = await response.json();
-      console.log("Detta är vad som skickas till DB:", data);
+      // console.log("Detta är vad som skickas till DB:", data);
 
       addDataToOrderItems();
       setOrderNr(data.orderNumber);
@@ -107,45 +114,54 @@ const OrderProvider = ({ children }: PropsWithChildren) => {
   }
 
   // Fetches all the orders from database
-   async function fetchOrders() {
-      try {
-        const response = await fetch("/api/orders");
-        const data = await response.json();
-        response.ok && setOrders(data);
-        console.log("Fetches all the orders from database:", data);
-      } catch (error) {
-        console.log(error);
-      }
+  async function fetchOrders() {
+    try {
+      const response = await fetch("/api/orders");
+      const data = await response.json();
+      response.ok && setOrders(data);
+      console.log("Fetches all the orders from database:", data);
+    } catch (error) {
+      console.log(error);
     }
+  }
 
   useEffect(() => {
     fetchOrders();
-  }, [])
+  }, []);
 
-  // En ny funktion för att fectha backend shipped samma på fetchOrders endpoint med /id, kalla på fetchOrders i denna funktion och skicka in id:et
-async function shippedFunc(shipped, id) {
+  // Updates backend shipped status from false to true
+  async function shippedUpdate(shipped: boolean, id: string | number) {
+    // console.log(shipped, id);
 
-  console.log(shipped, id)
-  
-  try{
-    await fetch(`/api/orders/${id}`, {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        shipped: shipped,
-      }),
-    });
-    fetchOrders();
-  } catch (error) {
-    console.log(error);
+    try {
+      await fetch(`/api/orders/${id}`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          shipped: shipped,
+        }),
+      });
+      fetchOrders();
+    } catch (error) {
+      console.log(error);
+    }
   }
-}
 
   return (
     <div>
-      <OrderContext.Provider value={{ order, setOrder, sendOrder, orderNr, orders, shippedFunc, fetchOrders }}>
+      <OrderContext.Provider
+        value={{
+          order,
+          setOrder,
+          sendOrder,
+          orderNr,
+          orders,
+          shippedUpdate,
+          fetchOrders,
+        }}
+      >
         {children}
       </OrderContext.Provider>
     </div>

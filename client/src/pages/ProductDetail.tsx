@@ -1,22 +1,12 @@
 import { useState, useEffect } from "react";
 import { Card } from "antd";
 import { useParams } from "react-router-dom";
-
+import { IProduct } from "../context/ProductContext";
 import PurchaseButton from "../components/PurchaseButton";
-import "../pages/ProductDetail.css"
-
-export interface Product {
-  _id: number;
-  title: string;
-  image: string;
-  price: number;
-  description: string;
-  inStock: number;
-}
+import "../pages/ProductDetail.css";
 
 function ProductDetail() {
-  //Kolla upp vad som ska vara i parantesen
-  const [product, setProduct] = useState<Product>();
+  const [product, setProduct] = useState<IProduct>();
 
   function inStockChecker(inStock: number) {
     if (inStock === 0) {
@@ -27,10 +17,6 @@ function ProductDetail() {
       return "I lager";
     }
   }
-
-  // useEffect(() => {
-  //   inStockChecker(product);
-  // }, [product]);
 
   const { id } = useParams();
 

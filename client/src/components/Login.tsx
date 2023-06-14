@@ -1,21 +1,7 @@
-import { PlusOutlined } from "@ant-design/icons";
 import "../component-styling/RegisterForm.css";
-import {
-  Alert,
-  Button,
-  Col,
-  DatePicker,
-  Drawer,
-  Typography,
-  Form,
-  Input,
-  Row,
-  Select,
-  Modal,
-  Space,
-} from "antd";
+import { Alert, Button, Typography, Form, Input, Modal } from "antd";
 import { Link } from "react-router-dom";
-import React, { useState, useEffect } from "react";
+import { useState } from "react";
 import { UserOutlined, AndroidOutlined } from "@ant-design/icons";
 import { useUserContext } from "../context/UserContext";
 import RegisterForm from "./RegisterForm";
@@ -26,7 +12,6 @@ function Login() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
   const [loginSuccess, setLoginSuccess] = useState(false);
-  const [showSuccessMessage, setSuccessMessage] = useState(false);
 
   const showModal = () => {
     setIsModalOpen(true);
@@ -36,7 +21,7 @@ function Login() {
   const handleOk = async () => {
     const user = { email, password };
     const response = await fetchLoginUser(user);
-    console.log(response);
+    // console.log(response);
     if (
       typeof response === "string" &&
       response === "Wrong password or username"
@@ -64,6 +49,7 @@ function Login() {
   const [password, setPassword] = useState("");
   const [form] = Form.useForm();
 
+  // Signs you out from the header
   const handleClick = () => {
     logoutUser();
     window.location.href = "/";

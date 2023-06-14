@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-empty-function */
-import { PropsWithChildren, createContext, useContext, useEffect } from "react";
+import { PropsWithChildren, createContext, useContext } from "react";
 import { IProduct } from "../context/ProductContext";
 import { useLocalStorage } from "../hooks/useLocalStorage";
 
@@ -16,6 +16,7 @@ interface CartContext {
 export interface CartItem {
   product: IProduct;
   quantity: number;
+  price: number;
 }
 
 const CartContext = createContext<CartContext>({
@@ -35,9 +36,6 @@ const CartProvider = ({ children }: PropsWithChildren<object>) => {
 
   const clearCart = () => {
     setCart([]);
-    // setTimeout(() => {
-    //   localStorage.removeItem("cart");
-    // }, 2000);
   };
   const addToCart = (product: IProduct) => {
     const existingItem = cart.find(
@@ -51,9 +49,10 @@ const CartProvider = ({ children }: PropsWithChildren<object>) => {
     }
   };
 
-  useEffect(() => {
-    console.log(cart);
-  }, [cart]);
+  // Ta bort vid final purge
+  // useEffect(() => {
+  //   console.log(cart);
+  // }, [cart]);
 
   const removeItem = (productId: number) => {
     const newItemList = cart.filter(
@@ -86,6 +85,7 @@ const CartProvider = ({ children }: PropsWithChildren<object>) => {
     }
   };
 
+  // Counting the total price of products in cart
   const totalSum = cart.reduce(
     (accumulator: number, item: CartItem) =>
       accumulator + item.product.price * item.quantity,
