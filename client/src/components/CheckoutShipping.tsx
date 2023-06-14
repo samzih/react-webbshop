@@ -4,6 +4,7 @@ import { Input, Radio, Space } from "antd";
 import { useShippingContext } from "../context/CheckoutShippingContext";
 import { useCartContext } from "../context/CartContext";
 import { useOrderContext } from "../context/OrderContext";
+import "../component-styling/Checkout.css"
 
 function CheckoutShipping() {
   const { shipping, calcDelivery, value, setValue } = useShippingContext();
@@ -21,13 +22,13 @@ function CheckoutShipping() {
   };
 
   return (
-    <div>
+    <div className="shipping">
       <Radio.Group  onChange={onChange} value={value}>
         {shipping.map((shipping) => (
           <div key={shipping._id}>
-            <Card>
+            <Card className="shippingcard">
               <Space direction="vertical">
-                <Card>
+                <Card className="shippinginnercard">
                   <Radio value={shipping}>{shipping.company}</Radio>
                   <p>Pris: {shipping.price} kr</p>
                   <p>Leveransdatum: {calcDelivery(shipping)} </p>

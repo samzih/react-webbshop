@@ -17,8 +17,9 @@ function CartItem() {
   const { totalSum } = useCartContext();
 
   return (
-    <div>
+    <div >
       <List
+      className="cartItem"
         itemLayout="horizontal"
         size="large"
         dataSource={cart}
@@ -26,7 +27,7 @@ function CartItem() {
           <List.Item key={cartItem.product._id}>
             <div className="cartContentLeftside">
               <img alt="example" src={cartItem.product.image} width={120} />
-              <Link to={`/${cartItem.product._id}`} key={cartItem.product._id}>
+              <Link className="content" to={`/${cartItem.product._id}`} key={cartItem.product._id}>
                 <List.Item.Meta
                   style={{ width: 200 }}
                   title={cartItem.product.title}

@@ -2,3 +2,155 @@
     background-color: #807972;
     color: #e3d5ca;
   }
+
+  .form{
+    display: flex;
+    justify-content: center;
+  }
+
+  .name{
+      margin-right: 40%;
+  }
+
+  .email{
+    margin-right: 40%;
+  }
+
+  .inputstreet{
+   width: 15rem;
+   margin-left: 1rem;
+  }
+
+  .inputzip{
+    width: 15rem;
+    margin-left: 1rem;
+   }
+
+   .inputcity{
+    width: 15rem;
+    margin-left: 1rem;
+   }
+
+   .inputcountry{
+    width: 15rem;
+    margin-left: 1rem;
+   }
+
+
+   .shipping {
+    margin: 3rem 1rem 1rem 1rem;
+   }
+
+   .shippingcard {
+    margin-top: 1rem;
+   }
+
+
+   @media (max-width: 580px) {
+    span.name{
+      margin-right: 66%;
+  }
+
+  .email{
+    margin-right: 68%;
+  }
+
+  .inputstreet{
+   width: 15rem;
+   margin-left: -0.5rem;
+  }
+
+  .inputzip{
+    width: 15rem;
+    margin-left: -0.5rem;
+   }
+
+   .inputcity{
+    width: 15rem;
+    margin-left: -0.5rem;
+   }
+
+   .inputcountry{
+    width: 15rem;
+    margin-left: -0.5rem;
+   }
+
+   }
+
+
+   @media (max-width: 500px) {
+    span.name{
+      margin-right: 59%;
+  }
+
+  .email{
+    margin-right: 68%;
+  }
+
+  .inputstreet{
+   width: 15rem;
+   margin-left: -0.5rem;
+  }
+
+  .inputzip{
+    width: 15rem;
+    margin-left: -0.5rem;
+   }
+
+   .inputcity{
+    width: 15rem;
+    margin-left: -0.5rem;
+   }
+
+   .inputcountry{
+    width: 15rem;
+    margin-left: -0.5rem;
+   }
+
+   }
+
+   @media (max-width: 450px) {
+
+    span.name{
+      margin-right: 55%;
+  }
+    .inputstreet{
+      width: 10rem;
+     
+     }
+   
+     .inputzip{
+       width: 10rem;
+     
+      }
+   
+      .inputcity{
+       width: 10rem;
+      
+      }
+   
+      .inputcountry{
+       width: 10rem;
+     
+      }
+   }
+
+@media (max-width: 430px ) {
+  span.name{
+    margin-right: 52%;
+  }
+}
+
+@media (max-width: 410px ) {
+  span.name{
+    margin-right: 43%;
+  }
+
+  .shippingcard {
+    width: 88%;
+   }
+
+  .shippinginnercard {
+    width: 88%;
+  }
+}
