@@ -94,8 +94,10 @@ function AdminOrdersTable() {
 
   return (
     <>
-      <h2>Orderlista</h2>
-      <Table columns={columns} pagination={{ position: ["bottomCenter"] }} dataSource={data.reverse()} />
+      <h2 className="orderlist">Orderlista</h2>
+      <div className="ordertable">
+      <Table className="ordertablecell" columns={columns} pagination={{ position: ["bottomCenter"] }} dataSource={data.reverse()} />
+      </div>
     </>
   );
 }

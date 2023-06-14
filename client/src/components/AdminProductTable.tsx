@@ -194,7 +194,6 @@ function AdminProductTable() {
   };
   return (
     <>
-      <h2>Produktlista</h2>
       <Form form={form} onFinish={onFinish}>
         <Table
           columns={columns}

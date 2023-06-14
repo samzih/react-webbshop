@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Alert, Button, Form, Input, Modal } from "antd";
 import { PlusOutlined } from "@ant-design/icons";
+import "../component-styling/admin.css"
 
 import { useAdminContext } from "../context/AdminContext";
 const AdminCreateProduct = () => {
@@ -60,6 +61,7 @@ const AdminCreateProduct = () => {
 
   return (
     <div>
+      <h2 className="h2">Produktlista</h2>
       <Button
         type="primary"
         onClick={showModal}

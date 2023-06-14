@@ -12,6 +12,8 @@ import AdminOrdersTable from "../components/AdminOrdersTable";
 import { useOrderContext } from "../context/OrderContext";
 import { useProductContext } from "../context/ProductContext";
 import { useEffect, useState } from "react";
+import "../component-styling/admin.css"
+import { Divider } from "rc-menu";
 
 const AdminCenter = () => {
   const { loginUser } = useUserContext();
@@ -72,10 +74,11 @@ const AdminCenter = () => {
   return loginUser && loginUser.isAdmin ? (
     <div>
       <h1>Adminpanel</h1>
-
-      <Space direction="horizontal">
+      <div className="statisticsCard">
+      <Space
+      direction="horizontal">
         <AdminCard
-          title={"Beställningar/Orders"}
+          title={"Beställningar"}
           value={orders.length}
           icon={<ShoppingCartOutlined style={orderStyle} />}
         />
@@ -91,6 +94,7 @@ const AdminCenter = () => {
           icon={<DollarOutlined style={revenueStyle} />}
         />
       </Space>
+      </div>
       <AdminCreateProduct />
       <AdminProductTable />
       <AdminOrdersTable />
