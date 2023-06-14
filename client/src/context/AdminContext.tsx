@@ -1,10 +1,17 @@
 import { PropsWithChildren, createContext, useContext } from "react";
+import { IProduct, useProductContext } from "./ProductContext";
 interface AdminContext {
   createNewProduct: (product: CreateProduct) => object;
+  deleteProduct: (data: IProduct) => void;
+  updateProduct: (data: IProduct) => void;
+  fetchProducts: () => void;
 }
 
 const AdminContext = createContext<AdminContext>({
   createNewProduct: () => Object,
+  deleteProduct: () => Promise.resolve(),
+  updateProduct: () => Promise.resolve(),
+  fetchProducts: () => Promise.resolve(),
 });
 
 export interface CreateProduct {
@@ -15,16 +22,10 @@ export interface CreateProduct {
   inStock: number;
 }
 
-// const ProductCreateValidationSchema = Joi.object({
-//   title: Joi.string().strict().required(),
-//   description: Joi.string().strict().required(),
-//   price: Joi.number().strict().required(),
-//   image: Joi.string().uri().allow("image/png", "image/jpeg").required(),
-//   inStock: Joi.number().strict().required(),
-// });
-
 export const useAdminContext = () => useContext(AdminContext);
 const AdminProvider = ({ children }: PropsWithChildren<object>) => {
+  const { fetchProducts } = useProductContext();
+
   const createNewProduct = async (product: CreateProduct) => {
     try {
       const response = await fetch("/api/products", {
@@ -39,7 +40,7 @@ const AdminProvider = ({ children }: PropsWithChildren<object>) => {
       if (response.status === 200) {
         console.log("Success");
       }
-      if (response.status === 401) {
+      if (response.status === 401 || response.status === 400) {
         console.log("Nope");
       }
     } catch (error) {
@@ -47,11 +48,47 @@ const AdminProvider = ({ children }: PropsWithChildren<object>) => {
     }
   };
 
+  // Put operation for product soft-deleted (true/false)
+  async function deleteProduct(data: IProduct) {
+    data = { ...data, deleted: true };
+    try {
+      await fetch(`/api/products/${data._id}`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      });
+      fetchProducts();
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  //En put för att uppdatera produkt
+  async function updateProduct(data: IProduct) {
+    try {
+      await fetch(`/api/products/${data._id}`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      });
+      fetchProducts();
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
   return (
     <div>
       <AdminContext.Provider
         value={{
           createNewProduct,
+          deleteProduct,
+          updateProduct,
+          fetchProducts,
         }}
       >
         {children}

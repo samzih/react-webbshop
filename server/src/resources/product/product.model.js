@@ -26,7 +26,7 @@ const ProductCreateValidationSchema = Joi.object({
   price: Joi.number().strict().required(),
   image: Joi.string().uri().allow("image/png", "image/jpeg").required(),
   inStock: Joi.number().strict().required(),
-  categories: Joi.array().min(1),
+  categories: Joi.array(),
 });
 
 const ProductUpdateValidationSchema = ProductCreateValidationSchema.keys({

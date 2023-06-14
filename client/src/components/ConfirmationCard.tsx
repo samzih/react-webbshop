@@ -1,7 +1,5 @@
 import { Card, Descriptions } from "antd";
-import { useEffect } from "react";
 import { useOrderContext } from "../context/OrderContext";
-import { useCartContext } from "../context/CartContext";
 import { useUserContext } from "../context/UserContext";
 import { UserContext } from "../context/UserContext";
 import { useShippingContext } from "../context/CheckoutShippingContext";
@@ -10,14 +8,16 @@ import "../component-styling/ConfirmationCard.css";
 function ConfirmationCard() {
   const { order, orderNr } = useOrderContext();
   console.log(order);
-  const { totalSum } = useCartContext();
+  // const { totalSum } = useCartContext();
   const { value, calcDelivery } = useShippingContext();
   const { loginUser }: UserContext = useUserContext();
   const cartItem = JSON.parse(localStorage.getItem("cart"));
-  useEffect(() => {
-    console.log(`order exists right now, let's clean it:`, order);
-    localStorage.removeItem("cart");
-  }, [order, cartItem]);
+  const { orderItems, totalSum } = order;
+
+  console.log("This is my orderItems:", orderItems);
+  console.log("Detta är mina varukorgitems:", cartItem);
+  console.log(order.orderItems);
+
   if (!loginUser) return null;
   console.log(cartItem);
   if (!cartItem) return null;
@@ -32,24 +32,24 @@ function ConfirmationCard() {
 
       <Card style={{ width: "80%" }}>
         <Descriptions title="Din order ">
-          <Descriptions.Item label="Namn: ">
+          <Descriptions.Item label="Namn">
             {loginUser.firstName + " " + loginUser.lastName}
           </Descriptions.Item>
-          <Descriptions.Item label="Leveransadress: ">
+          <Descriptions.Item label="Leveransadress">
             {order.deliveryAddress.street} <br />
             {order.deliveryAddress.zipcode} {order.deliveryAddress.city} <br />
             {order.deliveryAddress.country}
           </Descriptions.Item>
 
-          <Descriptions.Item label="Pris: " style={{ fontSize: 56 }}>
+          <Descriptions.Item label="Pris" style={{ fontSize: 56 }}>
             {"Order: " + totalSum + " kr"} <br />
             {"Frakt: " + value.price + " kr"}
           </Descriptions.Item>
 
-          <Descriptions.Item label="Produkter: ">
+          <Descriptions.Item label="Produkter">
             {" "}
             <ul style={{ listStyleType: "none" }}>
-              {cartItem.map((item) => (
+              {orderItems.map((item) => (
                 <div key={item.product._id}>
                   <li>
                     {item.product.title} <br /> x{item.quantity}
@@ -59,11 +59,11 @@ function ConfirmationCard() {
               ))}
             </ul>
           </Descriptions.Item>
-          <Descriptions.Item label="Fraktsätt: ">
+          <Descriptions.Item label="Fraktsätt">
             {value.company}
           </Descriptions.Item>
-          <Descriptions.Item label="Totalpris: " style={{ fontSize: 56 }}>
-            {totalSum + value.price}
+          <Descriptions.Item label="Totalpris" style={{ fontSize: 56 }}>
+            {totalSum + value.price} kr
           </Descriptions.Item>
         </Descriptions>
       </Card>

@@ -5,7 +5,7 @@ import { useParams } from "react-router-dom";
 import PurchaseButton from "../components/PurchaseButton";
 import "../pages/ProductDetail.css"
 
-interface Product {
+export interface Product {
   _id: number;
   title: string;
   image: string;
@@ -37,9 +37,7 @@ function ProductDetail() {
   useEffect(() => {
     async function fetchProducts() {
       try {
-        const response = await fetch(
-          `/api/products/${id}`
-        );
+        const response = await fetch(`/api/products/${id}`);
         const data = await response.json();
 
         setProduct(data);

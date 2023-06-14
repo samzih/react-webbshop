@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Card, Divider, RadioChangeEvent } from "antd";
+import { Card, Divider, RadioChangeEvent, Typography } from "antd";
 import { Input, Radio, Space } from "antd";
 import { useShippingContext } from "../context/CheckoutShippingContext";
 import { useCartContext } from "../context/CartContext";
@@ -10,7 +10,7 @@ function CheckoutShipping() {
   const { shipping, calcDelivery, value, setValue } = useShippingContext();
   const { totalSum } = useCartContext();
   const { order, setOrder } = useOrderContext();
-
+  const { Title } = Typography;
   useEffect(() => {
     setValue(shipping[0]);
   }, []);
@@ -37,7 +37,11 @@ function CheckoutShipping() {
             </Card>
           </div>
         ))}
-        <p>Totalpris: {totalSum + value.price} </p>
+        <Space direction="vertical">
+          <Card>
+            <Title level={4}>Totalpris: {totalSum + value.price} kr </Title>
+          </Card>
+        </Space>
       </Radio.Group>
     </div>
   );
