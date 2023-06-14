@@ -7,11 +7,11 @@ import { BsFillCartCheckFill } from "react-icons/Bs";
 import "../component-styling/ConfirmationCard.css";
 function ConfirmationCard() {
   const { order, orderNr } = useOrderContext();
-  console.log(order);
-  // const { totalSum } = useCartContext();
+  // console.log(order);
   const { value, calcDelivery } = useShippingContext();
   const { loginUser }: UserContext = useUserContext();
-  const cartItem = JSON.parse(localStorage.getItem("cart"));
+  const cartItemString = localStorage.getItem("cart");
+  const cartItem = cartItemString ? JSON.parse(cartItemString) : null;
   const { orderItems, totalSum } = order;
 
   console.log("This is my orderItems:", orderItems);

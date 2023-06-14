@@ -65,7 +65,7 @@ const AdminProvider = ({ children }: PropsWithChildren<object>) => {
     }
   }
 
-  //En put för att uppdatera produkt
+  //Update product
   async function updateProduct(data: IProduct) {
     try {
       await fetch(`/api/products/${data._id}`, {

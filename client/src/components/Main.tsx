@@ -4,7 +4,6 @@ import ProductDetail from "../pages/ProductDetail";
 import Checkout from "../pages/Checkout";
 import AdminCenter from "../pages/AdminCenter";
 import OrderConfirmation from "../pages/OrderConfirmation";
-// import CartItem from "../../App";
 
 function Main() {
   return (

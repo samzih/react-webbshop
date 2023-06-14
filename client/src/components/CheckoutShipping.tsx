@@ -1,10 +1,10 @@
-import { useState, useEffect } from "react";
-import { Card, Divider, RadioChangeEvent, Typography } from "antd";
-import { Input, Radio, Space } from "antd";
+import { useEffect } from "react";
+import { Card, RadioChangeEvent, Typography } from "antd";
+import { Radio, Space } from "antd";
 import { useShippingContext } from "../context/CheckoutShippingContext";
 import { useCartContext } from "../context/CartContext";
 import { useOrderContext } from "../context/OrderContext";
-import "../component-styling/Checkout.css"
+import "../component-styling/Checkout.css";
 
 function CheckoutShipping() {
   const { shipping, calcDelivery, value, setValue } = useShippingContext();
@@ -13,6 +13,7 @@ function CheckoutShipping() {
   const { Title } = Typography;
   useEffect(() => {
     setValue(shipping[0]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const onChange = (e: RadioChangeEvent) => {
@@ -23,7 +24,7 @@ function CheckoutShipping() {
 
   return (
     <div className="shipping">
-      <Radio.Group  onChange={onChange} value={value}>
+      <Radio.Group onChange={onChange} value={value}>
         {shipping.map((shipping) => (
           <div key={shipping._id}>
             <Card className="shippingcard">

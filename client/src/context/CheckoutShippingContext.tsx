@@ -28,8 +28,8 @@ const defaultShipping = {
 
 const ShippingContext = createContext<ShippingContext>({
   shipping: [],
-  calcDelivery: (shipping) => "",
-  setValue: () => {},
+  calcDelivery: () => "",
+  setValue: () => Promise.resolve(),
   value: defaultShipping,
 });
 

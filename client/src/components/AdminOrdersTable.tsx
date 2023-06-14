@@ -1,13 +1,23 @@
 import { Table, Checkbox } from "antd";
-import { useOrderContext } from "../context/OrderContext";
-import { useState } from "react";
+import { Order, useOrderContext } from "../context/OrderContext";
+
+interface OrderData extends Order {
+  _id: string;
+  orderNumber: string;
+  shipped: boolean;
+  createdAt: string;
+  customer: {
+    firstName: string;
+    lastName: string;
+  };
+}
 
 function AdminOrdersTable() {
-  const { orders, shippedFunc } = useOrderContext();
-  // const [shippedOrder, setShippedOrder] = useState(orders.map(order => order.shipped));
+  const { orders, shippedUpdate } = useOrderContext();
   // console.log("Orders som kommer in:", orders);
 
-  const data = orders.map((order) => {
+  const data = orders.map((order: Order) => {
+    const orderData = order as OrderData;
     const {
       _id,
       orderNumber,
@@ -16,7 +26,7 @@ function AdminOrdersTable() {
       customer,
       deliveryAddress,
       orderItems,
-    } = order;
+    } = orderData;
     const { firstName, lastName } = customer;
     const { city, street, zipcode } = deliveryAddress;
 
@@ -71,11 +81,11 @@ function AdminOrdersTable() {
       title: "Skickad",
       dataIndex: "shipped",
       key: "shipped",
-      render: (shipped, data) => {
+      render: (shipped: boolean, data: any) => {
         return (
           <Checkbox
             checked={shipped}
-            onChange={(e) => shippedFunc(e.target.checked, data.key)}
+            onChange={(e) => shippedUpdate(e.target.checked, data.key)}
           />
         );
       },

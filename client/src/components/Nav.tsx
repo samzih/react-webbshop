@@ -4,21 +4,21 @@ import { Menu } from "antd";
 import "../component-styling/Nav.css";
 
 function Nav() {
-  const [current, setCurrent] = useState("start");
+  // const [current, setCurrent] = useState("start");
 
-  const onClick: MenuProps["onClick"] = (e) => {
-    console.log("click ", e);
-   // setCurrent(e.key);
-  };
+  // const onClick: MenuProps["onClick"] = (e) => {
+  //   console.log("click ", e);
+  //   // setCurrent(e.key);
+  // };
 
   const items: MenuProps["items"] = [
     {
       label: (
         <a href="/" target="">
-         <div className="links">Startsida</div>
+          <div className="links">Startsida</div>
         </a>
       ),
-     key: "start",
+      key: "start",
     },
     {
       label: (
@@ -39,8 +39,8 @@ function Nav() {
   ];
   return (
     <Menu
-      onClick={onClick}
-     // selectedKeys={[current]}
+      // onClick={onClick}
+      // selectedKeys={[current]}
       mode="horizontal"
       items={items}
     />
