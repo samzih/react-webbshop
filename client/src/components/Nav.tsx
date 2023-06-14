@@ -8,30 +8,22 @@ function Nav() {
 
   const onClick: MenuProps["onClick"] = (e) => {
     console.log("click ", e);
-    setCurrent(e.key);
+   // setCurrent(e.key);
   };
 
   const items: MenuProps["items"] = [
     {
       label: (
         <a href="/" target="">
-          Startsida
+         <div className="links">Startsida</div>
         </a>
       ),
-      key: "start",
+     key: "start",
     },
     {
       label: (
         <a href="/" target="">
-          Produkter
-        </a>
-      ),
-      key: "produkter",
-    },
-    {
-      label: (
-        <a href="/" target="">
-          Om oss
+          <div className="links">Om oss</div>
         </a>
       ),
       key: "about",
@@ -39,7 +31,7 @@ function Nav() {
     {
       label: (
         <a href="/" target="">
-          Kontakt
+          <div className="links">Kontakt</div>
         </a>
       ),
       key: "kontakt",
@@ -48,7 +40,7 @@ function Nav() {
   return (
     <Menu
       onClick={onClick}
-      selectedKeys={[current]}
+     // selectedKeys={[current]}
       mode="horizontal"
       items={items}
     />

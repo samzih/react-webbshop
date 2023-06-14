@@ -6,27 +6,22 @@
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  padding-top: 1%;
+  padding-top: 1rem;
 }
 
 /* Gör klart när header är klar. */
 #right-content {
-  display: flex;
- margin-right: 5%;
+display: flex;
+ margin-right: 6rem;
+ margin-top: 2rem;
 }
 
-/* Kundvagnen*/
-.ant-badge {
-color: #4b4741 ;
-margin-left: 15%;
-margin-top: 25%;
-}
+
 
 /*Loggain/skapakonto knapparna*/
 .ant-btn {
   background-color: #807972;
   color: #e3d5ca;
-  margin-top: 5%;
 }
 
 .anticon-user{
@@ -36,7 +31,6 @@ margin-top: 25%;
 .anticon-plus{
   color: #4b4741;
 }
-
 
 /* Backgrunden till "count"-kundvagnen */
 .ant-scroll-number.ant-badge-count{
@@ -49,25 +43,28 @@ margin-top: 25%;
 }
 
 /*Titeln*/
-#header h1 {
+a h1 {
   font-size: 5rem;
   font-style: bold;
   color: #605b54;
-  margin-left: 40%;
+  margin-left: 45rem;
   letter-spacing: 1rem;
+  text-decoration: none;
 }
 
+
+/* Kundvagnen*/
 .ant-badge {
   color: #4b4741 ;
-  margin-left: 15%;
-  margin-top: 25%;
+  margin-top: 0.3rem;
   }
   
   /*Loggain/skapakonto knapparna*/
   .ant-btn {
     background-color: #807972;
     color: #e3d5ca;
-    margin-top: 5%;
+    margin-top: 0.5rem;
+    margin-right: 0.5rem;
   }
   
   .anticon-user{
@@ -94,11 +91,30 @@ margin-top: 25%;
     color: #e3d5ca;
   }
 
+  .LogoutAction {
+  font-size: 1.3rem;
+  color: #4b4741;
+  margin-right: 1.3rem;
+  }
 
+
+  @media (max-width: 1450px) {
+    a h1 {
+      font-size: 3.8rem;
+      margin-left: 40rem;
+    }
+  }
+  
+
+  @media (max-width: 1350px) {
+    a h1 {
+      margin-left: 35rem;
+    }
+  }
 
 
 @media (max-width: 1250px) {
-  #header h1 {
+  a h1 {
     font-size: 3.8rem;
     margin-left: 40%;
   }
@@ -109,7 +125,7 @@ margin-top: 25%;
 }
 
 @media (max-width: 1050px) {
-  #header h1 {
+ a h1 {
     font-size: 3.6rem;
     margin-left: 40%;
   }
@@ -117,17 +133,32 @@ margin-top: 25%;
 
 
 @media (max-width: 950px) {
-  #header h1 {
+  a  h1 {
     font-size: 3.3rem;
     margin-left: 40%;
   }
+
+  .LogoutAction {
+    font-size: 1rem;
+    margin-right: 1rem;
+    }
+
+    #right-content {
+      margin-right: 4rem;
+      margin-top: 1rem;
+     }
 }
 
 @media (max-width: 850px) {
-  #header h1 {
+  a h1 {
     font-size: 3.1rem;
     margin-left: 40%;
   }
+
+  .LogoutAction {
+    font-size: 0.8rem;
+    margin-right: 0.8rem;
+    }
 
   span.logintext {
     display: none;
@@ -139,41 +170,48 @@ span.createaccounttext{
 }
 
 @media (max-width: 780px) {
-  #header h1 {
+  a h1 {
     font-size: 2.9rem;
     margin-left: 40%;
   }
+
+  
+  #right-content {
+    margin-right: 2rem;
+   }
 }
 
 @media (max-width: 680px) {
-  #header h1 {
+  a h1 {
     font-size: 2.3rem;
     margin-left: 40%;
   }
 
-  .ant-btn {
-    padding: 2%;
-}
 }
 
 @media (max-width: 600px) {
-  #header h1 {
+  a h1 {
     font-size: 2rem;
     margin-left: 30%;
   }
+
+  #right-content {
+    margin-right: 1.2rem;
+    margin-top: 0.3rem;
+   }
 }
 
-
-
 @media (max-width: 440px) {
-  #header h1 {
+  a h1 {
     font-size: 1.6rem;
     margin-left: 20%;
   }
+
+
 }
 
 @media (max-width: 340px) {
-  #header h1 {
+  a h1 {
     font-size: 1rem;
     margin-left: 40%;
   }

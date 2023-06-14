@@ -6,9 +6,13 @@ import "../pages/HomePage.css"
 function HomePage() {
   return (
     <main>
+      
       <ImgCarousel />
+      
       <h1>VÄLKOMMEN TILL KJOSK</h1>
+      <div className="maincontent">
       <ProductList />
+      </div>
     </main>
   );
 }

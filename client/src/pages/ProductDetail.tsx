@@ -2,8 +2,8 @@ import { useState, useEffect } from "react";
 import { Card } from "antd";
 import { useParams } from "react-router-dom";
 
-import "../component-styling/ProductDetail.css";
 import PurchaseButton from "../components/PurchaseButton";
+import "../pages/ProductDetail.css"
 
 export interface Product {
   _id: number;
@@ -51,7 +51,7 @@ function ProductDetail() {
   }, [id]);
 
   return product ? (
-    <div>
+    <div className="singleitem">
       <Card style={{ width: 500, padding: 10, margin: 10 }}>
         <h2>{product.title}</h2>
         <img alt="example" src={product.image} width={300} />

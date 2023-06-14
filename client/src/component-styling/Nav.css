@@ -13,15 +13,36 @@
     text-decoration: none;
 }
 
+.links {
+    color: #a49f9a ;
+    text-decoration: none;
+    text-overflow: none;
+}
 
-.navtext a {
+li.ant-menu-item {
+    color: #a49f9a ;
+    text-decoration: none;
+    text-overflow: none;
+}
+
+.links a::after {
+    color: #a49f9a ;
     text-decoration: none;
 }
 
-.ant-menu-item-selected  a{
-    text-decoration: block;
+a:visited {
+    color: #a49f9a ;
+    text-decoration: none;
 }
 
+
+.navtext a{
+    color: #a49f9a ;
+}
+
+.ant-menu-item-selected  a{
+    color: #a49f9a ;
+}
 @media (max-width: 700px) {
     .ant-menu-horizontal {
         padding-top: 0.8rem;

@@ -7,7 +7,7 @@ function Header() {
   return (
     <header>
       <div id="header">
-        <h1>KJOSK</h1>
+        <a href="/"><h1>KJOSK</h1></a>
         <div id="right-content">
           <Login />
           <Cart  />

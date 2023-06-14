@@ -4,6 +4,8 @@ import { useUserContext } from "../context/UserContext";
 import { UserContext } from "../context/UserContext";
 import { useOrderContext } from "../context/OrderContext";
 import { useCartContext } from "../context/CartContext";
+import "../component-styling/Checkout.css"
+
 type SizeType = Parameters<typeof Form>[0]["size"];
 
 interface CheckoutFormProps {
@@ -43,6 +45,7 @@ function CheckoutForm({ setSubmittable }: CheckoutFormProps) {
   }, [values]);
 
   return (
+    <div  className="form">
     <Form
       form={form}
       name="validateOnly"
@@ -64,11 +67,11 @@ function CheckoutForm({ setSubmittable }: CheckoutFormProps) {
       {loginUser ? (
         <>
           <Form.Item label="Namn">
-            <span>{`${loginUser.firstName} ${loginUser.lastName}`}</span>
+            <span className="name">{`${loginUser.firstName} ${loginUser.lastName}`}</span>
           </Form.Item>
 
           <Form.Item label="Email">
-            <span>{loginUser.email}</span>
+            <span className="email">{loginUser.email}</span>
           </Form.Item>
 
           <Form.Item
@@ -78,7 +81,9 @@ function CheckoutForm({ setSubmittable }: CheckoutFormProps) {
             label="Gata"
             rules={[{ required: true }]}
           >
+            <div>
             <Input
+            className="inputstreet"
               name="street"
               type="text"
               autoComplete="address-line1"
@@ -92,9 +97,11 @@ function CheckoutForm({ setSubmittable }: CheckoutFormProps) {
                 })
               }
             />
+            </div>
           </Form.Item>
 
           <Form.Item
+         
             help
             name="postnummer"
             htmlFor="postal"
@@ -102,6 +109,7 @@ function CheckoutForm({ setSubmittable }: CheckoutFormProps) {
             rules={[{ required: true, min: 5 }]}
           >
             <Input
+            className="inputzip"
               name="postal"
               type="text"
               autoComplete="postal-code"
@@ -125,6 +133,7 @@ function CheckoutForm({ setSubmittable }: CheckoutFormProps) {
             rules={[{ required: true }]}
           >
             <Input
+              className="inputcity"
               name="city"
               type="text"
               autoComplete="address-level2"
@@ -148,6 +157,7 @@ function CheckoutForm({ setSubmittable }: CheckoutFormProps) {
             rules={[{ required: true }]}
           >
             <Input
+            className="inputcountry"
               name="country"
               type="text"
               autoComplete="country-name"
@@ -167,6 +177,7 @@ function CheckoutForm({ setSubmittable }: CheckoutFormProps) {
         <p>Du måste logga in för att komma vidare.</p>
       )}
     </Form>
+    </div>
   );
 }
 
