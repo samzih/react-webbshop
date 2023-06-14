@@ -182,8 +182,9 @@ function AdminProductTable() {
       <Form form={form} onFinish={onFinish}>
         <Table
           columns={columns}
+          pagination={{ position: ["bottomCenter"], size: "default" }}
           dataSource={products}
-          size="middle"
+          size="small"
           bordered
           rowKey="_id"
         />

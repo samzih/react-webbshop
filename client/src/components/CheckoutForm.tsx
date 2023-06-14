@@ -105,7 +105,7 @@ function CheckoutForm({ setSubmittable }: CheckoutFormProps) {
             help
             name="postnummer"
             htmlFor="postal"
-            label="Postnummer"
+            label="Postnr"
             rules={[{ required: true, min: 5 }]}
           >
             <Input

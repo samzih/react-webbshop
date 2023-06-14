@@ -25,11 +25,13 @@ function AdminOrdersTable() {
       (accumulator, currentValue) => accumulator + currentValue,
       0
     );
+    const date = new Date(createdAt);
+    const formattedDate = `${date.toISOString().slice(0, 10)}, kl. ${date.toTimeString().slice(0, 5)}`;
 
     return {
       key: _id,
       orderNumber: orderNumber,
-      date: createdAt,
+      date: formattedDate,
       customerName: `${firstName} ${lastName}`,
       address: `${street}, ${zipcode}, ${city}`,
       orderTotal: `${orderSum} kr`,
@@ -61,7 +63,7 @@ function AdminOrdersTable() {
       key: "should be the same as dataindex here",
     },
     {
-      title: "Order belopp",
+      title: "Orderbelopp (exkl. frakt)",
       dataIndex: "orderTotal",
       key: "should be the same as dataindex here",
     },
@@ -83,7 +85,7 @@ function AdminOrdersTable() {
   return (
     <>
       <h2>Orderlista</h2>
-      <Table columns={columns} dataSource={data} />
+      <Table columns={columns} pagination={{ position: ["bottomCenter"] }} dataSource={data.reverse()} />
     </>
   );
 }
