@@ -63,7 +63,7 @@ function AdminOrdersTable() {
       key: "should be the same as dataindex here",
     },
     {
-      title: "Order belopp",
+      title: "Orderbelopp (exkl. frakt)",
       dataIndex: "orderTotal",
       key: "should be the same as dataindex here",
     },
