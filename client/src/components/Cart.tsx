@@ -4,6 +4,7 @@ import { Badge } from "antd";
 import { useCartContext } from "../context/CartContext";
 import CartPanel from "./CartPanel";
 
+// Rendering the cart and all its children components
 function Cart() {
   const [open, setOpen] = useState(false);
   const { cart } = useCartContext();

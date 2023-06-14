@@ -3,7 +3,11 @@ import AdminCard from "../components/AdminCard";
 import AdminProductTable from "../components/AdminProductTable";
 import { useUserContext } from "../context/UserContext";
 import { Space, Result, Typography } from "antd";
-import { ShoppingCartOutlined, SkinOutlined, DollarOutlined } from '@ant-design/icons';
+import {
+  ShoppingCartOutlined,
+  SkinOutlined,
+  DollarOutlined,
+} from "@ant-design/icons";
 import AdminOrdersTable from "../components/AdminOrdersTable";
 import { useOrderContext } from "../context/OrderContext";
 import { useProductContext } from "../context/ProductContext";
@@ -19,27 +23,32 @@ const AdminCenter = () => {
 
   // Goes into every order and adds order totalPrice to totalRevenue state
   useEffect(() => {
-    console.log("!!!!!!", orders)
+    // console.log("!!!!!!", orders);
     if (orders.length >= 1) {
       const totalPrice = orders.reduce((accumulator: number, order) => {
         const orderItems = order.orderItems;
         const orderTotal = orderItems.reduce((subtotal: number, item) => {
           const itemPrice = item.price;
+          console.log("item:", item);
+          console.log("item price:", itemPrice);
+
           return subtotal + itemPrice;
         }, 0);
+        console.log("Order total: ", orderTotal);
+
         return accumulator + orderTotal;
       }, 0);
-
+      console.log("Total Price", totalPrice);
       setTotalRevenue(totalPrice);
     }
   }, [orders]);
 
   // Runs fetchOrders when user changes occur like logging in while on admin page
   useEffect(() => {
-    fetchOrders()
-  }, [loginUser])
+    fetchOrders();
+  }, [loginUser]);
 
-  // some styling for AdminCard (IGNORE THIS!)
+  // some styling for AdminCard
   const orderStyle = {
     color: "green",
     backgroundColor: "rgba(0,255,0,0.25)",
@@ -78,8 +87,12 @@ const AdminCenter = () => {
           value={products.length}
           icon={<SkinOutlined style={inventoryStyle} />}
         />
-        {/* <AdminCard title={"Användare/Kunder"} value={98} icon={<TeamOutlined />} /> */}
-        <AdminCard title={"Intäkter"} value={`${totalRevenue} kr`} icon={<DollarOutlined style={revenueStyle} />} />
+
+        <AdminCard
+          title={"Intäkter/Inkomst"}
+          value={`${totalRevenue} kr`}
+          icon={<DollarOutlined style={revenueStyle} />}
+        />
       </Space>
       </div>
       <AdminCreateProduct />
@@ -87,7 +100,15 @@ const AdminCenter = () => {
       <AdminOrdersTable />
     </div>
   ) : (
-    <Result status="403" title="403" subTitle={<Typography.Title level={4}>Tyvärr, du har inte behörighet att komma åt den här sidan.</Typography.Title>} />
+    <Result
+      status="403"
+      title="403"
+      subTitle={
+        <Typography.Title level={4}>
+          Tyvärr, du har inte behörighet att komma åt den här sidan.
+        </Typography.Title>
+      }
+    />
   );
 };
 

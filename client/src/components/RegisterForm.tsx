@@ -1,21 +1,10 @@
-import React, { useState, useEffect } from "react";
+import { useState } from "react";
 import { PlusOutlined } from "@ant-design/icons";
 import "../component-styling/RegisterForm.css";
 import "../component-styling/Header.css";
-import {
-  Button,
-  Col,
-  DatePicker,
-  Drawer,
-  Form,
-  Input,
-  Row,
-  Select,
-  Space,
-} from "antd";
+import { Button, Col, Drawer, Form, Input, Row, Space } from "antd";
 
-const { Option } = Select;
-import { useUserContext } from "../context/UserContext";
+import { useUserContext, User } from "../context/UserContext";
 function RegisterForm() {
   const [open, setOpen] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
@@ -29,8 +18,7 @@ function RegisterForm() {
     setOpen(false);
   };
 
-  // MÅSTE TYPA UPP DET
-  async function registerForm(values: any) {
+  async function registerForm(values: User) {
     const { firstName, lastName, email, password } = values;
     try {
       const response = await fetch("/api/users/register", {
@@ -58,7 +46,12 @@ function RegisterForm() {
   return (
     <div>
       {loginUser && loginUser.firstName ? null : (
-        <Button className="headerbtn" type="text" onClick={showDrawer} icon={<PlusOutlined />}>
+        <Button
+          className="headerbtn"
+          type="text"
+          onClick={showDrawer}
+          icon={<PlusOutlined />}
+        >
           <span className="createaccounttext">Skapa konto</span>
         </Button>
       )}

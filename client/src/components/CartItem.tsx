@@ -1,25 +1,27 @@
 import { DeleteOutlined } from "@ant-design/icons";
 import { Link } from "react-router-dom";
-import { Button, List, Space } from "antd";
-import { Card } from "antd";
+import { Button, List } from "antd";
 import { useCartContext } from "../context/CartContext";
 import "../component-styling/CartItem.css";
-import "../component-styling/Header.css"
-import "../component-styling/CartPanel.css"
+import "../component-styling/Header.css";
+import "../component-styling/CartPanel.css";
 
 function CartItem() {
-  const { Meta } = Card;
-  const { cart, removeItem, increaseCartQuantity, decreaseCartQuantity } =
-    useCartContext();
+  const {
+    cart,
+    removeItem,
+    increaseCartQuantity,
+    decreaseCartQuantity,
+    totalSum,
+  } = useCartContext();
   const handleClick = (id: number) => {
     removeItem(id);
   };
-  const { totalSum } = useCartContext();
 
   return (
-    <div >
+    <div>
       <List
-      className="cartItem"
+        className="cartItem"
         itemLayout="horizontal"
         size="large"
         dataSource={cart}
@@ -27,7 +29,11 @@ function CartItem() {
           <List.Item key={cartItem.product._id}>
             <div className="cartContentLeftside">
               <img alt="example" src={cartItem.product.image} width={120} />
-              <Link className="content" to={`/${cartItem.product._id}`} key={cartItem.product._id}>
+              <Link
+                className="content"
+                to={`/${cartItem.product._id}`}
+                key={cartItem.product._id}
+              >
                 <List.Item.Meta
                   style={{ width: 200 }}
                   title={cartItem.product.title}
@@ -87,75 +93,3 @@ function CartItem() {
 }
 
 export default CartItem;
-//   const ButtonGroup = Button.Group;
-//   const { totalSum } = useCartContext();
-//   return (
-//     <div>
-//       {cart.map((cartItem) => (
-//         <div key={cartItem.product._id}>
-//           <Card
-//             bordered
-//             size="small"
-//             hoverable
-//             style={{
-//               width: 200,
-//               padding: 10,
-//               margin: 10,
-//               pointerEvents: "none",
-//             }}
-//             cover={<img alt="example" src={cartItem.product.image} />}
-//           >
-//             <div style={{ pointerEvents: "auto" }}>
-//               <Link to={`/${cartItem.product._id}`} key={cartItem.product._id}>
-//                 {cartItem.product.title && (
-//                   <Meta
-//                     title={cartItem.product.title}
-//                     description={
-//                       cartItem.product.price * cartItem.quantity + " kr"
-//                     }
-//                   />
-//                 )}
-//               </Link>
-//             </div>
-
-//             <DeleteOutlined
-//               onClick={() => handleClick(cartItem.product._id)}
-//               style={{ pointerEvents: "auto" }}
-//             />
-
-//             <ButtonGroup style={{ pointerEvents: "auto" }}>
-//               <Button
-//                 type="primary"
-//                 size="small"
-//                 shape="circle"
-//                 onClick={(e) => {
-//                   e.preventDefault();
-//                   decreaseCartQuantity(cartItem.product);
-//                 }}
-//                 disabled={cartItem.quantity <= 1}
-//               >
-//                 -
-//               </Button>
-//               <p>{cartItem.quantity}</p>
-//               <Button
-//                 type="primary"
-//                 size="small"
-//                 shape="circle"
-//                 onClick={(e) => {
-//                   e.preventDefault();
-//                   increaseCartQuantity(cartItem.product);
-//                 }}
-//                 disabled={cartItem.quantity >= cartItem.product.inStock}
-//               >
-//                 +
-//               </Button>
-//             </ButtonGroup>
-//           </Card>
-//         </div>
-//       ))}
-//       <p>{`Totalsumma: ${totalSum} kr`}</p>
-//     </div>
-//   );
-// }
-
-// export default CartItem;

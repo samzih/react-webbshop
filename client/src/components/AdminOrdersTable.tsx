@@ -1,13 +1,23 @@
 import { Table, Checkbox } from "antd";
-import { useOrderContext } from "../context/OrderContext";
-import { useState } from "react";
+import { Order, useOrderContext } from "../context/OrderContext";
+
+interface OrderData extends Order {
+  _id: string;
+  orderNumber: string;
+  shipped: boolean;
+  createdAt: string;
+  customer: {
+    firstName: string;
+    lastName: string;
+  };
+}
 
 function AdminOrdersTable() {
-  const { orders, shippedFunc } = useOrderContext();
-  // const [shippedOrder, setShippedOrder] = useState(orders.map(order => order.shipped));
+  const { orders, shippedUpdate } = useOrderContext();
   // console.log("Orders som kommer in:", orders);
 
-  const data = orders.map((order) => {
+  const data = orders.map((order: Order) => {
+    const orderData = order as OrderData;
     const {
       _id,
       orderNumber,
@@ -16,7 +26,7 @@ function AdminOrdersTable() {
       customer,
       deliveryAddress,
       orderItems,
-    } = order;
+    } = orderData;
     const { firstName, lastName } = customer;
     const { city, street, zipcode } = deliveryAddress;
 
@@ -25,11 +35,13 @@ function AdminOrdersTable() {
       (accumulator, currentValue) => accumulator + currentValue,
       0
     );
+    const date = new Date(createdAt);
+    const formattedDate = `${date.toISOString().slice(0, 10)}, kl. ${date.toTimeString().slice(0, 5)}`;
 
     return {
       key: _id,
       orderNumber: orderNumber,
-      date: createdAt,
+      date: formattedDate,
       customerName: `${firstName} ${lastName}`,
       address: `${street}, ${zipcode}, ${city}`,
       orderTotal: `${orderSum} kr`,
@@ -61,7 +73,7 @@ function AdminOrdersTable() {
       key: "should be the same as dataindex here",
     },
     {
-      title: "Order belopp",
+      title: "Orderbelopp (exkl. frakt)",
       dataIndex: "orderTotal",
       key: "should be the same as dataindex here",
     },
@@ -69,11 +81,11 @@ function AdminOrdersTable() {
       title: "Skickad",
       dataIndex: "shipped",
       key: "shipped",
-      render: (shipped, data) => {
+      render: (shipped: boolean, data: any) => {
         return (
           <Checkbox
             checked={shipped}
-            onChange={(e) => shippedFunc(e.target.checked, data.key)}
+            onChange={(e) => shippedUpdate(e.target.checked, data.key)}
           />
         );
       },
@@ -84,7 +96,7 @@ function AdminOrdersTable() {
     <>
       <h2 className="orderlist">Orderlista</h2>
       <div className="ordertable">
-      <Table className="ordertablecell" columns={columns} dataSource={data} />
+      <Table className="ordertablecell" columns={columns} pagination={{ position: ["bottomCenter"] }} dataSource={data.reverse()} />
       </div>
     </>
   );

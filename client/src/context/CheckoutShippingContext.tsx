@@ -28,8 +28,8 @@ const defaultShipping = {
 
 const ShippingContext = createContext<ShippingContext>({
   shipping: [],
-  calcDelivery: (shipping) => "",
-  setValue: () => {},
+  calcDelivery: () => "",
+  setValue: () => Promise.resolve(),
   value: defaultShipping,
 });
 
@@ -58,7 +58,7 @@ const ShippingProvider = ({ children }: PropsWithChildren) => {
 
     const currentDate = new Date();
     currentDate.setHours(currentDate.getHours() + deliveryTimeInHours);
-    return currentDate.toLocaleString();
+    return currentDate.toLocaleString("sv-SV", {year: "numeric", month: "2-digit", day: "2-digit", hour: "2-digit", minute: "2-digit"});
   };
 
   return (

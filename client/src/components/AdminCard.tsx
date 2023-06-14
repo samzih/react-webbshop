@@ -1,7 +1,11 @@
 import { Card, Space, Statistic } from "antd";
-
-
-const AdminCard = ({ title, value, icon }) => {
+import { ReactElement } from "react";
+interface AdminCardProps {
+  title: string;
+  value: number | string;
+  icon: ReactElement;
+}
+const AdminCard = ({ title, value, icon }: AdminCardProps) => {
   return (
     <div>
     <Space direction="horizontal">

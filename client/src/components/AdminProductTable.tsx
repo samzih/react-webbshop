@@ -1,9 +1,19 @@
-import { Avatar, Button, Form, Input, InputNumber, Popconfirm, Space, Table } from "antd";
+import {
+  Avatar,
+  Button,
+  Form,
+  Input,
+  InputNumber,
+  Popconfirm,
+  Space,
+  Table,
+} from "antd";
 import { useProductContext } from "../context/ProductContext";
-import { EditOutlined, CloseOutlined, DeleteOutlined  } from "@ant-design/icons";
+import { EditOutlined, CloseOutlined, DeleteOutlined } from "@ant-design/icons";
 import { useAdminContext } from "../context/AdminContext";
 import { useState } from "react";
 import { IProduct } from "../context/ProductContext";
+
 function AdminProductTable() {
   const { products } = useProductContext();
   const { deleteProduct, updateProduct } = useAdminContext();
@@ -156,12 +166,18 @@ function AdminProductTable() {
                 }}
                 icon={<EditOutlined style={{ color: "white" }} />}
               ></Button>
-              <Popconfirm title="Ta bort produkten" onConfirm={() => deleteProduct(product)} okText="Ja" cancelText="Nej" icon={<DeleteOutlined style={{ color: 'red' }} />}>
-              <Button
-                type="primary"
-                icon={<CloseOutlined style={{ color: "white" }} />}
-                danger
-              ></Button>
+              <Popconfirm
+                title="Ta bort produkten"
+                onConfirm={() => deleteProduct(product)}
+                okText="Ja"
+                cancelText="Nej"
+                icon={<DeleteOutlined style={{ color: "red" }} />}
+              >
+                <Button
+                  type="primary"
+                  icon={<CloseOutlined style={{ color: "white" }} />}
+                  danger
+                ></Button>
               </Popconfirm>
             </Space>
           </>
@@ -181,8 +197,9 @@ function AdminProductTable() {
       <Form form={form} onFinish={onFinish}>
         <Table
           columns={columns}
+          pagination={{ position: ["bottomCenter"], size: "default" }}
           dataSource={products}
-          size="middle"
+          size="small"
           bordered
           rowKey="_id"
         />
