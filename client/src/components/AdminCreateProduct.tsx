@@ -13,6 +13,7 @@ import {
   Space,
 } from "antd";
 import { PlusOutlined } from "@ant-design/icons";
+import "../component-styling/admin.css"
 
 // const ProductCreateValidationSchema = Joi.object({
 //   title: Joi.string().strict().required(),
@@ -80,6 +81,7 @@ const AdminCreateProduct = () => {
 
   return (
     <div>
+      <h2 className="h2">Produktlista</h2>
       <Button
         type="primary"
         onClick={showModal}

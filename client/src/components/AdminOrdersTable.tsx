@@ -82,8 +82,10 @@ function AdminOrdersTable() {
 
   return (
     <>
-      <h2>Orderlista</h2>
-      <Table columns={columns} dataSource={data} />
+      <h2 className="orderlist">Orderlista</h2>
+      <div className="ordertable">
+      <Table className="ordertablecell" columns={columns} dataSource={data} />
+      </div>
     </>
   );
 }

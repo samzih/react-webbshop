@@ -115,8 +115,7 @@ a h1 {
 
 @media (max-width: 1250px) {
   a h1 {
-    font-size: 3.8rem;
-    margin-left: 40%;
+    margin-left: 29rem;
   }
 
   .ant-btn {
@@ -127,7 +126,7 @@ a h1 {
 @media (max-width: 1050px) {
  a h1 {
     font-size: 3.6rem;
-    margin-left: 40%;
+    margin-left: 25rem;
   }
 }
 
@@ -135,7 +134,7 @@ a h1 {
 @media (max-width: 950px) {
   a  h1 {
     font-size: 3.3rem;
-    margin-left: 40%;
+    margin-left: 20rem;
   }
 
   .LogoutAction {
@@ -152,7 +151,7 @@ a h1 {
 @media (max-width: 850px) {
   a h1 {
     font-size: 3.1rem;
-    margin-left: 40%;
+    margin-left: 17rem;
   }
 
   .LogoutAction {
@@ -172,7 +171,7 @@ span.createaccounttext{
 @media (max-width: 780px) {
   a h1 {
     font-size: 2.9rem;
-    margin-left: 40%;
+    margin-left: 15rem;
   }
 
   
@@ -184,7 +183,7 @@ span.createaccounttext{
 @media (max-width: 680px) {
   a h1 {
     font-size: 2.3rem;
-    margin-left: 40%;
+    margin-left: 13rem;
   }
 
 }
@@ -192,7 +191,7 @@ span.createaccounttext{
 @media (max-width: 600px) {
   a h1 {
     font-size: 2rem;
-    margin-left: 30%;
+    margin-left: 10rem;
   }
 
   #right-content {
@@ -201,18 +200,27 @@ span.createaccounttext{
    }
 }
 
-@media (max-width: 440px) {
+@media (max-width: 500px) {
   a h1 {
     font-size: 1.6rem;
-    margin-left: 20%;
+    margin-left: 7rem;
   }
 
 
 }
 
-@media (max-width: 340px) {
+@media (max-width: 440px) {
+  a h1 {
+    font-size: 1.6rem;
+    margin-left: 5rem;
+  }
+
+
+}
+
+@media (max-width: 400px) {
   a h1 {
     font-size: 1rem;
-    margin-left: 40%;
+    margin-left: 4rem;
   }
 }
