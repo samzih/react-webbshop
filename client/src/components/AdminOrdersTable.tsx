@@ -83,7 +83,7 @@ function AdminOrdersTable() {
   return (
     <>
       <h2>Orderlista</h2>
-      <Table columns={columns} dataSource={data} />
+      <Table columns={columns} dataSource={data.reverse()} />
     </>
   );
 }
