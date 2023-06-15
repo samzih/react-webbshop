@@ -2,7 +2,16 @@ import { useState } from "react";
 import { PlusOutlined } from "@ant-design/icons";
 import "../component-styling/RegisterForm.css";
 import "../component-styling/Header.css";
-import { Button, Col, Drawer, Form, Input, Row, Space } from "antd";
+import {
+  Button,
+  Col,
+  Drawer,
+  Form,
+  Input,
+  Row,
+  Space,
+  notification,
+} from "antd";
 
 import { useUserContext, User } from "../context/UserContext";
 function RegisterForm() {
@@ -33,13 +42,34 @@ function RegisterForm() {
           password,
         }),
       });
-      const data = await response.json();
-      console.log(data);
-      onClose();
-      form.resetFields();
-      setIsSubmitted(true);
+      if (response.ok) {
+        const data = await response.json();
+        console.log(data);
+        onClose();
+        form.resetFields();
+        setIsSubmitted(true);
+        notification.success({
+          message: "Success",
+          description: "Konto skapat!",
+        });
+      } else if (response.status === 409) {
+        notification.error({
+          message: "Email-adressen används redan",
+        });
+      } else {
+        const errorData = await response.json();
+        console.log("Registration failed:", errorData);
+        notification.error({
+          message: "Fel",
+          description: "Registrering misslyckades",
+        });
+      }
     } catch {
-      console.log(Error);
+      console.log("Error: ", Error);
+      notification.error({
+        message: "Error",
+        description: "Ett fel inträffade",
+      });
     }
   }
 

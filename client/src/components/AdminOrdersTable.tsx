@@ -14,8 +14,6 @@ interface OrderData extends Order {
 
 function AdminOrdersTable() {
   const { orders, shippedUpdate } = useOrderContext();
-  // console.log("Orders som kommer in:", orders);
-
   const data = orders.map((order: Order) => {
     const orderData = order as OrderData;
     const {
@@ -36,7 +34,9 @@ function AdminOrdersTable() {
       0
     );
     const date = new Date(createdAt);
-    const formattedDate = `${date.toISOString().slice(0, 10)}, kl. ${date.toTimeString().slice(0, 5)}`;
+    const formattedDate = `${date.toISOString().slice(0, 10)}, kl. ${date
+      .toTimeString()
+      .slice(0, 5)}`;
 
     return {
       key: _id,
@@ -48,8 +48,6 @@ function AdminOrdersTable() {
       shipped: shipped,
     };
   });
-
-  console.log("data map:", data);
 
   const columns = [
     {
@@ -96,7 +94,12 @@ function AdminOrdersTable() {
     <>
       <h2 className="orderlist">Orderlista</h2>
       <div className="ordertable">
-      <Table className="ordertablecell" columns={columns} pagination={{ position: ["bottomCenter"] }} dataSource={data.reverse()} />
+        <Table
+          className="ordertablecell"
+          columns={columns}
+          pagination={{ position: ["bottomCenter"] }}
+          dataSource={data.reverse()}
+        />
       </div>
     </>
   );

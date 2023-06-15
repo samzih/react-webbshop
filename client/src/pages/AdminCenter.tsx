@@ -12,7 +12,7 @@ import AdminOrdersTable from "../components/AdminOrdersTable";
 import { useOrderContext } from "../context/OrderContext";
 import { useProductContext } from "../context/ProductContext";
 import { useEffect, useState } from "react";
-import "../component-styling/admin.css"
+import "../component-styling/admin.css";
 
 const AdminCenter = () => {
   const { loginUser } = useUserContext();
@@ -22,22 +22,17 @@ const AdminCenter = () => {
 
   // Goes into every order and adds order totalPrice to totalRevenue state
   useEffect(() => {
-    // console.log("!!!!!!", orders);
     if (orders.length >= 1) {
       const totalPrice = orders.reduce((accumulator: number, order) => {
         const orderItems = order.orderItems;
         const orderTotal = orderItems.reduce((subtotal: number, item) => {
           const itemPrice = item.price;
-          console.log("item:", item);
-          console.log("item price:", itemPrice);
 
           return subtotal + itemPrice;
         }, 0);
-        console.log("Order total: ", orderTotal);
 
         return accumulator + orderTotal;
       }, 0);
-      console.log("Total Price", totalPrice);
       setTotalRevenue(totalPrice);
     }
   }, [orders]);
@@ -74,25 +69,24 @@ const AdminCenter = () => {
     <div style={{padding: 50}}>
       <h1>Adminpanel</h1>
       <div className="statisticsCard">
-      <Space
-      direction="horizontal">
-        <AdminCard
-          title={"Beställningar"}
-          value={orders.length}
-          icon={<ShoppingCartOutlined style={orderStyle} />}
-        />
-        <AdminCard
-          title={"Lager"}
-          value={products.length}
-          icon={<SkinOutlined style={inventoryStyle} />}
-        />
+        <Space direction="horizontal">
+          <AdminCard
+            title={"Beställningar"}
+            value={orders.length}
+            icon={<ShoppingCartOutlined style={orderStyle} />}
+          />
+          <AdminCard
+            title={"Lager"}
+            value={products.length}
+            icon={<SkinOutlined style={inventoryStyle} />}
+          />
 
-        <AdminCard
-          title={"Intäkter/Inkomst"}
-          value={`${totalRevenue} kr`}
-          icon={<DollarOutlined style={revenueStyle} />}
-        />
-      </Space>
+          <AdminCard
+            title={"Intäkter/Inkomst"}
+            value={`${totalRevenue} kr`}
+            icon={<DollarOutlined style={revenueStyle} />}
+          />
+        </Space>
       </div>
       <AdminCreateProduct />
       <AdminProductTable />

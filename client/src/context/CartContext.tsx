@@ -49,11 +49,6 @@ const CartProvider = ({ children }: PropsWithChildren<object>) => {
     }
   };
 
-  // Ta bort vid final purge
-  // useEffect(() => {
-  //   console.log(cart);
-  // }, [cart]);
-
   const removeItem = (productId: number) => {
     const newItemList = cart.filter(
       (item: CartItem) => item.product._id !== productId

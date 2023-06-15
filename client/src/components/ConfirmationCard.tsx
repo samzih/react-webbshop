@@ -7,19 +7,13 @@ import { BsFillCartCheckFill } from "react-icons/Bs";
 import "../component-styling/ConfirmationCard.css";
 function ConfirmationCard() {
   const { order, orderNr } = useOrderContext();
-  // console.log(order);
   const { value, calcDelivery } = useShippingContext();
   const { loginUser }: UserContext = useUserContext();
   const cartItemString = localStorage.getItem("cart");
   const cartItem = cartItemString ? JSON.parse(cartItemString) : null;
   const { orderItems, totalSum } = order;
 
-  console.log("This is my orderItems:", orderItems);
-  console.log("Detta är mina varukorgitems:", cartItem);
-  console.log(order.orderItems);
-
   if (!loginUser) return null;
-  console.log(cartItem);
   if (!cartItem) return null;
   return (
     <div className="confirmContainer">
