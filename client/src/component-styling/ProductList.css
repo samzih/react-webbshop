@@ -4,6 +4,14 @@
     grid-gap: 10px;
 }
 
+@media (max-width: 768px) {
+    .list {
+        display:flex;
+        flex-wrap: wrap;
+    }
+      }
+
+
 @media (min-width: 768px) {
 .list {
     width:650px;
