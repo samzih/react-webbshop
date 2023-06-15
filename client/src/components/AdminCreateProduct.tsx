@@ -46,34 +46,36 @@ const AdminCreateProduct = () => {
   return (
     <div>
       <h2 className="h2">Produktlista</h2>
+      <div style={{ margin: 18, display: "flex", justifyContent: "left" }}>
       <Button
-        type="primary"
+        type="text"
         onClick={showModal}
         icon={<PlusOutlined />}
-        style={{ margin: 18, display: "flex", justifyContent: "end" }}
       >
         Lägg till ny produkt
       </Button>
+      </div>
       <Modal
         title="Lägg till ny produkt"
         open={isModalOpen}
         onOk={handleOk}
         onCancel={handleCancel}
         okText="Skapa produkt"
+        okType="text"
         cancelText="Avbryt"
       >
         <Form form={form} onFinish={handleClick}>
           <Form.Item
             name="title"
             label="Produktnamn"
-            rules={[{ required: true, message: "Ange ett produktnamn" }]}
+            rules={[{ required: true, message: "Ange ett produktnamn" }, { type: "string", min: 3, message: "Minst 3 tecken krävs" }]}
           >
             <Input placeholder="Cola" />
           </Form.Item>
           <Form.Item
             name="description"
             label="Produktbeskrivning"
-            rules={[{ required: true, message: "Ange en beskrivning" }]}
+            rules={[{ required: true, message: "Ange en beskrivning" }, { type: "string", min: 6, message: "Minst 6 tecken krävs" }]}
           >
             <Input placeholder="Starta dagen med en Coca Cola..." />
           </Form.Item>
@@ -90,7 +92,6 @@ const AdminCreateProduct = () => {
             rules={[
               { required: true, message: "Ange en URL"},
               { type: "url",  message: "Ange en giltig URL!"},
-              // { type: "string", min: 6 },
             ]}
           >
             <Input placeholder="url" />
