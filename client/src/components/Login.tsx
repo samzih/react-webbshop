@@ -2,7 +2,7 @@ import "../component-styling/RegisterForm.css";
 import { Alert, Button, Typography, Form, Input, Modal } from "antd";
 import { Link } from "react-router-dom";
 import { useState } from "react";
-import { UserOutlined, AndroidOutlined } from "@ant-design/icons";
+import { UserOutlined, SettingOutlined } from "@ant-design/icons";
 import { useUserContext } from "../context/UserContext";
 import RegisterForm from "./RegisterForm";
 import "../component-styling/Header.css";
@@ -21,7 +21,6 @@ function Login() {
   const handleOk = async () => {
     const user = { email, password };
     const response = await fetchLoginUser(user);
-    // console.log(response);
     if (
       typeof response === "string" &&
       response === "Wrong password or username"
@@ -63,7 +62,14 @@ function Login() {
             {loginUser?.isAdmin ? (
               <>
                 <Link to={"/admin"}>
-                  <AndroidOutlined className="adminIcon" />
+                  <SettingOutlined
+                    className="adminIcon"
+                    style={{
+                      fontSize: "25px",
+                      color: "#4b4741",
+                      padding: "0.2rem",
+                    }}
+                  />
                 </Link>
               </>
             ) : (
