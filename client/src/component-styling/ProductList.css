@@ -1,5 +1,13 @@
 .list{
-    flex-direction: row;
-    display: flex;
-    justify-content: center;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    grid-gap: 10px;
 }
+
+@media (min-width: 768px) {
+.list {
+    width:650px;
+    margin: 0 auto; 
+    justify-content: center; 
+}
+  }
