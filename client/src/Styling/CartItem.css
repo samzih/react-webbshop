@@ -1,0 +1,48 @@
+
+/* CartItem CSS */
+.cartItem {
+  flex-direction: row;
+  display: flex;
+  justify-content: center;
+  padding: 1rem;
+}
+
+.cartContentLeftside {
+  display: flex;
+}
+
+.content{
+  padding: 2rem;
+ }
+
+.cartContentRightside {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding-bottom: 2rem;
+}
+
+.ant-list-item-meta-content {
+  justify-content: flex-start;
+}
+
+
+/* CartPanel (built in Class)*/
+.decreaseIncreaseBtnContainer {
+  display: flex;
+}
+
+/* CartItem Responsiv CSS */
+
+@media (max-width: 560px  ) {
+  .cartContentLeftside{
+    flex-direction: column;
+    align-items: center;
+    padding-bottom: 1rem;
+  }
+
+  .ant-list-item{
+    flex-direction: column;
+    padding-bottom: 1rem;
+  }
+}

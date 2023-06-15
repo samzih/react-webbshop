@@ -1,3 +1,16 @@
+
+
+/* CheckoutShipping CSS */
+.shipping {
+  margin: 3rem 1rem 1rem 1rem;
+ }
+
+.shippingcard {
+  margin-top: 1rem;
+ }
+
+ 
+
 .headerbtn:hover{
     background-color: #807972;
     color: #e3d5ca;
@@ -34,15 +47,6 @@
    .inputcountry{
     width: 15rem;
     margin-left: 1rem;
-   }
-
-
-   .shipping {
-    margin: 3rem 1rem 1rem 1rem;
-   }
-
-   .shippingcard {
-    margin-top: 1rem;
    }
 
 
@@ -142,15 +146,15 @@
 }
 
 @media (max-width: 410px ) {
-  span.name{
-    margin-right: 43%;
-  }
-
   .shippingcard {
     width: 88%;
    }
 
   .shippinginnercard {
     width: 88%;
+  }
+
+  span.name{
+    margin-right: 43%;
   }
 }

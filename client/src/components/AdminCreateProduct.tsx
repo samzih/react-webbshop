@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Button, Form, Input, InputNumber, Modal } from "antd";
 import { PlusOutlined } from "@ant-design/icons";
-import "../component-styling/admin.css"
+import "../Styling/admin.css"
 
 import { useAdminContext } from "../context/AdminContext";
 const AdminCreateProduct = () => {

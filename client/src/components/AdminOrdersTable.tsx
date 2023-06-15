@@ -1,5 +1,6 @@
 import { Table, Checkbox } from "antd";
 import { Order, useOrderContext } from "../context/OrderContext";
+import "../Styling/admin.css"
 
 interface OrderData extends Order {
   _id: string;
@@ -93,14 +94,11 @@ function AdminOrdersTable() {
   return (
     <>
       <h2 className="orderlist">Orderlista</h2>
-      <div className="ordertable">
         <Table
-          className="ordertablecell"
           columns={columns}
           pagination={{ position: ["bottomCenter"] }}
           dataSource={data.reverse()}
         />
-      </div>
     </>
   );
 }
