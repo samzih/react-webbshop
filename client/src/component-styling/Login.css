@@ -1,24 +1,26 @@
-.userIcon, .adminIcon {
-    font-size:30px;
+.userIcon,
+.adminIcon {
+  font-size: 30px;
 }
 
-.HandleUserContainer{
-    display:flex;
-    
+.HandleUserContainer {
+  display: flex;
 }
-.LoginAndRegisterContainer{
-    display:flex;
-    flex-direction: column;
+.LoginAndRegisterContainer {
+  display: flex;
+  flex-direction: column;
 }
 
-.nameOfUser:hover, .LogoutAction:hover, .userIcon:hover {
-    cursor: pointer;
-    background-color: beige;
-  }
+.nameOfUser:hover,
+.LogoutAction:hover,
+.userIcon:hover {
+  cursor: pointer;
+  background-color: beige;
+}
 
-.nameOfUser, .userIcon{
-    padding:5px;
-    display:flex;
-    justify-content: center;
-    
+.nameOfUser,
+.userIcon {
+  padding: 5px;
+  display: flex;
+  justify-content: center;
 }

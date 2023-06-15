@@ -50,7 +50,7 @@ function RegisterForm() {
         setIsSubmitted(true);
         notification.success({
           message: "Success",
-          description: "Account created!",
+          description: "Konto skapat!",
         });
       } else if (response.status === 409) {
         notification.error({
