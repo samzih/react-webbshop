@@ -66,7 +66,7 @@ const AdminCenter = () => {
   };
 
   return loginUser && loginUser.isAdmin ? (
-    <div>
+    <div style={{padding: 50}}>
       <h1>Adminpanel</h1>
       <div className="statisticsCard">
         <Space direction="horizontal">
