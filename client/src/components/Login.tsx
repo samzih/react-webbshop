@@ -6,6 +6,7 @@ import { UserOutlined, SettingOutlined } from "@ant-design/icons";
 import { useUserContext } from "../context/UserContext";
 import RegisterForm from "./RegisterForm";
 import "../component-styling/Header.css";
+import "../Styling/Checkout.css"
 
 const { Title, Text } = Typography;
 function Login() {
