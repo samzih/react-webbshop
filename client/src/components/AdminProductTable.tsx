@@ -33,7 +33,6 @@ function AdminProductTable() {
               rules={[
                 { required: true, message: "Ange en giltig URL" },
                 { type: "url", message: "Ange en giltig URL" },
-                { type: "string", min: 6, message: "Minst 6 tecken krävs" },
               ]}
             >
               <Input />
