@@ -7,7 +7,7 @@ import { useOrderContext } from "../context/OrderContext";
 import { useShippingContext } from "../context/CheckoutShippingContext";
 import { useNavigate } from "react-router-dom";
 import { useCartContext } from "../context/CartContext";
-import "../component-styling/Checkout.css";
+import "../Styling/Checkout.css";
 
 function Checkout() {
   const { cart } = useCartContext();

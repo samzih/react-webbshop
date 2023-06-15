@@ -4,7 +4,7 @@ import { useUserContext } from "../context/UserContext";
 import { UserContext } from "../context/UserContext";
 import { useOrderContext } from "../context/OrderContext";
 import { useCartContext } from "../context/CartContext";
-import "../component-styling/Checkout.css";
+import "../Styling/Checkout.css";
 
 type SizeType = Parameters<typeof Form>[0]["size"];
 

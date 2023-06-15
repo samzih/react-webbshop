@@ -9,45 +9,48 @@
   margin-top: 1rem;
  }
 
- 
 
+/* CheckoutForm CSS */
+
+.form{
+  display: flex;
+  justify-content: center;
+}
+
+.name{
+  margin-right: 40%;
+}
+
+.email{
+  margin-right: 40%;
+}
+
+.inputstreet{
+  width: 15rem;
+  margin-left: 1rem;
+}
+
+.inputzip{
+  width: 15rem;
+  margin-left: 1rem;
+}
+
+.inputcity{
+  width: 15rem;
+  margin-left: 1rem;
+}
+
+.inputcountry{
+  width: 15rem;
+  margin-left: 1rem;
+}
+
+
+/* Login CSS */
 .headerbtn:hover{
-    background-color: #807972;
-    color: #e3d5ca;
-  }
-
-  .form{
-    display: flex;
-    justify-content: center;
-  }
-
-  .name{
-      margin-right: 40%;
-  }
-
-  .email{
-    margin-right: 40%;
-  }
-
-  .inputstreet{
-   width: 15rem;
-   margin-left: 1rem;
-  }
-
-  .inputzip{
-    width: 15rem;
-    margin-left: 1rem;
-   }
-
-   .inputcity{
-    width: 15rem;
-    margin-left: 1rem;
-   }
-
-   .inputcountry{
-    width: 15rem;
-    margin-left: 1rem;
-   }
+  background-color: #807972;
+  color: #e3d5ca;
+}
 
 
    @media (max-width: 580px) {
