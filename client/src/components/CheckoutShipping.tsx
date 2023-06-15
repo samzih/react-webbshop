@@ -17,7 +17,6 @@ function CheckoutShipping() {
   }, []);
 
   const onChange = (e: RadioChangeEvent) => {
-    console.log("radio checked", e.target.value);
     setValue(e.target.value);
     setOrder({ ...order, shippingMethod: e.target.value._id });
   };

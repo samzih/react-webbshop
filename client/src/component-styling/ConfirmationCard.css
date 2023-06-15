@@ -2,9 +2,7 @@
   display: flex;
   align-items: center;
   flex-direction: column;
-  height: 100vh;
   padding: 2rem;
-  
 }
 
 .confimMessage {
@@ -18,17 +16,13 @@
   padding: 1rem;
 }
 
-.ant-descriptions{ /* gör om gör rätt*/
+.ant-descriptions {
   background-color: #f7f6f5;
   padding: 1rem;
 }
-
-
-@media (max-width:450px ) {
-  .confirmContainer{
+@media (max-width: 450px) {
+  .confirmContainer {
     height: 80%;
     padding: 0.2rem;
   }
-
-
 }
