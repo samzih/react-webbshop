@@ -53,24 +53,22 @@ function RegisterForm() {
           description: "Account created!",
         });
       } else if (response.status === 409) {
-        const errorMessage = await response.text();
         notification.error({
-          message: "Error",
-          description: errorMessage,
+          message: "Email-adressen används redan",
         });
       } else {
         const errorData = await response.json();
         console.log("Registration failed:", errorData);
         notification.error({
-          message: "Error",
-          description: "Registration failed",
+          message: "Fel",
+          description: "Registrering misslyckades",
         });
       }
     } catch {
       console.log("Error: ", Error);
       notification.error({
         message: "Error",
-        description: "An error occurred",
+        description: "Ett fel inträffade",
       });
     }
   }
