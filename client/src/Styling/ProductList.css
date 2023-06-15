@@ -1,16 +1,14 @@
-/* .list{
-    flex-direction: row;
-    display: flex;
-    justify-content: center;
-    flex-warp:wrap;
-} */
 
+
+/* CSS Productlist */
 .list{
     display: grid;
     grid-template-columns: repeat(5, 1fr);
     grid-gap: 10px;
 }
 
+
+/* ProductList Responsive CSS */
 @media (max-width: 1186px) {
     .list {
         display:flex;
@@ -19,13 +17,13 @@
         grid-template-columns:none;
         justify-content: center;
     }
-      }
+}
 
 
 @media (min-width: 1187px) {
-.list {
-    width:650px;
-    margin: 0 auto; 
-    justify-content: center; 
+    .list {
+        width:650px;
+        margin: 0 auto; 
+        justify-content: center; 
+    }
 }
-  }

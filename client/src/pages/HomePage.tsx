@@ -1,6 +1,6 @@
 import ImgCarousel from "../components/ImgCarousel";
 import ProductList from "../components/ProductList";
-import "../pages/HomePage.css"
+import "../Styling/HomePage.css"
 
 
 function HomePage() {

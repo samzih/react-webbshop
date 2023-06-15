@@ -1,5 +1,5 @@
 import ConfirmationCard from "../components/ConfirmationCard";
-import "../pages/OrderConfirmation.css"
+
 
 function OrderConfirmation() {
   return (

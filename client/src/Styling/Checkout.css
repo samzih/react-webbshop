@@ -46,118 +46,105 @@
 }
 
 
-/* Login CSS */
-.headerbtn:hover{
-  background-color: #807972;
-  color: #e3d5ca;
+/* CheckoutForm Responsiv CSS */
+@media (max-width: 580px) {
+span.name{
+  margin-right: 66%;
 }
 
+.email{
+  margin-right: 68%;
+}
 
-   @media (max-width: 580px) {
-    span.name{
-      margin-right: 66%;
-  }
+.inputstreet{
+  width: 15rem;
+  margin-left: -0.5rem;
+}
 
-  .email{
-    margin-right: 68%;
-  }
+.inputzip{
+  width: 15rem;
+  margin-left: -0.5rem;
+}
 
-  .inputstreet{
-   width: 15rem;
-   margin-left: -0.5rem;
-  }
+.inputcity{
+  width: 15rem;
+  margin-left: -0.5rem;
+}
 
-  .inputzip{
-    width: 15rem;
-    margin-left: -0.5rem;
-   }
+.inputcountry{
+  width: 15rem;
+  margin-left: -0.5rem;
+}
+}
 
-   .inputcity{
-    width: 15rem;
-    margin-left: -0.5rem;
-   }
+@media (max-width: 500px) {
+span.name{
+  margin-right: 59%;
+}
 
-   .inputcountry{
-    width: 15rem;
-    margin-left: -0.5rem;
-   }
+.email{
+  margin-right: 68%;
+}
 
-   }
+.inputstreet{
+  width: 15rem;
+  margin-left: -0.5rem;
+}
 
+.inputzip{
+  width: 15rem;
+  margin-left: -0.5rem;
+}
 
-   @media (max-width: 500px) {
-    span.name{
-      margin-right: 59%;
-  }
+.inputcity{
+  width: 15rem;
+  margin-left: -0.5rem;
+}
 
-  .email{
-    margin-right: 68%;
-  }
+.inputcountry{
+  width: 15rem;
+  margin-left: -0.5rem;
+}
+}
 
-  .inputstreet{
-   width: 15rem;
-   margin-left: -0.5rem;
-  }
+@media (max-width: 450px) {
+span.name{
+  margin-right: 55%;
+}
 
-  .inputzip{
-    width: 15rem;
-    margin-left: -0.5rem;
-   }
-
-   .inputcity{
-    width: 15rem;
-    margin-left: -0.5rem;
-   }
-
-   .inputcountry{
-    width: 15rem;
-    margin-left: -0.5rem;
-   }
-
-   }
-
-   @media (max-width: 450px) {
-
-    span.name{
-      margin-right: 55%;
-  }
-    .inputstreet{
-      width: 10rem;
-     
-     }
+.inputstreet{
+  width: 10rem;
+}
    
-     .inputzip{
-       width: 10rem;
-     
-      }
+.inputzip{
+  width: 10rem;
+}
    
-      .inputcity{
-       width: 10rem;
-      
-      }
+.inputcity{
+  width: 10rem;
+}
    
-      .inputcountry{
-       width: 10rem;
-     
-      }
-   }
+.inputcountry{
+  width: 10rem;
+}
+}
 
 @media (max-width: 430px ) {
-  span.name{
-    margin-right: 52%;
-  }
+span.name{
+  margin-right: 52%;
+}
 }
 
 @media (max-width: 410px ) {
-  .shippingcard {
-    width: 88%;
-   }
+.shippingcard {
+  width: 88%;
+}
 
-  .shippinginnercard {
-    width: 88%;
-  }
+.shippinginnercard {
+  width: 88%;
+}
 
-  span.name{
-    margin-right: 43%;
-  }
+span.name{
+  margin-right: 43%;
+}
 }
