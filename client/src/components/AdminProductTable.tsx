@@ -185,7 +185,7 @@ function AdminProductTable() {
       },
     },
   ];
-  //HELP, vad ska vi ha istället för any?
+
   const onFinish = (values: any) => {
     const newValue = { _id: editingRow, deleted: false, ...values };
     updateProduct(newValue);
@@ -198,7 +198,7 @@ function AdminProductTable() {
         <Table
           columns={columns}
           pagination={{ position: ["bottomCenter"], size: "default" }}
-          dataSource={products}
+          dataSource={products.reverse()}
           size="small"
           bordered
           rowKey="_id"
