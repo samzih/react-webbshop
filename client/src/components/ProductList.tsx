@@ -10,7 +10,7 @@ function ProductList() {
   const { products } = useProductContext();
 
   return (
-    <div className="list" style={{ display: "flex", flexWrap: "wrap" }}>
+    <div className="list">
       {products.map((product) => (
         <div key={product._id}>
           <Link to={`/${product._id}`} key={product._id}>

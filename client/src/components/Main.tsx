@@ -4,6 +4,8 @@ import ProductDetail from "../pages/ProductDetail";
 import Checkout from "../pages/Checkout";
 import AdminCenter from "../pages/AdminCenter";
 import OrderConfirmation from "../pages/OrderConfirmation";
+import About from "../pages/About";
+import Contact from "../pages/Contact";
 
 function Main() {
   return (
@@ -14,6 +16,8 @@ function Main() {
         <Route path="/checkout" element={<Checkout />} />
         <Route path="/admin" element={<AdminCenter />} />
         <Route path="/confirmation" element={<OrderConfirmation />} />
+        <Route path="/about" element={<About />} />
+        <Route path="/contact" element={<Contact />} />
       </Routes>
     </main>
   );

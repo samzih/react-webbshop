@@ -1,47 +1,30 @@
 import { useState } from "react";
-import { Alert, Button, Form, Input, Modal } from "antd";
+import { Button, Form, Input, InputNumber, Modal } from "antd";
 import { PlusOutlined } from "@ant-design/icons";
 import "../component-styling/admin.css"
 
 import { useAdminContext } from "../context/AdminContext";
 const AdminCreateProduct = () => {
   const { createNewProduct } = useAdminContext();
-
-  const [title, setTitle] = useState("");
-  const [description, setDescription] = useState("");
-  const [price, setPrice] = useState("");
-  const [image, setImage] = useState("");
-  const [inStock, setInStock] = useState("");
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [errorMessage, setErrorMessage] = useState("");
   const [form] = Form.useForm();
 
   const handleClick = async () => {
     try {
       await form.validateFields();
-      const values = await form.getFieldsValue();
-
-      if (
-        Object.values(values).some(
-          (value) => value === undefined || value === ""
-        )
-      ) {
-        setErrorMessage("Fyll i alla fälten!");
-        return;
-      }
-
-      const priceInNumb = parseFloat(values.price);
-      const inStockInNumb = parseInt(values.inStock);
+      const fieldsValue = await form.getFieldsValue();
 
       const product = {
-        title: values.title,
-        description: values.description,
-        price: priceInNumb,
-        image: values.image,
-        inStock: inStockInNumb,
+        title: fieldsValue.title,
+        description: fieldsValue.description,
+        price: fieldsValue.price,
+        image: fieldsValue.image,
+        inStock: fieldsValue.inStock,
       };
+
       createNewProduct(product);
       setIsModalOpen(false);
+      form.resetFields();
     } catch (error) {
       console.log("Fel vid validering:", error);
     }
@@ -57,72 +40,61 @@ const AdminCreateProduct = () => {
 
   const handleCancel = () => {
     setIsModalOpen(false);
+    form.resetFields();
   };
 
   return (
     <div>
       <h2 className="h2">Produktlista</h2>
+      <div style={{ margin: 18, display: "flex", justifyContent: "left" }}>
       <Button
-        type="primary"
+        type="text"
         onClick={showModal}
         icon={<PlusOutlined />}
-        style={{ margin: 18, display: "flex", justifyContent: "end" }}
       >
         Lägg till ny produkt
       </Button>
+      </div>
       <Modal
         title="Lägg till ny produkt"
         open={isModalOpen}
         onOk={handleOk}
         onCancel={handleCancel}
         okText="Skapa produkt"
-        cancelText="Stäng"
+        okType="text"
+        cancelText="Avbryt"
       >
-        {errorMessage && <Alert message={errorMessage} type="error" showIcon />}
         <Form form={form} onFinish={handleClick}>
           <Form.Item
             name="title"
             label="Produktnamn"
-            rules={[{ required: true, message: "Lägg till en title" }]}
+            rules={[{ required: true, message: "Ange ett produktnamn" }, { type: "string", min: 3, message: "Minst 3 tecken krävs" }]}
           >
-            <Input
-              placeholder="Cola"
-              onChange={(e) => setTitle(e.target.value)}
-            />
+            <Input placeholder="Cola" />
           </Form.Item>
           <Form.Item
             name="description"
             label="Produktbeskrivning"
-            rules={[{ required: true, message: "Ange en beskrivning" }]}
+            rules={[{ required: true, message: "Ange en beskrivning" }, { type: "string", min: 6, message: "Minst 6 tecken krävs" }]}
           >
-            <Input
-              placeholder="Starta dagen med en Coca Cola..."
-              onChange={(e) => setDescription(e.target.value)}
-            />
+            <Input placeholder="Starta dagen med en Coca Cola..." />
           </Form.Item>
           <Form.Item
             name="price"
             label="Produktpris"
             rules={[{ required: true, message: "Ange ett pris" }]}
           >
-            <Input
-              placeholder="100"
-              onChange={(e) => setPrice(e.target.value)}
-            />
+            <InputNumber style={{width: "100%"}} placeholder="100" controls={false} addonAfter="kr" />
           </Form.Item>
           <Form.Item
             name="image"
             label="Produktbild"
             rules={[
-              { required: true, message: "Ange en giltig URL" },
-              { type: "url", warningOnly: true },
-              { type: "string", min: 6 },
+              { required: true, message: "Ange en URL"},
+              { type: "url",  message: "Ange en giltig URL!"},
             ]}
           >
-            <Input
-              placeholder="url"
-              onChange={(e) => setImage(e.target.value)}
-            />
+            <Input placeholder="url" />
           </Form.Item>
           <Form.Item
             name="inStock"
@@ -131,10 +103,7 @@ const AdminCreateProduct = () => {
               { required: true, message: "Ange antal produkter i lager" },
             ]}
           >
-            <Input
-              placeholder="30"
-              onChange={(e) => setInStock(e.target.value)}
-            />
+            <InputNumber style={{width: "100%"}} min={0} controls={false} placeholder="30" addonAfter="st" />
           </Form.Item>
         </Form>
       </Modal>

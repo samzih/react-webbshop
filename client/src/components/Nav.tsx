@@ -1,16 +1,8 @@
-import { useState } from "react";
 import type { MenuProps } from "antd";
 import { Menu } from "antd";
 import "../component-styling/Nav.css";
 
 function Nav() {
-  // const [current, setCurrent] = useState("start");
-
-  // const onClick: MenuProps["onClick"] = (e) => {
-  //   console.log("click ", e);
-  //   // setCurrent(e.key);
-  // };
-
   const items: MenuProps["items"] = [
     {
       label: (
@@ -22,7 +14,7 @@ function Nav() {
     },
     {
       label: (
-        <a href="/" target="">
+        <a href="/about" target="">
           <div className="links">Om oss</div>
         </a>
       ),
@@ -30,21 +22,14 @@ function Nav() {
     },
     {
       label: (
-        <a href="/" target="">
+        <a href="/contact" target="">
           <div className="links">Kontakt</div>
         </a>
       ),
       key: "kontakt",
     },
   ];
-  return (
-    <Menu
-      // onClick={onClick}
-      // selectedKeys={[current]}
-      mode="horizontal"
-      items={items}
-    />
-  );
+  return <Menu mode="horizontal" items={items} />;
 }
 
 export default Nav;

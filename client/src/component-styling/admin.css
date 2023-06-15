@@ -1,34 +1,32 @@
 
 /* CSS for the first three boxes with statistics - AdminPage */
 .statisticsCard {
-    flex-direction: row;
-    display: flex;
-    justify-content: center;
-    padding-top: 2rem;
-    padding-bottom: 0rem;
-    
+  flex-direction: row;
+  display: flex;
+  justify-content: center;
+  padding-top: 2rem;
+  padding-bottom: 2rem;
 }
 
 /* Produktlista title - AdminPage */
 .h2 {
-    flex-direction: row;
-    display: flex;
-    justify-content: center;
-    padding-bottom: 2rem;
-    font-size: 2.2rem;
+  flex-direction: row;
+  display: flex;
+  justify-content: center;
+  padding-bottom: 2rem;
+  font-size: 2.2rem;
 }
 
 /* CSS for ordertitle - AdminPage*/
 .orderlist {
-    flex-direction: row;
-    display: flex;
-    justify-content: center;
-    padding-bottom: 2rem;
-    font-size: 2.2rem;
+  flex-direction: row;
+  display: flex;
+  justify-content: center;
+  padding-bottom: 2rem;
+  font-size: 2.2rem;
 }
 
-/* CSS for ordertablewrapper - AdminPage */
-.ordertable {
+/* .ordertable {
     flex-direction: row;
     display: flex;
     justify-content: center;
@@ -39,22 +37,22 @@
 
 /* CSS - responsive styling. */
 
-@media (max-width: 640px ) {
-    .ant-statistic-content-value {
+@media (max-width: 640px) {
+  .ant-statistic-content-value {
     font-size: 1rem;
-    }
-    
-    .ant-card-body {
-        padding: 0.4rem;
-    }
+  }
+
+  .ant-card-body {
+    padding: 0.4rem;
+  }
 }
 
-@media (max-width: 640px ) {
-    .ant-statistic-content-value {
+@media (max-width: 640px) {
+  .ant-statistic-content-value {
     font-size: 0.7rem;
-    }
-    
-    .ant-card-body {
-        padding: 0.2rem;
-    }
+  }
+
+  .ant-card-body {
+    padding: 0.2rem;
+  }
 }

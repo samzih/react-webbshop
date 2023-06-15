@@ -18,7 +18,6 @@ import "../component-styling/admin.css"
 function AdminProductTable() {
   const { products } = useProductContext();
   const { deleteProduct, updateProduct } = useAdminContext();
-  console.log("Produkter som kommer in:", products);
   const [editingRow, setEditingRow] = useState<number | null>(null);
   const [form] = Form.useForm();
   const [saveBtn, setSaveBtn] = useState(true);
@@ -35,7 +34,6 @@ function AdminProductTable() {
               rules={[
                 { required: true, message: "Ange en giltig URL" },
                 { type: "url", message: "Ange en giltig URL" },
-                { type: "string", min: 6, message: "Minst 6 tecken krävs" },
               ]}
             >
               <Input />
@@ -186,7 +184,7 @@ function AdminProductTable() {
       },
     },
   ];
-  //HELP, vad ska vi ha istället för any?
+
   const onFinish = (values: any) => {
     const newValue = { _id: editingRow, deleted: false, ...values };
     updateProduct(newValue);
@@ -200,7 +198,7 @@ function AdminProductTable() {
         <Table
           columns={columns}
           pagination={{ position: ["bottomCenter"], size: "default" }}
-          dataSource={products}
+          dataSource={products.reverse()}
           size="small"
           bordered
           rowKey="_id"

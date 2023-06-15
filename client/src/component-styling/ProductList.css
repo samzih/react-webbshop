@@ -1,5 +1,31 @@
-.list{
+/* .list{
     flex-direction: row;
     display: flex;
     justify-content: center;
+    flex-warp:wrap;
+} */
+
+.list{
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    grid-gap: 10px;
 }
+
+@media (max-width: 1186px) {
+    .list {
+        display:flex;
+        flex-wrap: wrap;
+        width:100%;
+        grid-template-columns:none;
+        justify-content: center;
+    }
+      }
+
+
+@media (min-width: 1187px) {
+.list {
+    width:650px;
+    margin: 0 auto; 
+    justify-content: center; 
+}
+  }

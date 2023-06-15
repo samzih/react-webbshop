@@ -81,16 +81,14 @@ const UserProvider = ({ children }: PropsWithChildren<object>) => {
     async function authorizeUser() {
       try {
         if (loginUser) {
-          // console.log("is logged in");
+          console.log("is logged in");
         } else {
           const response = await fetch("/api/users/authorize");
           if (response.status === 200) {
-            // console.log("is logged in");
             const data = await response.json();
             setLoginUser(data);
           } else if (response.status === 401) {
             setLoginUser(null);
-            // console.log("you are not logged in");
           } else {
             console.log("Unexpected response from server");
           }
