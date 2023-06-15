@@ -9,9 +9,9 @@ function ProductDetail() {
   const [product, setProduct] = useState<IProduct>();
 
   function inStockChecker(inStock: number) {
-    if (inStock === 0) {
+    if (inStock <= 0) {
       return "Ej i lager";
-    } else if (inStock < 3) {
+    } else if (inStock <= 3) {
       return "Fåtal i lager";
     } else {
       return "I lager";
