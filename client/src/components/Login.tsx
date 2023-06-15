@@ -94,7 +94,7 @@ function Login() {
         {loginSuccess && <p>Välkommen {loginUser?.firstName}</p>}
         <Form form={form}>
           {loginUser && loginUser.firstName ? (
-            <Title>Welcome {loginUser.firstName}</Title>
+            <Title>Välkommen {loginUser.firstName}!</Title>
           ) : (
             <>
               <Form.Item
