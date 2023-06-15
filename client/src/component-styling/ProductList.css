@@ -1,3 +1,10 @@
+/* .list{
+    flex-direction: row;
+    display: flex;
+    justify-content: center;
+    flex-warp:wrap;
+} */
+
 .list{
     display: grid;
     grid-template-columns: repeat(5, 1fr);
