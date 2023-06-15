@@ -37,8 +37,10 @@ const AdminProvider = ({ children }: PropsWithChildren<object>) => {
       });
       const data = await response.json();
       console.log(data);
-      if (response.status === 200) {
+
+      if (response.status === 201) {
         console.log("Success");
+        fetchProducts();
       }
       if (response.status === 401 || response.status === 400) {
         console.log("Nope");
