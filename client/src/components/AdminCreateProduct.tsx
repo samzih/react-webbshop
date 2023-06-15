@@ -42,6 +42,7 @@ const AdminCreateProduct = () => {
       };
       createNewProduct(product);
       setIsModalOpen(false);
+      form.resetFields();
     } catch (error) {
       console.log("Fel vid validering:", error);
     }
