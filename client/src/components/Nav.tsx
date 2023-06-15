@@ -1,4 +1,3 @@
-import { useState } from "react";
 import type { MenuProps } from "antd";
 import { Menu } from "antd";
 import "../component-styling/Nav.css";
@@ -22,7 +21,7 @@ function Nav() {
     },
     {
       label: (
-        <a href="/" target="">
+        <a href="/about" target="">
           <div className="links">Om oss</div>
         </a>
       ),
@@ -30,7 +29,7 @@ function Nav() {
     },
     {
       label: (
-        <a href="/" target="">
+        <a href="/contact" target="">
           <div className="links">Kontakt</div>
         </a>
       ),
