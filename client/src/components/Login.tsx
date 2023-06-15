@@ -87,6 +87,7 @@ function Login() {
         open={isModalOpen}
         onOk={handleOk}
         onCancel={handleCancel}
+        cancelButtonProps={{ style: { display: "none" } }}
       >
         {errorMessage && !loginSuccess && (
           <Alert message={errorMessage} type="error" showIcon />
