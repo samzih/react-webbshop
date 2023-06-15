@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import PurchaseButton from "./PurchaseButton";
 import { useProductContext } from "../context/ProductContext";
 import { Card } from "antd";
-import "../component-styling/ProductList.css";
+import "../Styling/ProductList.css";
 
 // Rendering av alla produkter på startsidan, där det även går att trycka på en handlaknapp
 function ProductList() {

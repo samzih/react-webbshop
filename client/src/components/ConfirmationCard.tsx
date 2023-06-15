@@ -4,7 +4,8 @@ import { useUserContext } from "../context/UserContext";
 import { UserContext } from "../context/UserContext";
 import { useShippingContext } from "../context/CheckoutShippingContext";
 import { BsFillCartCheckFill } from "react-icons/Bs";
-import "../component-styling/ConfirmationCard.css";
+import "../Styling/ConfirmationCard.css";
+
 function ConfirmationCard() {
   const { order, orderNr } = useOrderContext();
   const { value, calcDelivery } = useShippingContext();
@@ -17,7 +18,7 @@ function ConfirmationCard() {
   if (!cartItem) return null;
   return (
     <div className="confirmContainer">
-      <div className="confimMessage">
+      <div className="confirmMessage">
         <BsFillCartCheckFill style={{ fontSize: "50px" }} />
         <h2>Tack för din beställning!</h2>
         <h3>Beräknad leverans: {calcDelivery(value)}</h3>

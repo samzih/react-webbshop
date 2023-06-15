@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import CartItem from "./CartItem";
 import { useState } from "react";
 import type { DrawerProps } from "antd/es/drawer";
-import "../component-styling/Header.css";
+import "../Styling/Header.css";
 import "../Styling/CartPanel.css";
 
 type Props = {

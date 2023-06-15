@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { PlusOutlined } from "@ant-design/icons";
-import "../component-styling/RegisterForm.css";
-import "../component-styling/Header.css";
+import "../Styling/RegisterForm.css";
+import "../Styling/Header.css";
 import {
   Button,
   Col,

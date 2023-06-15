@@ -35,7 +35,6 @@ a:visited {
     text-decoration: none;
 }
 
-
 .navtext a{
     color: #a49f9a ;
 }
@@ -43,6 +42,9 @@ a:visited {
 .ant-menu-item-selected  a{
     color: #a49f9a ;
 }
+
+
+/* Nav Responsive CSS */
 @media (max-width: 700px) {
     .ant-menu-horizontal {
         padding-top: 0.8rem;
