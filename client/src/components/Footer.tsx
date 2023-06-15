@@ -1,4 +1,4 @@
-import "../component-styling/Footer.css";
+import "../Styling/Footer.css";
 import {
   FacebookFilled,
   InstagramFilled,
