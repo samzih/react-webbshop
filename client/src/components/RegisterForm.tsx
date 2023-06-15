@@ -2,7 +2,16 @@ import { useState } from "react";
 import { PlusOutlined } from "@ant-design/icons";
 import "../component-styling/RegisterForm.css";
 import "../component-styling/Header.css";
-import { Button, Col, Drawer, Form, Input, Row, Space } from "antd";
+import {
+  Button,
+  Col,
+  Drawer,
+  Form,
+  Input,
+  Row,
+  Space,
+  notification,
+} from "antd";
 
 import { useUserContext, User } from "../context/UserContext";
 function RegisterForm() {
@@ -33,13 +42,36 @@ function RegisterForm() {
           password,
         }),
       });
-      const data = await response.json();
-      console.log(data);
-      onClose();
-      form.resetFields();
-      setIsSubmitted(true);
+      if (response.ok) {
+        const data = await response.json();
+        console.log(data);
+        onClose();
+        form.resetFields();
+        setIsSubmitted(true);
+        notification.success({
+          message: "Success",
+          description: "Account created!",
+        });
+      } else if (response.status === 409) {
+        const errorMessage = await response.text();
+        notification.error({
+          message: "Error",
+          description: errorMessage,
+        });
+      } else {
+        const errorData = await response.json();
+        console.log("Registration failed:", errorData);
+        notification.error({
+          message: "Error",
+          description: "Registration failed",
+        });
+      }
     } catch {
-      console.log(Error);
+      console.log("Error: ", Error);
+      notification.error({
+        message: "Error",
+        description: "An error occurred",
+      });
     }
   }
 
