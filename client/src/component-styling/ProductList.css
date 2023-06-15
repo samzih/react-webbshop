@@ -4,15 +4,18 @@
     grid-gap: 10px;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 1186px) {
     .list {
         display:flex;
         flex-wrap: wrap;
+        width:100%;
+        grid-template-columns:none;
+        justify-content: center;
     }
       }
 
 
-@media (min-width: 768px) {
+@media (min-width: 1187px) {
 .list {
     width:650px;
     margin: 0 auto; 
