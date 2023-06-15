@@ -1,4 +1,5 @@
 
+/* HomePage CSS */
 #maincontent{
   display: flex;
   justify-content: center;
@@ -25,6 +26,7 @@ a {
     text-decoration: none;
 }
 
+/* HomePage Responsive CSS */
 
 @media (max-width: 1080px) {
     h1 {

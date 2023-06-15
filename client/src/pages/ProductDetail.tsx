@@ -3,7 +3,7 @@ import { Card } from "antd";
 import { useParams } from "react-router-dom";
 import { IProduct } from "../context/ProductContext";
 import PurchaseButton from "../components/PurchaseButton";
-import "../pages/ProductDetail.css";
+import "../Styling/ProductDetail.css";
 
 function ProductDetail() {
   const [product, setProduct] = useState<IProduct>();

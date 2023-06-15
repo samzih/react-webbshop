@@ -1,12 +1,13 @@
-import "../component-styling/RegisterForm.css";
+
 import { Alert, Button, Typography, Form, Input, Modal } from "antd";
 import { Link } from "react-router-dom";
 import { useState } from "react";
 import { UserOutlined, SettingOutlined } from "@ant-design/icons";
 import { useUserContext } from "../context/UserContext";
 import RegisterForm from "./RegisterForm";
-import "../component-styling/Header.css";
-import "../Styling/Checkout.css"
+import "../Styling/RegisterForm.css";
+import "../Styling/Header.css";
+import "../Styling/Login.css"
 
 const { Title, Text } = Typography;
 function Login() {

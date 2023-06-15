@@ -1,7 +1,7 @@
 import Nav from "./Nav";
 import Cart from "./Cart";
 import Login from "./Login";
-import "../component-styling/Header.css";
+import "../Styling/Header.css";
 
 function Header() {
   return (

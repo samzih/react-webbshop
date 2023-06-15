@@ -1,6 +1,6 @@
 import type { MenuProps } from "antd";
 import { Menu } from "antd";
-import "../component-styling/Nav.css";
+import "../Styling/Nav.css";
 
 function Nav() {
   const items: MenuProps["items"] = [
