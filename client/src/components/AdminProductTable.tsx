@@ -13,6 +13,7 @@ import { EditOutlined, CloseOutlined, DeleteOutlined } from "@ant-design/icons";
 import { useAdminContext } from "../context/AdminContext";
 import { useState } from "react";
 import { IProduct } from "../context/ProductContext";
+import "../component-styling/admin.css"
 
 function AdminProductTable() {
   const { products } = useProductContext();
@@ -192,6 +193,7 @@ function AdminProductTable() {
   };
   return (
     <>
+    <div className="table">
       <Form form={form} onFinish={onFinish}>
         <Table
           columns={columns}
@@ -202,6 +204,7 @@ function AdminProductTable() {
           rowKey="_id"
         />
       </Form>
+      </div>
     </>
   );
 }
