@@ -4,7 +4,7 @@ import CartItem from "./CartItem";
 import { useState } from "react";
 import type { DrawerProps } from "antd/es/drawer";
 import "../component-styling/Header.css";
-import "../component-styling/CartPanel.css";
+import "../Styling/CartPanel.css";
 
 type Props = {
   cartItemCount: number;

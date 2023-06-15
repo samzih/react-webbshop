@@ -1,3 +1,6 @@
+
+/* Admincenter CSS */
+
 .statisticsCard {
   flex-direction: row;
   display: flex;
@@ -5,6 +8,8 @@
   padding-top: 2rem;
   padding-bottom: 2rem;
 }
+
+/* AdminCreateProduct CSS */
 
 .h2 {
   flex-direction: row;
@@ -14,6 +19,8 @@
   font-size: 2.2rem;
 }
 
+/* AdminOrdersTable CSS */
+
 .orderlist {
   flex-direction: row;
   display: flex;
@@ -22,18 +29,7 @@
   font-size: 2.2rem;
 }
 
-/* .ordertable {
-    flex-direction: row;
-    display: flex;
-    justify-content: center;
-    padding-left: 1rem;
-    padding-right: 1rem;
-} */
-
-@media (max-width: 650px) {
-  .ordertablecell {
-  }
-}
+/* AdminCenter Responsiv CSS */
 
 @media (max-width: 640px) {
   .ant-statistic-content-value {

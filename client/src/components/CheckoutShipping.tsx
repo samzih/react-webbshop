@@ -4,7 +4,7 @@ import { Radio, Space } from "antd";
 import { useShippingContext } from "../context/CheckoutShippingContext";
 import { useCartContext } from "../context/CartContext";
 import { useOrderContext } from "../context/OrderContext";
-import "../component-styling/Checkout.css";
+import "../Styling/Checkout.css";
 
 function CheckoutShipping() {
   const { shipping, calcDelivery, value, setValue } = useShippingContext();

@@ -2,9 +2,8 @@ import { DeleteOutlined } from "@ant-design/icons";
 import { Link } from "react-router-dom";
 import { Button, List } from "antd";
 import { useCartContext } from "../context/CartContext";
-import "../component-styling/CartItem.css";
-import "../component-styling/Header.css";
-import "../component-styling/CartPanel.css";
+import "../Styling/CartItem.css";
+import "../Styling/CartPanel.css";
 
 function CartItem() {
   const {

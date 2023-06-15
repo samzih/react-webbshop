@@ -12,7 +12,7 @@ import AdminOrdersTable from "../components/AdminOrdersTable";
 import { useOrderContext } from "../context/OrderContext";
 import { useProductContext } from "../context/ProductContext";
 import { useEffect, useState } from "react";
-import "../component-styling/admin.css";
+import "../Styling/admin.css";
 
 const AdminCenter = () => {
   const { loginUser } = useUserContext();
