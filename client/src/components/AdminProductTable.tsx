@@ -17,7 +17,6 @@ import { IProduct } from "../context/ProductContext";
 function AdminProductTable() {
   const { products } = useProductContext();
   const { deleteProduct, updateProduct } = useAdminContext();
-  console.log("Produkter som kommer in:", products);
   const [editingRow, setEditingRow] = useState<number | null>(null);
   const [form] = Form.useForm();
   const [saveBtn, setSaveBtn] = useState(true);

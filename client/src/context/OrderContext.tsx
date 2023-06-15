@@ -57,10 +57,6 @@ const OrderProvider = ({ children }: PropsWithChildren) => {
   const { clearCart, totalSum } = useCartContext();
   const [orders, setOrders] = useState([]);
 
-  // useEffect(() => {
-  //   console.log(order);
-  // }, [order]);
-
   const addDataToOrderItems = () => {
     const cartItem = localStorage.getItem("cart");
     const orderItems: CartItem[] = cartItem ? JSON.parse(cartItem) : [];
@@ -82,12 +78,10 @@ const OrderProvider = ({ children }: PropsWithChildren) => {
       totalSum: totalSum,
     };
     setOrder(orderToSend);
-    // console.log("Nu flätar vi om cartItemet:", orderToSend);
   };
 
   async function sendOrder(order: Order, navigate: (path: string) => void) {
     const { deliveryAddress, orderItems, shippingMethod } = order;
-    // console.log("ORDERITEMS: ", orderItems);
 
     try {
       const response = await fetch("/api/orders", {
@@ -102,7 +96,6 @@ const OrderProvider = ({ children }: PropsWithChildren) => {
         }),
       });
       const data = await response.json();
-      // console.log("Detta är vad som skickas till DB:", data);
 
       addDataToOrderItems();
       setOrderNr(data.orderNumber);
@@ -119,7 +112,6 @@ const OrderProvider = ({ children }: PropsWithChildren) => {
       const response = await fetch("/api/orders");
       const data = await response.json();
       response.ok && setOrders(data);
-      console.log("Fetches all the orders from database:", data);
     } catch (error) {
       console.log(error);
     }
@@ -131,8 +123,6 @@ const OrderProvider = ({ children }: PropsWithChildren) => {
 
   // Updates backend shipped status from false to true
   async function shippedUpdate(shipped: boolean, id: string | number) {
-    // console.log(shipped, id);
-
     try {
       await fetch(`/api/orders/${id}`, {
         method: "PUT",

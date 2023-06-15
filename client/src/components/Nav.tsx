@@ -3,13 +3,6 @@ import { Menu } from "antd";
 import "../component-styling/Nav.css";
 
 function Nav() {
-  // const [current, setCurrent] = useState("start");
-
-  // const onClick: MenuProps["onClick"] = (e) => {
-  //   console.log("click ", e);
-  //   // setCurrent(e.key);
-  // };
-
   const items: MenuProps["items"] = [
     {
       label: (
@@ -36,14 +29,7 @@ function Nav() {
       key: "kontakt",
     },
   ];
-  return (
-    <Menu
-      // onClick={onClick}
-      // selectedKeys={[current]}
-      mode="horizontal"
-      items={items}
-    />
-  );
+  return <Menu mode="horizontal" items={items} />;
 }
 
 export default Nav;
