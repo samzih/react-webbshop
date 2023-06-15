@@ -13,7 +13,6 @@ import { useOrderContext } from "../context/OrderContext";
 import { useProductContext } from "../context/ProductContext";
 import { useEffect, useState } from "react";
 import "../component-styling/admin.css"
-import { Divider } from "rc-menu";
 
 const AdminCenter = () => {
   const { loginUser } = useUserContext();
@@ -72,7 +71,7 @@ const AdminCenter = () => {
   };
 
   return loginUser && loginUser.isAdmin ? (
-    <div>
+    <div style={{padding: 50}}>
       <h1>Adminpanel</h1>
       <div className="statisticsCard">
       <Space
