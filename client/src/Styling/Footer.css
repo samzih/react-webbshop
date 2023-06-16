@@ -6,22 +6,19 @@ footer {
   justify-content: space-around;
   padding-top: 5%;
   padding-bottom: 5%;
-  
-   
-  }
+}
 
-  .anticon-facebook {
-    color: #373430;
-  }
+.anticon-facebook {
+  color: #373430;
+}
 
-  .anticon-instagram {
-    color: #373430;
-  }
+.anticon-instagram {
+  color: #373430;
+}
 
-  .anticon-twitter-circle {
-    color: #373430;
-  }
-
+.anticon-twitter-circle {
+  color: #373430;
+}
 
 h5 {
   font-size: 1.3rem;
